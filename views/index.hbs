@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Blog</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+	<div class="row col-md-12">
+		<h1 class="text-center">Time to Blog</h1>
+	</div> <!-- end of title row -->
+	<div class="blog-container">
+	<script id="blog-template" type="text/x-handlebars-template">
+	\{{#each blogs}}
+	<div class="row">
+		<div class="blog-inserts col-md-8 col-md-offset-2">
+			<div class="blog-content">
+				<p class="title">Title: \{{ title }}</p>
+				<p class="category">Category \{{ category }}</p>
+				<p class="blogContent">Content: \{{ blogContent }}</p>
+				<p class="comments">Comments: \{{ comments }}</p>
+			</div>
+		</div>
+	</div>
+	\{{/each}}
+	</script>
+	</div>
+</div> <!-- end of content div -->
+
+
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap js -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- handlebars js -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+	<!-- custom js -->
+	<script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
