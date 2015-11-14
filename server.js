@@ -31,6 +31,17 @@ app.post("/api/posts", function (req, res) {
 	});
 });
 
+//find specific post by its id
+
+app.get("/api/posts/:id", function (req, res) {
+	//get id from url
+	var id = req.params.id;
+	//find the post with specific id in db
+	Post.findOne({ _id: id}, function (err, foundPost) {
+		res.json(foundPost);
+	});
+});
+
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("I'm listening");
