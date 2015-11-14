@@ -17,22 +17,18 @@
 					<strong>Weekly Track Review</strong>
 				</div>
 	<div class="container">
-		<div class="row">
-					<div class="col-md-12" id="blogTitle"><h2>A Day in the Life</h2></div>
+			<script id= "blog-template" type="text/x-handlebars-template">
+				\{{#each posts}}
+				<div class="row">
+					<div class="col-md-12" id="blogTitle">
+					<h2>\{{title}}</h2>
+				</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 					<br>
-					<p>This particular track changed my view of the Beatles catalog from assuming it was mostly pop driven to being intrigued by the depth of their clout</p>
+						<p>\{{content}}</p>
 					</div>
-				</div>
-			<script id= "blog-template" type="text/x-handlebars-template">
-				\{{#each posts}}
-				<div class="row">
-					<div class="col-md-3"><h2>\{{title}}</h2></div><hr>
-				</div>
-				<div class="row">
-					<p>{{content}}</p>
 				</div>
 				\{{/each}}
 			</script>
