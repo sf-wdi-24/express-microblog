@@ -57,6 +57,15 @@ app.put("/api/posts/:id", function (req, res) {
 	});
 });
 
+app.delete("/api/posts/:id", function (req, res) {
+	//get id
+	var id = req.params.id;
+	//remove the post with that id
+	Post.findOneAndRemove({ _id: id}, function (err, deletedPost) {
+		res.json(deletedPost);
+	});
+});
+
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("I'm listening");
