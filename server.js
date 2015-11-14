@@ -42,6 +42,21 @@ app.get("/api/posts/:id", function (req, res) {
 	});
 });
 
+app.put("/api/posts/:id", function (req, res) {
+	// get id
+	var id = req.params.id;
+	// find post by id
+	Post.findOne({ _id: id}, function (err, foundPost) {
+		//assign new value to foundPost
+		foundPost.title = req.body.title;
+		foundPost.description = req.body.description;
+		//save edited foundPost to db
+		foundPost.save(function (err, editedPost) {
+			res.json(editedPost);
+		});
+	});
+});
+
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("I'm listening");
