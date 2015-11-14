@@ -9,31 +9,45 @@
 		<!-- bootstrap css -->
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<!-- custom styles -->
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<title>MicroBlog</title>
 </head>
 <body>
+				<div class="text-center" id="pageHeading">
+					<strong>Weekly Track Review</strong>
+				</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<h1>Weekly Playist</h1>
-			</div>
-			<hr>
-			\{{#each posts}}
-			<div class="row">
-				<div class="col-md-3"><h2>\{{title}}</h2></div><hr>
-				
-			</div>
-			\{{/each}}
+					<div class="col-md-12" id="blogTitle"><h2>A Day in the Life</h2></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					<br>
+					<p>This particular track changed my view of the Beatles catalog from assuming it was mostly pop driven to being intrigued by the depth of their clout</p>
+					</div>
+				</div>
+			<script id= "blog-template" type="text/x-handlebars-template">
+				\{{#each posts}}
+				<div class="row">
+					<div class="col-md-3"><h2>\{{title}}</h2></div><hr>
+				</div>
+				<div class="row">
+					<p>{{content}}</p>
+				</div>
+				\{{/each}}
+			</script>
 		</div>
 	</div>
+	
+
+		<!-- jquery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<!-- bootstrap -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	
 	<!-- handlebars -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
-	
-	<!-- jquery -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+
 </body>
 </html>

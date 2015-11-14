@@ -6,16 +6,18 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended : true }));
 
 // Set up static page directory
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(__dirname + '/public'));
 
 // Set HBS view engine
 app.set('view engine', 'hbs');
 
+app.get('/', function (req, res) {
+	res.render('index');
+});
 
 
 
-
-
+// Server listening?
 var server = app.listen(process.env.PORT || 3000, function(){
 	console.log('HEY! LISTEN!');
 });
