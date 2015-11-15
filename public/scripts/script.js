@@ -6,6 +6,7 @@ $(function() {
 
  	getAllPosts();
 
+
  	// Add Single Post
  	$('.new-post-form').on('submit', function(e){
  		var title = $('#new-title').val();
@@ -22,12 +23,14 @@ $(function() {
 		var body = $('#updateBody').val();
 		var url = $('#updateURL').val();
 		var favorite = $('#updateFavorite').val();
+		console.log(id+title+body+url+favorite);
 		updatePost(id, title, body, url, favorite);
 	});
 
 	// Delete Single Post
 	$('#delete-post-form').on('click', function(e){
 		e.preventDefault();
+		console.log("inside delete");
 		var id = $('#delete-post-form').attr('data-id');
 		console.log(id);
 		var answer = prompt("Are you sure you want to delete this? (Yes/No)");
@@ -41,6 +44,8 @@ $(function() {
  	function getAllPosts(){
 		$.get('/api/posts', function(data){
 			var allPosts = data.posts;
+			var totalposts = allPosts.length;
+			$('#total-count-badge').text(totalposts);
 			var postsHtml = template({ posts: allPosts });
 			$('#posts-list').append(postsHtml);
 		});

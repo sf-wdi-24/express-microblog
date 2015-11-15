@@ -14,10 +14,17 @@
 </head>
 <body>
 
-
-	<h1>All Posts</h1>
-
+	<div class="row">
+	<div class="col-sm-6" id="header">
+	<div id="all-posts-title">All Posts</div>
+	<span class="badge" id="total-count-badge"></span>
+	</div>
+	<div class="col-sm-6" id="new-post-button">
 	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#NewPostModal">New Post</button>
+	</div>
+	</div>
+
+	
 
 	<div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
 	  <div class="modal-dialog" role="document">
@@ -50,13 +57,49 @@
 	  </div>
 	</div>
 	
-	<div class="row" id="posts-list">
+	<div class="row"  id="posts-list">
 		<script id="posts-template" type="text/x-handlebars-template">
 		\{{#each posts}}
+		<div class="thumbnail" id="thumbnail-posts-list">
 			<a href="http://localhost:3000/posts/\{{_id}}">\{{title}}</a><br>
 			<p>\{{body}}<br>
 				\{{url}}</p>
-		\{{/each}}
+		
+			<div class="glyphicon glyphicon-heart" id="post-favorite"></div>
+			<!-- edit button to toggle form -->
+	        <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-\{{_id}}"><div class="glyphicon glyphicon-pencil"></div>
+	        </a>
+	          
+	        <!-- delete button -->
+	        <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{_id}}"></div>
+	          
+	        <!-- form to update post -->
+	        <div class="collapse" id="update-\{{_id}}">
+	          <br>
+	          <form class="edit-form">
+	            <div class="form-group">
+	              <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}" id="updateTitle">
+	            </div>
+	            <div class="form-group">
+	              <input type="text" name="body" class="form-control" placeholder="Body" value="\{{body}}" id="updateBody">
+	            </div>
+	            <div class="form-group">
+	              <input type="text" name="url" class="form-control" placeholder="URL" value="\{{url}}" id="updateURL">
+	            </div>
+	            <div class="form-group">
+	              <input type="checkbox" name="favorite" class="form-control" placeholder="Favorite" value="\{{favorite}}" id="updateFavorite">
+	            </div>
+	            <div class="form-group">
+	              <input type="hidden" name="id" class="form-control" value="\{{_id}}" id="updateId">
+	            </div>
+	            <div class="form-group">
+	              <input type="submit" class="btn btn-block btn-info" value="Update">
+	            </div>
+	          </form>
+	        </div>
+
+	    </div>
+        \{{/each}}
 		</script>
 	</div>
 

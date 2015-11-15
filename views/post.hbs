@@ -13,27 +13,27 @@
 	<title>Post</title>
 </head>
 <body>
-	<h1>Post</h1>
 	
-	<div class="row" id="post">
+	<div class="thumbnail" id="post">
 		<script id="posts-template" type="text/x-handlebars-template">
-			<p>Title: \{{post.title}}</p>
-			<p>Body: \{{post.body}}<br>
-			   URL: \{{post.url}}<br>
-			   Favorite: \{{post.favorite}}</p>
+			<p>\{{post.title}}</p>
+			<p>\{{post.body}}<br>
+			   \{{post.url}}<br>
+			   \{{post.favorite}}</p>
 		</script>
 		<div class="row" id="post-server">
-			<p>Title: {{post.title}}</p>
-			<p>Body: {{post.body}}<br>
-				URL: {{post.url}}<br>
-				Favorite: {{post.favorite}}</p>
+			<b><p>{{post.title}}</p></b>
+			<p>{{post.body}}<br>
+				{{post.url}}</p>
 		</div>
+
+    <div class="glyphicon glyphicon-heart" id="post-favorite"></div>
 		<!-- edit button to toggle form -->
         <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil"></div>
         </a>
           
         <!-- delete button -->
-        <div class="glyphicon glyphicon-remove" id="delete-post-form" data-id="{{post._id}}"></div>
+        <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{post._id}}"></div>
           
         <!-- form to update post -->
         <div class="collapse" id="update-{{post._id}}">
