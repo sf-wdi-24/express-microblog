@@ -16,6 +16,26 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
+// seed data
+var allPosts = [
+					{ post: 'This is a post.',
+						name: 'Steven',
+						time: '10:54',
+						likes: 0 },
+					{ post: 'This is another post.',
+						name: 'Steven',
+						time: '10:50',
+						likes: 0 },
+					{ post: 'This is yet another post.',
+						name: 'Steven',
+						time: '10:43',
+						likes: 0 }
+				];
+
+// set up api routes
+app.get('/api/posts', function(req, res) {
+	res.json({ posts: allPosts });
+});
 
 // start the server
 app.listen(process.env.PORT || 5000, function() {
