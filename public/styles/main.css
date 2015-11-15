@@ -1,0 +1,46 @@
+body {
+    background-image: url("http://www.417news.com/wp-content/uploads/2015/07/vacation.jpg");
+    background-attachment: fixed;
+	background-size: 100% auto;
+	color: white;
+}
+.jumbotron{
+	background-color: #ffffff;
+  	border: 1px solid black;
+  	opacity:0.6;
+  	color: black;
+}
+.card-container{
+	perspective: 700px;
+	padding: 20px;
+	
+}
+.card{
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	background: url('https://s-media-cache-ak0.pinimg.com/736x/5f/69/ec/5f69ece88016bb29c29a0d28a3a47f51.jpg');
+	background-size: 80%;
+	background-repeat: no-repeat;
+	width: 650px;
+	height: 350px;
+	transition: all 0.6s ease;
+	transform-style: preserve-3d;
+
+}
+.front,.back{
+	color:black;
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 650px;
+	height: 350px;
+	backface-visibility: hidden;
+}
+.back{
+	transform: rotateY(180deg);
+}
+.card:hover{
+	transform: rotateY(180deg);
+
+}
