@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 //GET ALL POSTS
   app.get('/api/posts', function (req, res) {
     console.log("hello");
-    // find all todos in db
+    // find all posts in db
     Post.find(function (err, allPosts) {
       res.json({ posts: allPosts });
    
