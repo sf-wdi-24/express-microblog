@@ -32,22 +32,44 @@
 						<div class="form-group">
 							<input type="text" class="formdata form-control form-group" name="question" placeholder="Discussion Question">
 							<input type="text" class="formdata form-control form-group" name="student" placeholder="Student">
-							<input type="submit" class="btn btn-block btn-warning" value="Submit">
+							<input type="submit" class="btn btn-block btn-info disabled" value="Submit">
 						</div>
 					</form>
 				</div>
 			</div>
 
 			<div class="col-md-8 full-height">
-				<div class="row" id="discussion-question">
+				<div class="row info" id="discussion-question">
 					<h2>This is my sample discussion question.  Isn't it clever?</h2>
+		      <div class="btn-group pull-right">
+	          <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="edit-question" aria-hidden="true"></span>
+	          <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="delete-question" aria-hidden="true"></span>
+	          <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="like-question" aria-hidden="true"></span>
+	        </div>
 				</div>
-				<div class="row" id="post-results">
-					<ul>
-						<li>This is a post.</li>
-						<li>This is another post.</li>
-						<li>This is yet another post.</li>
-					</ul>
+				<div class="row info">
+					<button class="btn btn-block btn-info">Add Post</button>
+				</div>
+				<div class="row info" id="posts-results">
+					<script type="text/x-handlebars-template" id="posts-template">
+						{{#each posts}}
+							<p>{{post}}</p>
+							<p class="name text-right">by {{name}} at {{time}}
+				      <div class="btn-group pull-right">
+                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="{{_id}}" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="{{_id}}" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="{{_id}}" aria-hidden="true"></span>
+              </div></p>
+              <form class="editPost" id="form{{_id}}">
+                <div class="form-group">
+                  <input type="text" class="formdata form-control form-group" name="task" value="{{task}}">
+                  <input type="text" class="formdata form-control form-group" name="description" value="{{description}}">
+                  <input type="submit" class="btn btn-info btn-block" value="Submit">
+                </div>
+              </form>
+							<hr>
+						{{/each}}
+					</script>
 				</div>
 			</div>
 		</div>
