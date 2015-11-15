@@ -1,3 +1,10 @@
 body {
 	background-color: #90db9d;
 }
+.blog-inserts {
+	background-color: #999999;
+	margin: 2px;
+}
+.changes {
+	float: right;
+}

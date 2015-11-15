@@ -14,15 +14,52 @@
 		<h1 class="text-center">Time to Blog</h1>
 	</div> <!-- end of title row -->
 	<div class="blog-container">
+		<div class="row">
+			<div class="newBlogPost col-md-8 col-md-offset-2">
+				<h1>Add new posting</h1>
+				<form class="newBlog">
+					<input type="text" class="newTitle" placeholder="Title">
+					<input type="text" class="newCategory" placeholder="Category">
+					<input type="text" class="newContent" placeholder="Content">
+					<input type="submit" class="newSubmit">
+				</form>
+			</div>
+		</div>
 	<script id="blog-template" type="text/x-handlebars-template">
 	\{{#each blogs}}
 	<div class="row">
 		<div class="blog-inserts col-md-8 col-md-offset-2">
-			<div class="blog-content">
+			<div class="blog-content" data-id:\{{_id}}>
+				<!-- delete button -->
+				<button type="button" id="deleteButton" class="changes btn btn-primary btn-sm" data-target="#delete">Remove</button>
+				<!-- bootstrap popup -->
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+				  Edit
+				</button>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+				      <div class="modal-body">
+				        ...
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- end of bootstrap popup -->
 				<p class="title">Title: \{{ title }}</p>
 				<p class="category">Category \{{ category }}</p>
 				<p class="blogContent">Content: \{{ blogContent }}</p>
-				<p class="comments">Comments: \{{ comments }}</p>
+				<p class="comments">Comments: \{{ comments }}</p>	
 			</div>
 		</div>
 	</div>
@@ -30,6 +67,7 @@
 	</script>
 	</div>
 </div> <!-- end of content div -->
+
 
 
 	<!-- jquery -->
