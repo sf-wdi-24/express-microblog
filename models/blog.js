@@ -2,9 +2,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var BlogSchema = new Schema({
-  task: String,
+  place: String,
   description: String,
-  image: image
+  image: String
 });
 
 var Blog = mongoose.model('Blog', BlogSchema);
