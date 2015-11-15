@@ -60,20 +60,32 @@ app.post('/api/posts', function(req, res) {
 	});
 });
 
-//updating todo
+//updating post
 app.put('/api/posts/:id', function(req, res) {
 	var PostId = req.params.id;
 	//find post in db by id
-	Post.findOne({ _id: PostId }, function(err, foundPost) {
-      //updating posts attributes
-      foundPost.title = req.body.title;
-      foundPost.story = req.body.story;
-      //saving updated post in db
-      foundPost.save(function(err, savedPost) {
-      	res.json(savedPost);
-      });
+	Post.findOne({
+		_id: PostId
+	}, function(err, foundPost) {
+		//updating posts attributes
+		foundPost.title = req.body.title;
+		foundPost.story = req.body.story;
+		//saving updated post in db
+		foundPost.save(function(err, savedPost) {
+			res.json(savedPost);
+		});
 	});
 
+});
+
+//deleting post
+app.delete('/api/posts/:id', function(req, res) {
+	var PostId = req.params.id;
+	Post.findOneAndRemove({
+		_id: PostId
+	}, function(err, deletedPost) {
+		res.json(deletedPost);
+	});
 });
 
 
