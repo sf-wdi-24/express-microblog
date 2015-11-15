@@ -9,15 +9,24 @@ $(function (){
 
 	//test data
 	var allQuotes = [
-		{	category: 'book', 
-		quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
-		author: 'John Dwyer'},
-		{	category: 'movie',
-			quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
-			author: "cristina"}
+		{	Category: 'Book', 
+		Quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
+		Author: 'John Dwyer'},
+		{	Category: 'movie',
+			Quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
+			Author: "Cristina"}
 	];
 
-	var quotesHtml = template({ taco : allQuotes });
-	$('#quotes-list').append(quotesHtml);
+	//Ajax call to get allQuotes
+	$.get('/api/quotes', function (data){
+		console.log(data);
+		allQuotes = data.allQuotes;
+		
+		var quotesHtml = template({ taco : allQuotes });
+		$('#quotes-list').append(quotesHtml);
+	});
+
+	/*var quotesHtml = template({ taco : allQuotes });
+	$('#quotes-list').append(quotesHtml);*/
 
 }); /*loading closing brace */
