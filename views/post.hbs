@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- set viewport to device width to make site responsive -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- bootstrap css -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- custom styles -->
+	<link rel="stylesheet" type="text/css" href="/styles/main.css">
+	<meta charset="UTF-8">
+	<title>Post</title>
+</head>
+<body>
+	<h1>Post</h1>
+	
+	<div class="row" id="post">
+		<script id="posts-template" type="text/x-handlebars-template">
+			<p>Title: \{{post.title}}</p>
+			<p>Body: \{{post.body}}<br>
+			   URL: \{{post.url}}<br>
+			   Favorite: \{{post.favorite}}</p>
+		</script>
+		<div class="row" id="post-server">
+			<p>Title: {{post.title}}</p>
+			<p>Body: {{post.body}}<br>
+				URL: {{post.url}}<br>
+				Favorite: {{post.favorite}}</p>
+		</div>
+		<!-- edit button to toggle form -->
+        <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil"></div>
+        </a>
+          
+        <!-- delete button -->
+        <div class="glyphicon glyphicon-remove" id="delete-post-form" data-id="{{post._id}}"></div>
+          
+        <!-- form to update post -->
+        <div class="collapse" id="update-{{post._id}}">
+          <br>
+          <form class="edit-form">
+            <div class="form-group">
+              <input type="text" name="title" class="form-control" placeholder="Title" value="{{post.title}}" id="updateTitle">
+            </div>
+            <div class="form-group">
+              <input type="text" name="body" class="form-control" placeholder="Body" value="{{post.body}}" id="updateBody">
+            </div>
+            <div class="form-group">
+              <input type="text" name="url" class="form-control" placeholder="URL" value="{{post.url}}" id="updateURL">
+            </div>
+            <div class="form-group">
+              <input type="checkbox" name="favorite" class="form-control" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite">
+            </div>
+            <div class="form-group">
+              <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-block btn-info" value="Update">
+            </div>
+          </form>
+        </div>
+	</div>
+	<br><br>
+
+	<!-- jquery -->
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  	<!-- bootstrap js -->
+  	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  	<!-- handlebars -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+  	<script type="text/javascript" src="/scripts/script.js"></script>
+</body>
+</html>
