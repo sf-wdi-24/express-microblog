@@ -1,0 +1,30 @@
+body {
+	height: 100%;
+	background-color: green;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.info {
+	margin: 20px 20px 10px 10px;
+	padding: 20px;
+	background-color: lightgreen;
+}
+
+#discussion-question {
+	margin: 20px 20px 10px 10px;
+	padding: 20px;
+	background-color: lightgreen;	
+}
+
+#post-results {
+	margin: 20px 20px 10px 10px;
+	padding: 20px;
+	background-color: lightgreen;
+}
+
+li {
+	font-size: 24px;
+}
