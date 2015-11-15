@@ -18,39 +18,42 @@
 			<div class="newBlogPost col-md-8 col-md-offset-2">
 				<h1>Add new posting</h1>
 				<form class="newBlog">
-					<input type="text" class="newTitle" placeholder="Title">
-					<input type="text" class="newCategory" placeholder="Category">
-					<input type="text" class="newContent" placeholder="Content">
+					<input type="text" class="newTitle" placeholder="Title" name="title">
+					<input type="text" class="newCategory" placeholder="Category" name="category">
+					<input type="text" class="newblogContent" placeholder="Content" name="blogContent">
 					<input type="submit" class="newSubmit">
 				</form>
 			</div>
 		</div>
+	<div class="insertContainer">	
 	<script id="blog-template" type="text/x-handlebars-template">
 	\{{#each blogs}}
 	<div class="row">
 		<div class="blog-inserts col-md-8 col-md-offset-2">
-			<div class="blog-content" data-id:\{{_id}}>
-				<!-- delete button -->
-				<button type="button" id="deleteButton" class="changes btn btn-primary btn-sm" data-target="#delete">Remove</button>
+			<div class="blog-content" data-id=\{{_id}}>
 				<!-- bootstrap popup -->
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+				<button type="button" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
 				  Edit
 				</button>
+				<button class="delete btn btn-primary btn-sm">Remove</button>
 				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal fade blogPostId" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-id=\{{_id}}>
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				        <h4 class="modal-title" id="myModalLabel">Edit Blog</h4>
 				      </div>
 				      <div class="modal-body">
-				        ...
-				      </div>
-				      <div class="modal-footer">
+				        <form class="editBlogForm">
+				        	<input type="text" class="editTitle" placeholder="Title" name="title">
+				        	<input type="text" class="editCategory" placeholder="Category" name="category">
+				        	<input type="text" class="editBlogContent" placeholder="Content" name="blogContent">
+				        	{{!-- <input type="submit" class="editSubmit"> --}}
+				        <input type="submit" class="editSubmit btn btn-primary" data-id=\{{_id}}>
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				        </form>
 				      </div>
 				    </div>
 				  </div>
@@ -65,9 +68,9 @@
 	</div>
 	\{{/each}}
 	</script>
-	</div>
+	</div>	
 </div> <!-- end of content div -->
-
+</div>
 
 
 	<!-- jquery -->

@@ -56,10 +56,8 @@ app.delete('/api/blogs/:id', function (req,res) {
 }) ;
 
 //edit existing blog post
-
 app.put('/api/blogs/:id', function (req,res) {
 	var blogId = req.params.id;
-
 	Blog.findOne({_id: blogId}, function (err,updatedBlog) {
 		updatedBlog.title = req.body.title;
 		updatedBlog.category = req.body.category;
