@@ -8,21 +8,21 @@ $(function (){
 	var template = Handlebars.compile(source);
 
 	//test data
-	var allQuotes = [
-		{	Category: 'Book', 
-		Quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
-		Author: 'John Dwyer'},
-		{	Category: 'movie',
-			Quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
-			Author: "Cristina"}
+	var quotes = [
+	{	category: 'Book', 
+		quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
+		author: 'John Dwyer'},
+	{	category: 'movie',
+		quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
+		author: "Cristina"}
 	];
 
 	//Ajax call to get allQuotes
 	$.get('/api/quotes', function (data){
-		console.log(data);
-		allQuotes = data.allQuotes;
+		/*console.log(data);*/
+		allQuotes = data.quotes;
 		
-		var quotesHtml = template({ taco : allQuotes });
+		var quotesHtml = template({ quotesbars: quotes });
 		$('#quotes-list').append(quotesHtml);
 	});
 
