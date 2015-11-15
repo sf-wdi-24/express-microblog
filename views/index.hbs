@@ -35,9 +35,26 @@
 						<script id="posts-template" type="text/x-handlebars-template">
 						\{{#each posts}}
 						<li><strong>\{{title}}</strong><br>
-							
+								
 						\{{story}}</li>
-						</textarea>
+						
+
+                       //FORM TO UPDATE POST
+						<div class="collapse">
+							<br>
+							<form class="update" id="\{{_id}}">
+								<div class="form-group">
+									<input type="text" name="title" class="form-control" placeholder="title" value="\{{title}}">
+								</div>
+								<div class="form-group">
+									<input type="text" name="story" class="form-control" placeholder="story" value ="\{{story}}">
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-block btn-default" value="update">
+								</div>
+							</form>
+						</div>
+						
 						\{{/each}}
 						</script>
 					</ul>

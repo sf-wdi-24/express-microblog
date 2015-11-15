@@ -8,6 +8,8 @@ $(function() {
 
 	var allPosts = [];
 
+	var $postform = $('.post-form');
+
 	var render = function() {
 		// empty existing todos from view
 		$postslist.empty();
@@ -38,8 +40,68 @@ $(function() {
 			allPosts.push(data);
 			render();
 		});
+
+		//resetting form
+		$postform[0].reset();
+		$postform.find('input').first().focus();
+
+	});
+
+	//EDIT 
+	//add event-handlers to posts for updating/deleting
+	
+
+	$('.update').on('submit', function(data) {
+		console.log("update");
+		event.preventDefault();
+		var postId = $(this).attr('id');
+
+		var postUpdate = allPosts.filter(function(post) {
+			return post._id == postId;
+		})[0];
+		var updatePost = $(this).serialize();
+
+		$.ajax({
+			type: "PUT",
+			url: baseUrl + '/' + postId,
+			data: updatePost,
+			success: function(data) { //data that comes back from server {
+				allPosts.splice(allPosts.indexOf(postUpdate), 1, data);
+				render();
+			}
+		});
+
+	
+
 	});
 
 
 
+
+
+
+
+
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
