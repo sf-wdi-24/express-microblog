@@ -20,6 +20,7 @@ $(function () {
 	$("#new-post").on("submit", function (event) {
 		event.preventDefault();
 		var newPost = $(this).serialize();
+		newPost.like = false;
 		$.post(baseUrl, newPost, function (data) {
 			allPosts.push(data);
 			render();
@@ -38,6 +39,7 @@ $(function () {
 		});
 		$("#form" + id).on("submit", function (event) {
 			var editedPost = $("#form" + id).serialize();
+			editedPost= editedPost + "&like=" + allPosts[editPostIndex].like.toString();
 			event.preventDefault();
 			$.ajax({
 				type: "PUT",
@@ -73,7 +75,19 @@ $(function () {
 
 	$postList.on("click", ".like-button", function (event) {
 		var id = $(this).attr("id").slice(4);
-		console.log(id);
 		$("#like" + id).toggleClass("btn-default").toggleClass("btn-info");
+		var likePost = allPosts.filter(function (post) {
+			return post._id == id;
+		})[0];
+		likePost = "title=" + likePost.title + "&description=" + likePost.description + "&like=" + (!likePost.like);
+		console.log(likePost);
+		$.ajax({
+			type: "PUT",
+			url: baseUrl + "/" + id,
+			data: likePost,
+			success: function(data) {
+				allPosts.splice(allPosts.indexOf(likePost), 1, data);
+			}
+		});
 	});
 });

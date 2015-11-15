@@ -29,6 +29,7 @@ app.get("/api/posts", function (req, res) {
 app.post("/api/posts", function (req, res) {
 	//create new post from form data
 	var newPost = new Post(req.body);
+	newPost.like = false;
 	//save newPost in db
 	newPost.save(function (err, newPost) {
 		res.json(newPost);
@@ -54,6 +55,7 @@ app.put("/api/posts/:id", function (req, res) {
 		//assign new value to foundPost
 		foundPost.title = req.body.title;
 		foundPost.description = req.body.description;
+		foundPost.like = req.body.like;
 		//save edited foundPost to db
 		foundPost.save(function (err, editedPost) {
 			res.json(editedPost);
