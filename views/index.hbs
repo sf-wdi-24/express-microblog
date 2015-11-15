@@ -52,23 +52,23 @@
 				</div>
 				<div class="row info" id="posts-results">
 					<script type="text/x-handlebars-template" id="posts-template">
-						{{#each posts}}
-							<p>{{post}}</p>
-							<p class="name text-right">by {{name}} at {{time}}
+						\{{#each posts}}
+							<p>\{{post}}</p>
+							<p class="name text-right">by \{{name}} at \{{time}}
 				      <div class="btn-group pull-right">
-                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="{{_id}}" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="{{_id}}" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="{{_id}}" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
               </div></p>
-              <form class="editPost" id="form{{_id}}">
+              <form class="editPost" id="form\{{_id}}">
                 <div class="form-group">
-                  <input type="text" class="formdata form-control form-group" name="task" value="{{task}}">
-                  <input type="text" class="formdata form-control form-group" name="description" value="{{description}}">
+                  <input type="text" class="formdata form-control form-group" name="task" value="\{{task}}">
+                  <input type="text" class="formdata form-control form-group" name="description" value="\{{description}}">
                   <input type="submit" class="btn btn-info btn-block" value="Submit">
                 </div>
               </form>
 							<hr>
-						{{/each}}
+						\{{/each}}
 					</script>
 				</div>
 			</div>
