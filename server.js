@@ -17,22 +17,23 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
+
+
+
 //STATIC ROUTE
 app.get('/', function(req, res) {
 	res.render('index');
 });
 
-// //GET ALL POSTS
-//   app.get('/api/posts', function (req, res) {
-
-//     // find all todos in db
-//     Todo.find(function (err, allPosts) {
-//       res.json({ todos: allTodos });
-//     });
-//   });
-
-
-
+//GET ALL POSTS
+  app.get('/api/posts', function (req, res) {
+    console.log("hello");
+    // find all todos in db
+    Post.find(function (err, allPosts) {
+      res.json({ posts: allPosts });
+   
+  });
+});
 
 
 
@@ -55,6 +56,9 @@ app.get('/', function(req, res) {
 
 
 
-var server = app.listen(process.env.PORT || 4000, function() {
-	console.log("WASABIIIIIIIII");
+
+
+
+var server = app.listen(process.env.PORT || 3000, function() {
+	console.log("WASABII");
 });
