@@ -70,4 +70,10 @@ $(function () {
 			}
 		});
 	});
+
+	$postList.on("click", ".like-button", function (event) {
+		var id = $(this).attr("id").slice(4);
+		console.log(id);
+		$("#like" + id).toggleClass("btn-default").toggleClass("btn-info");
+	});
 });

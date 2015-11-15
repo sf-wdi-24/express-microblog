@@ -32,6 +32,18 @@
 									</div>
 									<div class="col-xs-6">
 										<h3>\{{description}}</h3>
+										<button type="button" class="btn btn-default like-button" aria-label="Left Align" id="like\{{_id}}">
+											<span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true">Like
+											</span>
+										</button>
+										<button type="button" class="btn btn-default edit-button" aria-label="Left Align" id="\{{_id}}">
+											<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
+											</span>
+										</button>
+										<button type="button" class="btn btn-default delete-button" aria-label="Left Align" id="del\{{_id}}">
+											<span class="glyphicon glyphicon-remove-circle glyphicon-align-left" aria-hidden="true">
+											</span>
+										</button>
 										<form hidden id="form\{{_id}}">
 								 			<div class="form-group">
 								 				<input type="text" class="form-control" name="title" placeholder="Title">
@@ -41,14 +53,6 @@
 								 		</form>
 									</div>
 									<div class="col-xs-2">	
-										<button type="button" class="btn btn-default edit-button" aria-label="Left Align" id="\{{_id}}">
-											<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
-											</span>
-										</button>
-										<button type="button" class="btn btn-default delete-button" aria-label="Left Align" id="del\{{_id}}">
-											<span class="glyphicon glyphicon-remove-circle glyphicon-align-left" aria-hidden="true">
-											</span>
-										</button>
 									</div>
 								</div>
 							</div>

@@ -1,4 +1,3 @@
-button {
-	display: inline;
-	float: left;
+.edit-button, .delete-button {
+	float: right;
 }
