@@ -25,25 +25,25 @@ var render = function() {
 $.get(baseUrl, function(data) {
 	console.log("hello");
 	//set allTodos to todo data from API
-	allTodos = data.posts;
+	allPosts = data.posts;
 	render();
 });
 
 
 
-	//   POSTING
-	$('.post-form').on('submit', function(event) {
-		event.preventDefault();
-		//serialize form data
+	// //   POSTING
+	// $('.post-form').on('submit', function(event) {
+	// 	event.preventDefault();
+	// 	//serialize form data
 
-		var newPost = $(this).serialize();
-		//POST request to create new book
-        $.post(baseUrl, newPost, function(data) {
-			console.log(data);
-			allPosts.push(data);
-			render();
-		});
-   });
+	// 	var newPost = $(this).serialize();
+	// 	//POST request to create new book
+ //        $.post(baseUrl, newPost, function(data) {
+	// 		console.log(data);
+	// 		allPosts.push(data);
+	// 		render();
+	// 	});
+ //   });
 
 
 
