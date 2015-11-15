@@ -8,12 +8,12 @@ $(function (){
 	var template = Handlebars.compile(source);
 
 	//test data
-	var quotes = [
+	var allQuotes = [
 	{	category: 'Book', 
-		quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
+		statement: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
 		author: 'John Dwyer'},
 	{	category: 'movie',
-		quote: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
+		statement: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
 		author: "Cristina"}
 	];
 
@@ -21,8 +21,7 @@ $(function (){
 	$.get('/api/quotes', function (data){
 		/*console.log(data);*/
 		allQuotes = data.quotes;
-		
-		var quotesHtml = template({ quotesbars: quotes });
+		var quotesHtml = template({ quotesbars: allQuotes });
 		$('#quotes-list').append(quotesHtml);
 	});
 
