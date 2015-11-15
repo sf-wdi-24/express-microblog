@@ -1,5 +1,5 @@
 $(function(){
-
+console.log("JS WORKING!");
 //handlebars set up for posts
 var baseUrl = '/api/posts';
 var $postslist = $('#posts-list');
@@ -31,19 +31,19 @@ $.get(baseUrl, function(data) {
 
 
 
-	// //   POSTING
-	// $('.post-form').on('submit', function(event) {
-	// 	event.preventDefault();
-	// 	//serialize form data
+	//   POSTING
+	$('.post-form').on('submit', function(event) {
+		event.preventDefault();
+		//serialize form data
 
-	// 	var newPost = $(this).serialize();
-	// 	//POST request to create new book
- //        $.post(baseUrl, newPost, function(data) {
-	// 		console.log(data);
-	// 		allPosts.push(data);
-	// 		render();
-	// 	});
- //   });
+		var newPost = $(this).serialize();
+		//POST request to create new book
+        $.post(baseUrl, newPost, function(data) {
+			console.log(data);
+			allPosts.push(data);
+			render();
+		});
+   });
 
 
 
