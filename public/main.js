@@ -26,7 +26,24 @@ $.get(baseUrl, function(data) {
 	console.log("hello");
 	//set allTodos to todo data from API
 	allTodos = data.posts;
+	render();
 });
+
+
+
+	//   POSTING
+	$('.post-form').on('submit', function(event) {
+		event.preventDefault();
+		//serialize form data
+
+		var newPost = $(this).serialize();
+		//POST request to create new book
+        $.post(baseUrl, newPost, function(data) {
+			console.log(data);
+			allPosts.push(data);
+			render();
+		});
+   });
 
 
 

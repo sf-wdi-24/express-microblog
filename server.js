@@ -36,6 +36,17 @@ app.get('/', function(req, res) {
 });
 
 
+//POSTING A STORY
+  app.post('/api/posts', function(req, res){
+  	  var newPost = new Post(req.body);
+
+    // save new todo in db
+    newPost.save(function (err, savedPost) {
+      res.json(savedPost);
+    });
+  });
+
+
 
 
 
