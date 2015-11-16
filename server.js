@@ -45,6 +45,16 @@ app.get('/api/quotes', function (req, res){
 	});
 });
 
+//GET one quote
+app.get('/api/quotes/:id', function (req, res){
+	var quoteId = req.params.id;
+
+	Quote.findById({_id: quoteId}, function (foundQuote) {
+		res.json(foundQuote);
+	});
+});
+
+
 //POST new quote
 app.post('/api/quotes', function (req, res) {
 	var newQuote = new Quote(req.body);
@@ -55,7 +65,21 @@ app.post('/api/quotes', function (req, res) {
 	});
 });
 
+//PUT update to quote
+app.put('/api/quotes', function (req, res) {
+	var quoteId = req.params.id;
 
+	Quote.findById({_id: quoteId}, function (foundQuote){
+		foundQuote.category=req.body.category;
+		foundQuote.statement=req.body.statement;
+		foundQuote.author=req.body.author;
+		foundQuote.work=req.body.work;
+
+		foundQuote.save(function(savedQuote){
+			res.json(savedQuote);
+		});
+	});
+});		
 
 
 
