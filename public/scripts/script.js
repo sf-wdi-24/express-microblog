@@ -31,6 +31,7 @@ $(function() {
 			favorite = false;
 		}
 		updatePost(id, title, body, url, favorite);
+		$('#update-' + id).slideUp('slow');
 	});
 
 	// Delete Single Post
@@ -43,6 +44,14 @@ $(function() {
 		}
 	});
 
+	// Get Single Post
+	function getSinglePost(id){
+		$.get('/api/posts/'+id, function(data){
+			var postsHtml = template({ post: data.post });
+			console.log(data.post);
+			$('#post').prepend(postsHtml);
+		});
+	}
 
 	// Get All Posts
  	function getAllPosts(){
@@ -70,6 +79,7 @@ $(function() {
 	      data: {title: title, body: body, url: url},
 	      success: function (data) {
 	        console.log("Added new post!");
+	        $('#posts-list').empty();
 	        getAllPosts();
 	      },
 	      error: function (error) {
@@ -86,7 +96,9 @@ $(function() {
 			data: {title: title, body: body, url: url, favorite:favorite},
 			success: function (data) {
 				console.log("Updated post!");
-				window.location.href = "http://localhost:3000/posts/"+id;
+				$('#post-server').empty();
+				getSinglePost(id);
+				//window.location.href = "http://localhost:3000/posts/"+id;
 			},
 			error: function (error) {
 				console.error(error);
