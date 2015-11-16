@@ -4,7 +4,8 @@ var mongoose = require("mongoose"),
 var PostSchema = new Schema({
 	title: String,
 	description: String,
-	like: Boolean
+	like: Boolean,
+	time: String
 });
 
 var Post = mongoose.model("Post", PostSchema);
