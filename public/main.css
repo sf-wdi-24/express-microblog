@@ -1,3 +1,22 @@
+body {
+	background-color: #CDB99C;
+}
+.header {
+	background-color: #CDB99C;
+}
+#sub-title {
+	font-size: 30px;
+}
 .edit-button, .delete-button {
 	float: right;
+}
+h1 {
+	font-size: 60px;
+	font-family: 'Berkshire Swash', cursive;
+}
+h3 {
+	font-family: 'Playfair Display', serif;
+}
+h4 {
+	font-family: 'Brawler', serif;
 }
