@@ -1,12 +1,15 @@
 $(function() {
   
+  //make sure is retunring
+  console.log("client side js running")
+
   // compile handlebars template
   var source = $('#microblog-template').html();
   var template = Handlebars.compile(source);
 
   // array of test data
   var allBlogPosts = [
-    { Post: 'BlogPost', category: 'Post' },
+    { Post: 'BlogPost', category: 'BlogPost' },
     
   ];
 
