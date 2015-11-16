@@ -1,7 +1,7 @@
 body {
 	margin: 50px;
 	background-color: #fafafa;
-	padding-top: 70px;
+	padding-top: 30px;
 }
 
 .navbar {
@@ -68,6 +68,10 @@ body {
 
 #single-post-header {
 	margin-left: 0px;
+}
+
+#single-post-pencil {
+	margin-left: 20px;
 }
 
 @media all and (max-width: 500px) { /* screen size until 500px */

@@ -8,7 +8,6 @@ $(function() {
  	showFaves($('#updateFavorite').val());
 
 
-
  	// Add Single Post
  	$('.new-post-form').on('submit', function(e){
  		var title = $('#new-title').val();
@@ -42,6 +41,27 @@ $(function() {
 		if(answer.toLowerCase() === "yes" || answer.toLowerCase() === "y" ){
 			deletePost(id);
 		}
+	});
+
+	// Get Tag Suggestions
+	$('#single-post-tag').on('click', function(e){
+		var tagsArray = [];
+		var textbefore = $('#updateBody').val();
+		var text = textbefore.replace(/ /g,"%20");
+		$.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20contentanalysis.analyze%20where%20text%3D%27'+text+'%27%3B&format=json&diagnostics=true', function(data){
+			console.log(data);
+			var entities = data.query.results.entities.entity;
+			console.log(entities[0]);
+			if(entities === undefined){
+
+			} else if((Object.keys(entities).length >=1) && (entities[0] === undefined)){
+				$('#single-post-tag').append('<span class="label label-success" id="tag-labels">'+entities.text.content+'</span>'+' ');
+			} else {
+				for(var i = 0; i < Object.keys(entities).length; i++){
+					$('#single-post-tag').append('<span class="label label-success" id="tag-labels">'+entities[i].text.content+'</span>'+' ');
+				}
+			}
+		});
 	});
 
 	// Get Single Post
@@ -129,6 +149,15 @@ $(function() {
 		}
 	}
 
+	// Yahoo Content Analysis
+	function getTagSuggestions(title, body){
+		var text = (title + body).replace(/ /g,"%20");
+		var base_url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20contentanalysis.analyze%20where%20text%3D%27" + text + "%27%3B&format=json&diagnostics=true";
+		console.log(base_url);
+		$.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20contentanalysis.analyze%20where%20text%3D%27Financial%20EmpowermentSquare%20stands%20for%20economic%20empowerment.%20We%20stand%20for%20financial%20systems%20that%20serve%20instead%20of%20rule.%20We%20stand%20for%20leveling%20the%20playing%20field%27%3B&format=json&diagnostics=true', function(data){
+			console.log(data);
+		});
+	}
 
 
 });

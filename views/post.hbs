@@ -29,81 +29,90 @@
   </nav>
 	
 	<div class="thumbnail" id="post">
-		<script id="posts-template" type="text/x-handlebars-template">
-			<b><p>\{{post.title}}</p></b>
-			<p>\{{post.body}} (<a href="\{{post.url}}" target="_blank">More Info Here</a>)</p>
-		</script>
-		<div class="row" id="post-server" data-id="{{post.favorite}}">
-      <div class="row" id="single-post-header">
-			 <b>{{post.title}}</b><div class="glyphicon glyphicon-heart" id="post-favorite"></div>
+    <div class="row">
+      <div class="hidden-xs col-sm-1">
+          <img src="https://pbs.twimg.com/profile_images/565291259351166976/ftSG_Wwt_400x400.jpeg" id="profile-pic-two" class="img-circle">
       </div>
-			<p>{{post.body}} (<a href="{{post.url}}" target="_blank">More Info Here</a>)</p>
-		</div>
-
-    <div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="NewPostModal">New Post</h4>
+    	<div class="col-sm-9" id="post-server" data-id="{{post.favorite}}">
+        <script id="posts-template" type="text/x-handlebars-template">
+            <b><p>\{{post.title}}</p></b>
+            <p>\{{post.body}} (<a href="\{{post.url}}" target="_blank">More Info Here</a>)</p>
+        </script>
+        <div class="row" id="single-post-header">
+    			 <b>{{post.title}}</b><div class="glyphicon glyphicon-heart" id="post-favorite"></div>
+          </div>
+    			<p>{{post.body}} (<a href="{{post.url}}" target="_blank">More Info Here</a>)</p>
         </div>
-        <form class="new-post-form">
-          <div class="modal-body">
-              <div class="form-group">
-                <label for="new-title" class="control-label">Title</label>
-                <input type="text" class="form-control" id="new-title">
-              </div>
-              <div class="form-group">
-                <label for="new-body" class="control-label">Body</label>
-                <textarea class="form-control" id="new-body"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="new-url" class="control-label">URL</label>
-                <input type="text" class="form-control" id="new-url">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <input type="submit" class="btn btn-info" value="submit"></input>
-          </div>
-        </form>
       </div>
     </div>
-  </div>
 
+  
 		<!-- edit button to toggle form -->
-        <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil"></div>
-        </a>
-          
-        <!-- delete button -->
-        <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{post._id}}"></div>
-          
-        <!-- form to update post -->
-        <div class="collapse" id="update-{{post._id}}">
-          <br>
-          <form class="edit-form">
-            <div class="form-group">
-              <input type="text" name="title" class="form-control" placeholder="Title" value="{{post.title}}" id="updateTitle">
+    <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil" id="single-post-pencil"></div></a>
+      
+    <!-- delete button -->
+    <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{post._id}}"></div>
+      
+    <!-- form to update post -->
+    <div class="collapse" id="update-{{post._id}}">
+      <br>
+      <form class="edit-form">
+        <div class="form-group">
+          <input type="text" name="title" class="form-control" placeholder="Title" value="{{post.title}}" id="updateTitle">
+        </div>
+        <div class="form-group">
+          <input type="text" name="body" class="form-control" placeholder="Body" value="{{post.body}}" id="updateBody">
+        </div>
+        <div class="form-group">
+          <input type="text" name="url" class="form-control" placeholder="URL" value="{{post.url}}" id="updateURL">
+        </div>
+        
+          <input type="checkbox" name="favorite" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite" checked="checked">  Favorite
+        
+        <div class="form-group">
+          <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-info" value="Update">
+        </div>
+      </form>
+    </div>
+    <div class="glyphicon glyphicon-tag" id="single-post-tag">
+     
+    </div>
+	</div>
+	<br><br>
+
+  <div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="NewPostModal">New Post</h4>
+          </div>
+          <form class="new-post-form">
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="new-title" class="control-label">Title</label>
+                  <input type="text" class="form-control" id="new-title">
+                </div>
+                <div class="form-group">
+                  <label for="new-body" class="control-label">Body</label>
+                  <textarea class="form-control" id="new-body"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="new-url" class="control-label">URL</label>
+                  <input type="text" class="form-control" id="new-url">
+                </div>
             </div>
-            <div class="form-group">
-              <input type="text" name="body" class="form-control" placeholder="Body" value="{{post.body}}" id="updateBody">
-            </div>
-            <div class="form-group">
-              <input type="text" name="url" class="form-control" placeholder="URL" value="{{post.url}}" id="updateURL">
-            </div>
-            
-              <input type="checkbox" name="favorite" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite" checked="checked">  Favorite
-            
-            <div class="form-group">
-              <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btn btn-block btn-info" value="Update">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-info" value="submit"></input>
             </div>
           </form>
         </div>
-	</div>
-	<br><br>
+      </div>
+    </div>
 
 	<!-- jquery -->
   	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
