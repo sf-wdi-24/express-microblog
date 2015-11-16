@@ -13,7 +13,7 @@ $(function () {
 	}
 
 	$.get(baseUrl, function (data) {
-		allPosts = data.posts;
+		allPosts = data.posts.reverse(); //to post newest first
 		render();
 	});
 
@@ -26,7 +26,7 @@ $(function () {
 		newPost.like = false;
 		newPost.time = (new Date()).toDateString();
 		$.post(baseUrl, newPost, function (data) {
-			allPosts.push(data);
+			allPosts.unshift(data);
 			render();
 		});
 	});
@@ -123,7 +123,7 @@ $(function () {
 		} else {
 			$.get(baseUrl, function () {
 				$postList.empty();
-				$postList.removeClass("text-center")
+				$postList.removeClass("text-center");
 				var postsHtml = template({ posts: foundCategoryPosts});
 				$postList.append(postsHtml);
 			});
