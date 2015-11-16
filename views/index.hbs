@@ -11,15 +11,17 @@
 		</head>
 		
 		<body>
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">
-							<img id="bat" alt="Brand" src="http://icons.iconarchive.com/icons/icons8/windows-8/128/Cinema-Batman-New-icon.png">
-						</a>
+			<div class="navigation">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#">
+								<img id="bat" alt="Brand" src="http://icons.iconarchive.com/icons/icons8/windows-8/128/Cinema-Batman-New-icon.png">
+							</a>
+						</div>
 					</div>
-				</div>
-			</nav>
+				</nav>
+			</div>
 			<div class="container">
 				<h1>Micro-Blog</h1>
 			</div>
@@ -28,32 +30,66 @@
 					<form class="post-form" id="create-post">
 						<input type="text" name="title" class="form-control" placeholder="title" style="width:800px">
 						<input type="text" rows="10" name="story" class="form-control"  style="width:800px; height:200px;" >
-						<input type="submit" class="btn btn-default" value="Add Post">
+						<br>
+						<div id="addpost">
+							<input type="submit" class="bttn" value="Add Post">
+						</div>
 					</form>
+					<br><br><br>
 					
 					<ul id="posts-list">
 						<script id="posts-template" type="text/x-handlebars-template">
 						\{{#each posts}}
-						<li><strong>\{{title}}</strong><br>
-								
+						<li class="list-group-item post" data-id="\{{_id}}"><strong>\{{title}}</strong><br>
+											
 						\{{story}}</li>
 						
+						
+						
 
-                       //FORM TO UPDATE POST
-						<div class="collapse">
-							<br>
-							<form class="update" id="\{{_id}}">
-								<div class="form-group">
-									<input type="text" name="title" class="form-control" placeholder="title" value="\{{title}}">
-								</div>
-								<div class="form-group">
-									<input type="text" name="story" class="form-control" placeholder="story" value ="\{{story}}">
-								</div>
-								<div class="form-group">
-									<input type="submit" class="btn btn-block btn-default" value="update">
-								</div>
-							</form>
+
+
+
+
+
+
+						<div class="pull-right">
+							<!-- pencil icon to toggle update form -->
+							<a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</a>
+							
+							<!-- trash can icon to delete todo -->
+							<a href="javascript:void(0)" class="delete-post">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
 						</div>
+						
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<form class="form-inline update-post" data-id="\{{_id}}">
+							<div class="form-group">
+								<input type="text" name="title" class="form-control" placeholder="title" value="\{{title}}">
+							</div>
+							<div class="form-group">
+								<input type="text" name="story" class="form-control" placeholder="story" value ="\{{story}}">
+							</div>
+							<div class="form-group">
+								<input type="submit" class="btn btn-block btn-default" value="update">
+							</div>
+						</form>
 						
 						\{{/each}}
 						</script>
