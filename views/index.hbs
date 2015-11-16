@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Blog</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles.css">
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+	<div class="row col-md-12">
+		<h1 class="blogTitle text-center">The Blog About Nothing</h1>
+		<hr>
+	</div> <!-- end of title row -->
+	<div class="row blog-container">
+		<div class="newBlogPost col-md-8 col-md-offset-2">
+			<h1 class="newBlogTitle">Add new posting</h1>
+			<form class="newBlog">
+				<input type="text" class="newTitle form-control" placeholder="Title" name="title">
+				<input type="text" class="newCategory form-control" placeholder="Category" name="category">
+				<input type="text" class="newblogContent form-control" placeholder="Content" name="blogContent"></input>
+				<input type="submit" class="createButton btn btn-primary form-control">
+			</form>
+		</div>
+	</div>
+	<hr>
+	<div class="insertContainer">	
+	<script id="blog-template" type="text/x-handlebars-template">
+	\{{#each blogs}}
+	<div class="row">
+		<div class="blog-inserts col-md-8 col-md-offset-2">
+			<div class="blog-content" data-id=\{{_id}}>
+				<!-- bootstrap popup -->
+				<!-- Button trigger modal -->
+				<button type="button" class="edit btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
+				  Edit
+				</button>
+				<button class="delete btn btn-primary btn-sm pull-right">Remove</button>
+				<!-- Modal -->
+				<div class="modal fade blogPostId" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Edit Blog</h4>
+				      </div>
+				      <div class="modal-body">
+				        <form class="editBlogForm form-group">
+				        	<input type="text" class="editTitle form-control" placeholder="Title" name="title">
+				        	<input type="text" class="editCategory form-control" placeholder="Category" name="category">
+				        	<input type="text" class="editBlogContent form-control" placeholder="Content" name="blogContent">
+				        	{{!-- <input type="submit" class="editSubmit"> --}}
+				        <input type="submit" class="editSubmit btn btn-primary form-control" data-id=\{{_id}}>
+				        </form>
+				      </div>
+				        <div class="modal-footer"></div>	
+				    </div>
+				  </div>
+				</div>
+				<!-- end of bootstrap popup -->
+				<h2 class="mainBlogTitle text-center">\{{ title }}</h2>
+				<p class="blogPostContent">Content: \{{ blogContent }}</p>	
+				<p class="category">Category: \{{ category }}</p>
+			</div>
+		</div>
+	</div>
+	\{{/each}}
+	</script>
+	</div>	
+</div> <!-- end of content div -->
+
+
+
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap js -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- handlebars js -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+	<!-- custom js -->
+	<script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
