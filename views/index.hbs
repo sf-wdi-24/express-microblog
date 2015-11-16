@@ -14,25 +14,52 @@
 </head>
 <body>
 				<div class="text-center" id="pageHeading">
-					<strong>Weekly Track Review</strong>
+					<strong>Daily Track Review</strong>
 				</div>
 	<div class="container">
+		<div class="col-md-12" id ="blog-body">
 			<script id= "blog-template" type="text/x-handlebars-template">
 				\{{#each posts}}
 				<div class="row">
-					<div class="col-md-12" id="blogTitle">
-					<h2>\{{title}}</h2>
-				</div>
+					<div class="col-md-12 blogTitle post" id="\{{_id}}">
+						<h2>\{{title}}\\\\\</h2>
+					</div>
 				</div>
 				<div class="row">
+
 					<div class="col-md-12">
 					<br>
 						<p>\{{content}}</p>
+							<div class="col-md-2 pull-left btn-group-sm" id="\{{_id}}">
+											<a href="javascript:void(0)" data-toggle="collapse" data-target="#form\{{_id}}">
+				                    <span class="glyphicon glyphicon-pencil btn btn-primary" id='\{{_id}}'></span>
+											</a>
+												<form class="editDrop submitEdit" id="form\{{_id}}">
+															<input type="text" class="form-control" name="title" placeholder="Edit title">
+															<textarea class="form-control" name='content' form="form\{{_id}}" placeholder="Edit track review here..."></textarea><br>
+															<input type="submit" class="btn btn-primary" id="\{{_id}}">
+												</form>
+											
+												<span class="glyphicon glyphicon-remove btn btn-primary" id="\{{_id}}" aria-hidden="true"> </span>
+										</div>
 					</div>
 				</div>
 				\{{/each}}
 			</script>
+			</div>
 		</div>
+			 <div class="row">
+			 	<div class="col-md-3 col-md-offset-1">
+			 	<hr>
+					 <form id="newBlogForm">
+		            <div class="form-group">
+		              <input type="text" class="form-control" name="title" placeholder="Track title">
+		              <textarea class="form-control" name='content' form="newBlogForm" placeholder="Your track review here..."></textarea>
+		              <br>
+		              <input type="submit" class="btn btn-primary" id="submitTodo">
+		            </div>
+		       </form>
+		      </div>
 	</div>
 	
 
@@ -40,9 +67,9 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<!-- bootstrap -->
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
 	<!-- handlebars -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+	<!-- custom script -->
 	<script type="text/javascript" src="scripts.js"></script>
 
 </body>

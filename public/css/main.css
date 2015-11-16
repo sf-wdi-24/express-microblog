@@ -15,16 +15,22 @@ body {
 	background-color: cyan;
 }
 
+.editDrop {
+    display: none;
+}
+
 .container {
     background-color: white;
-    border: yellow solid 4px;
+    border: magenta solid 4px;
     border-top: none;
     border-bottom: none;
 }
 
-#blogTitle{
+.blogTitle{
     font-family: 'ziamimiregular';
     background-color: yellow;
+    width: 100%;
+    margin-bottom: none;
 
 
 }
@@ -33,6 +39,50 @@ body {
 	background-color: magenta;
     font-family: 'ziamimiregular';
     font-size: 80px;
-    color: black; 
-    /*box-shadow: 0px 5px 5px lightgrey;*/
+    color: yellow; 
+    box-shadow: 0px 1px 10px magenta;
 }
+
+.btn {
+    border: none;
+    background-color: none;
+    color: white;
+    padding: 4px 9px;
+    margin-bottom: 10px;
+    margin-left: -3px;
+
+}
+
+hr {
+    border: 2px solid magenta;
+    border-width: 50%;
+    margin-top: 20px;
+}
+
+h2 {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+p {
+    border-bottom: 2px solid magenta;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.btn-primary {
+    background-color: magenta;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: darkmagenta;
+    color: white;
+}
+
+
