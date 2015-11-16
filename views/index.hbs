@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Microblog</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'> 
+  
+       <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		
+		<link relhttps://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" >
+			<link rel="stylesheet" type="text/css" href="main.css">
+
+			<link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+			<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans' rel='stylesheet' type='text/css'>
+		</head>
+		
+		<body>
+		<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Photos</a></li>
+  <li><a href="#">Contact</li>
+</ol>
+			<div class="container">
+				<h1>Micro-Blog</h1>
+				<p>A place to share thoughts, ideas, and whatever else may be on your mind...
+				Keep on keepin' on.</p>
+
+
+
+				<nav class="social">
+          <ul>
+              <li><a href="http://twitter.com/gian_michelle">Twitter <i class="fa fa-twitter"></i></a></li>
+              <li><a href="http://facebook.com/gian.michelle">Facebook <i class="fa fa-facebook"></i></a></li>
+              <li><a href="http://dribbble.com/gian_michelle">Dribbble <i class="fa fa-dribbble"></i></a></li>
+              <li><a href="http://behance.net">Behance <i class="fa fa-behance"></i></a></li>
+              
+          </ul>
+      </nav>
+</div>
+			
+
+			
+					<br><br><br>
+					<div class="row" id="blog">
+				<div class="col-md-8 col-md-offset-2">
+					<ul id="posts-list">
+						<script id="posts-template" type="text/x-handlebars-template">
+						\{{#each posts}}
+						<li class="list-group-item post" data-id="\{{_id}}"><strong>\{{title}}</strong><br>
+											
+						\{{story}}</li>
+
+
+						
+						
+						<div class="pull-right">
+							<!-- pencil icon to toggle update form -->
+							<a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</a>
+							
+							<!-- trash can icon to delete todo -->
+							<a href="javascript:void(0)" class="delete-post">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+						</div>
+						
+						 <form class="form-inline update-post" data-id="\{{_id}}">
+							<div class="form-group">
+								<input type="text" name="title" class="form-control" placeholder="title" value="\{{title}}">
+							</div>
+							<div class="form-group">
+								<input type="text" name="story" class="form-control" placeholder="story" value ="\{{story}}">
+							</div>
+							<div class="form-group">
+								<input type="submit" class="btn btn-block btn-default" value="update">
+							</div>
+						</form>
+						
+						
+						\{{/each}}
+						</script>
+					</ul>
+				</div>
+			</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div class="row" "blog">
+				<div class="col-md-10 col-md-offset-1">
+					<form class="post-form" id="create-post">
+						<input type="text" name="title" class="form-control" placeholder="title" style="width:800px">
+						<input type="text" rows="10" name="story" class="form-control"  style="width:800px; height:200px;" >
+						<br>
+						<div id="addpost">
+							<input type="submit" class="bttn" value="Add Post">
+						</div>
+					</form>
+					</div>
+					</div>
+
+			
+			<!-- jquery -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+			<!-- bootsrap js -->
+			<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+			<!-- handlebars -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+			<!-- customer js -->
+			<script type="text/javascript" src="main.js"></script>
+		</body>
+	</html>

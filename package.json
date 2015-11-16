@@ -1,0 +1,32 @@
+{
+  "name": "express-microblog",
+  "version": "1.0.0",
+  "description": "**Objective:** Use Node, Express, and MongoDB to build a full-stack microblog application.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheEddyChang/express-microblog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheEddyChang/express-microblog/issues"
+  },
+  "homepage": "https://github.com/TheEddyChang/express-microblog#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "chai": "^3.4.1",
+    "express": "^4.13.3",
+    "hbs": "^4.0.0",
+    "mocha": "^2.3.3",
+    "mongoose": "^4.2.5",
+    "request": "^2.65.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.3"
+  }
+}
