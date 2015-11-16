@@ -9,12 +9,20 @@ p {
 	text-align: center;
 }
 body {
-	background: #F8F8FF;
+	background: #F5F5F5;
+	font-color: #4682B4;
 
 }
 #posts-list {
-	font-family: 'Dancing Script', cursive;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size:20px;
+	font-color: blue;
 
+
+}
+
+#blog {
+	border-radius: 50px;
 }
 
 
