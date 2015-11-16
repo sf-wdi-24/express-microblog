@@ -30,7 +30,6 @@ $(document).ready(function (){
 	$(document).on('click', '.glyphicon-pencil', function (event) {
 				event.preventDefault();
 				id = $(this).attr('id');
-				console.log(id);
 				$('.glyphicon-remove').toggle();
 
 			});
