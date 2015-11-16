@@ -4,6 +4,10 @@
 		<title>Microblog</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'> 
+  
+       <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		
 		<link relhttps://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" >
@@ -11,19 +15,41 @@
 		</head>
 		
 		<body>
-			<div class="navigation">
-				<nav class="navbar navbar-default">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<a class="navbar-brand" href="#">
-								<img id="bat" alt="Brand" src="http://icons.iconarchive.com/icons/icons8/windows-8/128/Cinema-Batman-New-icon.png">
-							</a>
-						</div>
-					</div>
-				</nav>
-			</div>
+		<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Photos</a></li>
+  <li><a href="#">Contact</li>
+</ol>
 			<div class="container">
 				<h1>Micro-Blog</h1>
+
+
+
+				<nav class="social">
+          <ul>
+              <li><a href="http://twitter.com/gian_michelle">Twitter <i class="fa fa-twitter"></i></a></li>
+              <li><a href="http://facebook.com/gian.michelle">Facebook <i class="fa fa-facebook"></i></a></li>
+              <li><a href="http://dribbble.com/gian_michelle">Dribbble <i class="fa fa-dribbble"></i></a></li>
+              <li><a href="http://behance.net">Behance <i class="fa fa-behance"></i></a></li>
+              
+          </ul>
+      </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
@@ -78,7 +104,7 @@
 
 
 
-
+  					<div class="collapse" id="update-\{{_id}}">
 						<form class="form-inline update-post" data-id="\{{_id}}">
 							<div class="form-group">
 								<input type="text" name="title" class="form-control" placeholder="title" value="\{{title}}">
@@ -90,6 +116,7 @@
 								<input type="submit" class="btn btn-block btn-default" value="update">
 							</div>
 						</form>
+						</div>
 						
 						\{{/each}}
 						</script>

@@ -52,39 +52,40 @@ $(function() {
 
 	
 
-	// $('.update-post').on('submit', function(event) {
+	$(".update-post").on("submit", function(event) {
 		
-	// 	event.preventDefault();
-	// 	console.log("yoyoyoyo");
-	// 	// var postId = $(this).attr('data-id');
-	// 	var postId = $(this).closest('.post').attr('data-id');
+		event.preventDefault();
+		console.log("yoyoyoyo");
+		// var postId = $(this).attr('data-id');
+		var postId = $(this).closest(".post").attr("data-id");
 
-	// 	var postUpdate = allPosts.filter(function(post) {
-	// 		return post._id == postId;
-	// 	})[0];
-	// 	var updatePost = $(this).serialize();
+		var postUpdate = allPosts.filter(function(post) {
+			return post._id == postId;
+		})[0];
+		var updatePost = $(this).serialize();
 
-	// 	$.ajax({
-	// 		type: "PUT",
-	// 		url: baseUrl + '/' + postId,
-	// 		data: updatePost,
-	// 		success: function(data) { //data that comes back from server {
-	// 			allPosts.splice(allPosts.indexOf(postUpdate), 1, data);
-	// 			render();
-	// 		}
-	// 	});
+		$.ajax({
+			type: "PUT",
+			url: baseUrl + "/" + postId,
+			data: updatePost,
+			success: function(data) { //data that comes back from server {
+				allPosts.splice(allPosts.indexOf(postUpdate), 1, data);
+				render();
+			}
+		});
 
 	
 
-	// });
+	});
 
 
 
-$('.delete-post').on('click', function (event) {
+$(".delete-post").on("click", function (event) {
       event.preventDefault();
+      console.log("HEY THERE");
 
       // find the todo's id (stored in HTML as `data-id`)
-      var postId = $(this).closest('.post').attr('data-id');
+      var postId = $(this).closest(".post").attr("data-id");
 
       // find the todo to delete by its id
       var postToDelete = allPosts.filter(function (todo) {
@@ -93,8 +94,8 @@ $('.delete-post').on('click', function (event) {
 
       // DELETE request to delete todo
       $.ajax({
-        type: 'DELETE',
-        url: baseUrl + '/' + postId,
+        type: "DELETE",
+        url: baseUrl + "/" + postId,
         success: function(data) {
           // remove deleted todo from all todos
           allPosts.splice(allPosts.indexOf(postToDelete), 1);
