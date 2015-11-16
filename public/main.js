@@ -123,6 +123,7 @@ $(function () {
 		} else {
 			$.get(baseUrl, function () {
 				$postList.empty();
+				$postList.removeClass("text-center")
 				var postsHtml = template({ posts: foundCategoryPosts});
 				$postList.append(postsHtml);
 			});
