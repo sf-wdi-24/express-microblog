@@ -86,12 +86,12 @@
 							</a>
 							
 							<!-- trash can icon to delete todo -->
-							<a href="javascript:void(0)" class="delete-post">
+							<a href="javascript:void(0)" class="delete-post" data-id="\{{_id}}">
 								<span class="glyphicon glyphicon-trash"></span>
 							</a>
 						</div>
 						
-						
+	
 
 
 
@@ -104,7 +104,7 @@
 
 
 
-  					<div class="collapse" id="update-\{{_id}}">
+  					
 						<form class="form-inline update-post" data-id="\{{_id}}">
 							<div class="form-group">
 								<input type="text" name="title" class="form-control" placeholder="title" value="\{{title}}">
@@ -116,13 +116,15 @@
 								<input type="submit" class="btn btn-block btn-default" value="update">
 							</div>
 						</form>
-						</div>
+						
+						
 						
 						\{{/each}}
 						</script>
 					</ul>
 				</div>
 			</div>
+			<br><br><br><br><br><br><br><br><br><br>
 			
 			<!-- jquery -->
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>

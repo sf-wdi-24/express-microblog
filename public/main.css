@@ -1,12 +1,15 @@
 h1 {
 	text-align: center;
 }
+body {
+	background: beige;
+}
 .container {
-	background-image: url("http://thecyclinghouse.com/wp-content/uploads/GLAYLW22.jpg");
+	background-image: url("http://www.theravive.com/img/therapedia/Rebirthing-Breathwork.jpg");
 	background-size: cover;
 	border-radius: 0px;
 	height: 500px;
-	width: 1500px;
+	width: 1470px;
 	margin-top: -20px;
 } 
 

@@ -52,12 +52,12 @@ $(function() {
 
 	
 
-	$(".update-post").on("submit", function(event) {
+	$("body").on("click", ".update-post", function(event) {
 		
 		event.preventDefault();
 		console.log("yoyoyoyo");
 		// var postId = $(this).attr('data-id');
-		var postId = $(this).closest(".post").attr("data-id");
+		var postId = $(this).attr("data-id");
 
 		var postUpdate = allPosts.filter(function(post) {
 			return post._id == postId;
@@ -66,7 +66,7 @@ $(function() {
 
 		$.ajax({
 			type: "PUT",
-			url: baseUrl + "/" + postId,
+			url: '/api/posts/' + postId,
 			data: updatePost,
 			success: function(data) { //data that comes back from server {
 				allPosts.splice(allPosts.indexOf(postUpdate), 1, data);
@@ -80,12 +80,12 @@ $(function() {
 
 
 
-$(".delete-post").on("click", function (event) {
+$("body").on("click", ".delete-post", function (event) {
       event.preventDefault();
       console.log("HEY THERE");
 
       // find the todo's id (stored in HTML as `data-id`)
-      var postId = $(this).closest(".post").attr("data-id");
+      var postId = $(this).attr("data-id");
 
       // find the todo to delete by its id
       var postToDelete = allPosts.filter(function (todo) {
@@ -95,7 +95,7 @@ $(".delete-post").on("click", function (event) {
       // DELETE request to delete todo
       $.ajax({
         type: "DELETE",
-        url: baseUrl + "/" + postId,
+        url: '/api/posts/' + postId,
         success: function(data) {
           // remove deleted todo from all todos
           allPosts.splice(allPosts.indexOf(postToDelete), 1);
