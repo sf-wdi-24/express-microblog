@@ -1,10 +1,32 @@
 body {
-	background-color: #90db9d;
+	background-color: #756955;
+	background-image: url('https://sugarchalet.files.wordpress.com/2012/11/blog-background1.jpg');
+	font-family: 'Josefin Sans', sans-serif;
+	color: #FFFFFF;
 }
-.blog-inserts {
-	background-color: #999999;
-	margin: 2px;
+.blogTitle {
+	font-size: 50px;
+		
+}
+.newBlogTitle {
+	font-size: 35px;
+}
+.blog-content {
+	background-color: #524938;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 5px;
 }
 .changes {
 	float: right;
+}
+.mainBlogTitle {
+	font-size: 25px;
+	text-decoration: underline;
+}
+.blogPostContent {
+	font-size: 15px;
+}
+.category {
+	font-size: 10px;
 }

@@ -32,17 +32,24 @@ $(function(){
 		$.post('/api/blogs/', blogData, function(data) {
 			allBlogs.push(data);
 			render();
+			$('.newBlog').each(function(){
+				this.reset();
 			});
 		});
+	});
 	//update existing blog 
 	$('.insertContainer').on('click', '.edit', function(event){
 		var blogId = $(this).closest('.blog-content').attr('data-id');
+		console.log("blogid",blogId);
 		$('.insertContainer').on('submit', '.editBlogForm', function(event){
 			event.preventDefault();
+			console.log("blogid2",blogId);
 			var blogEdits = $(this).serialize();
+			console.log('blogedits',blogEdits);
 			var blogUpdate = allBlogs.filter(function (blog) {
-				return (blog._id == blogId);
+				return (blog._id === blogId);
 			})[0];
+			console.log('blogupdate',blogUpdate);
 			$.ajax({
 				type: 'PUT',
 				url: '/api/blogs/'+blogId,
@@ -53,11 +60,13 @@ $(function(){
 				}
 			});
 			$('.modal-backdrop.fade.in').remove();
+			$('body').removeClass('modal-open');	
 		});
-	});
+ 	});
 
 //delete blog posting
 $('.insertContainer').on('click', '.delete', function(event){
+	event.preventDefault();
 	var blogId = $(this).closest('.blog-content').attr('data-id');
 	var blogDelete = allBlogs.filter(function (blog) {
 				return (blog._id == blogId);

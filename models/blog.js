@@ -5,6 +5,7 @@ var blogSchema = new Schema({
 	title: {type: String},
 	category: {type: String},
 	blogContent: {type: String},
+	likes: {type: Number},
 	comments: {type: String}
 });
 
