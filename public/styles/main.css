@@ -10,16 +10,24 @@ body {
 
 #nav-header {
 	margin-top: 10px;
+	padding-left: 60px;
 }
 
 #new-post-button {
 	text-align: right;
 	margin-top: 10px;
+	padding-right: 60px;
 }
 
 #profile-pic {
 	height: 35px;
 	width: 35px;
+	margin-top: 10px;
+}
+
+#profile-pic-two {
+	height: 50px;
+	width: 50px;
 	margin-top: 10px;
 }
 
@@ -49,7 +57,7 @@ body {
 #thumbnail-posts-list {
 	background-color: white;
 	margin: 15px;
-	padding: 15px;
+	padding: 5px;
 }
 
 #post {
@@ -60,4 +68,19 @@ body {
 
 #single-post-header {
 	margin-left: 0px;
+}
+
+@media all and (max-width: 500px) { /* screen size until 500px */
+    #all-posts-title {
+        font-size: 0.9em; /* 0.8x default size */
+    }
+    #total-count-badge {
+    	font-size: .8em;
+    }
+}
+
+@media all and (max-width: 500px) { /* screen size until 500px */
+    #profile-pic-two {
+        font-size: 0.9em; /* 0.8x default size */
+    }
 }
