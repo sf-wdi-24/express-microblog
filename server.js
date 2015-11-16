@@ -1,7 +1,8 @@
 // require express and other modules
 var express = require('express'),
 		app = express(),
-		bodyParser = require('body-parser');
+		bodyParser = require('body-parser'),
+		mongoose = require('mongoose');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -16,25 +17,18 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
-// seed data
-var allPosts = [
-					{ post: 'This is a post.',
-						name: 'Steven',
-						time: '10:54',
-						likes: 0 },
-					{ post: 'This is another post.',
-						name: 'Steven',
-						time: '10:50',
-						likes: 0 },
-					{ post: 'This is yet another post.',
-						name: 'Steven',
-						time: '10:43',
-						likes: 0 }
-				];
+// connect to mongodb
+mongoose.connect('mongodb://localhost/posts-app');
+
+// require Post model
+var Post = require('./models/post');
 
 // set up api routes
 app.get('/api/posts', function(req, res) {
-	res.json({ posts: allPosts });
+	Post.find(function(err, allPosts) {
+		res.json({ posts: allPosts });
+	});
+
 });
 
 // start the server
