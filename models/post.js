@@ -5,7 +5,8 @@ var PostSchema = new Schema({
 	title: String,
 	description: String,
 	like: Boolean,
-	time: String
+	time: String,
+	category: String
 });
 
 var Post = mongoose.model("Post", PostSchema);

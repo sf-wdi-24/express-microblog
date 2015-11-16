@@ -20,6 +20,9 @@ $(function () {
 	$("#new-post").on("submit", function (event) {
 		event.preventDefault();
 		var newPost = $(this).serialize();
+		newPost = newPost.replace(/&category=.+&/g, function(x) {
+			return x.slice(0,10) + x.slice(10, x.length-1).toLowerCase() + x.slice(-1);
+		});
 		newPost.like = false;
 		newPost.time = (new Date()).toDateString();
 		$.post(baseUrl, newPost, function (data) {
@@ -40,6 +43,9 @@ $(function () {
 		});
 		$("#form" + id).on("submit", function (event) {
 			var editedPost = $("#form" + id).serialize();
+			editedPost = editedPost.replace(/&category=.+&/g, function(x) {
+			return x.slice(0,10) + x.slice(10, x.length-1).toLowerCase() + x.slice(-1);
+		});
 			editedPost= editedPost + "&like=" + allPosts[editPostIndex].like.toString() + "&time=" + allPosts[editPostIndex].time;
 			event.preventDefault();
 			$.ajax({
@@ -80,7 +86,7 @@ $(function () {
 		var likePost = allPosts.filter(function (post) {
 			return post._id == id;
 		})[0];
-		likePost = "title=" + likePost.title + "&description=" + likePost.description + "&like=" + (!likePost.like) + "&time=" + likePost.time;
+		likePost = "title=" + likePost.title + "&description=" + likePost.description + "&like=" + (!likePost.like) + "&time=" + likePost.time + "&category=" + likePost.category;
 		$.ajax({
 			type: "PUT",
 			url: baseUrl + "/" + id,
@@ -88,6 +94,33 @@ $(function () {
 			success: function(data) {
 				allPosts.splice(allPosts.indexOf(likePost), 1, data);
 			}
+		});
+	});
+
+	$("span").click(function () {
+		var filterCategory = $(this).text().toLowerCase();
+		console.log(filterCategory);
+		foundCategoryPosts = [];
+		if (filterCategory == "all categories") {
+			foundCategoryPosts = allPosts;
+		}
+		allPosts.forEach(function (post) {
+			if (post.category == filterCategory) {
+				foundCategoryPosts.push(post);
+			}
+		});
+		var allCategory = ["news", "sports", "economy", "finances"]
+		if (foundCategoryPosts.length === 0) {
+			allPosts.forEach(function (post) {
+				if (allCategory.indexOf(post.category) < 0) {
+					foundCategoryPosts.push(post);
+				}
+			});
+		}
+		$.get(baseUrl, function () {
+			$postList.empty();
+			var postsHtml = template({ posts: foundCategoryPosts});
+			$postList.append(postsHtml);
 		});
 	});
 });

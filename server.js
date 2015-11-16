@@ -58,6 +58,7 @@ app.put("/api/posts/:id", function (req, res) {
 		foundPost.description = req.body.description;
 		foundPost.like = req.body.like;
 		foundPost.time = req.body.time;
+		foundPost.category = req.body.category;
 		//save edited foundPost to db
 		foundPost.save(function (err, editedPost) {
 			res.json(editedPost);
