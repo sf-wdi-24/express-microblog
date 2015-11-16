@@ -47,13 +47,14 @@ $(function() {
 	$('#single-post-tag').on('click', function(e){
 		var tagsArray = [];
 		var textbefore = $('#updateBody').val();
-		var text = textbefore.replace(/ /g,"%20");
+		var text = textbefore.replace(/[.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/'/g, '').replace(/ /g,"%20");
+		console.log(text);
 		$.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20contentanalysis.analyze%20where%20text%3D%27'+text+'%27%3B&format=json&diagnostics=true', function(data){
 			console.log(data);
 			var entities = data.query.results.entities.entity;
 			console.log(entities[0]);
 			if(entities === undefined){
-
+				console.log("No suggestions available");
 			} else if((Object.keys(entities).length >=1) && (entities[0] === undefined)){
 				$('#single-post-tag').append('<span class="label label-success" id="tag-labels">'+entities.text.content+'</span>'+' ');
 			} else {
