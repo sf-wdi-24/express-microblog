@@ -1,9 +1,24 @@
-#blog {
-	border-left: 1px solid #000;
-	height: 500px;
-};
 
-#entry {
-	padding: 55px;
-	/*background-color: red;*/
+body {
+	background-color: #DCEAD5;
 }
+h1 {
+	font-size: 75px;
+}
+.page-header {
+	font-family: 'Courgette', cursive;
+}
+
+#show-all {
+	padding: 55px;
+}
+
+#quotes-list {
+ background-color: #ECEAE0;
+}
+
+p {
+font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+}
+
+

@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 var QuoteSchema = new Schema({
 	category : String,
 	statement: String,
-	author: String
+	author: String,
+	work: String
 });
 
 //Model 

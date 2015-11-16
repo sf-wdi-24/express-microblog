@@ -7,20 +7,26 @@ $(function (){
 	//Can now compile the source
 	var template = Handlebars.compile(source);
 
+	//button to show all quotes
+	var $showAll = $('#showAll');
+	//form to create new data
+	var $createQuote = $('#create-quote');
+	
 	//test data
-	var allQuotes = [
+	var allQuotes = [];
+	/*var allQuotes = [
 	{	category: 'Book', 
 		statement: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam! ',
 		author: 'John Dwyer'},
 	{	category: 'movie',
 		statement: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ipsum architecto error minima accusantium sapiente in aliquam!',
 		author: "Cristina"}
-	];
+	];*/
 
 
 
 	//Show all quotes on pageload
-	$.get('/api/quotes', function (data){
+	$.get('/api/quotes', function (data) {
 			/*console.log(data);*/
 			allQuotes = data.quotes;
 			var quotesHtml = template({ quotes: allQuotes });
@@ -29,8 +35,8 @@ $(function (){
 	});
 
 	//Show all quotes on submit
-	$('#showAll').on('click', function (e){
-		$.get('/api/quotes', function (data){
+	$('#showAll').on('click', function (e) {
+		$.get('/api/quotes', function (data) {
 			/*console.log(data);*/
 			allQuotes = data.quotes;
 			var quotesHtml = template({ quotes: allQuotes });
@@ -38,12 +44,25 @@ $(function (){
 		});
 	});
 
+	//Show and search for quote by id
+	/*$.get('/api/quotes/:id' function (data) {
+
+	});*/
+
 	//Make new quote
 	//NEEDS WORK
-	$('#create-quote').on('submit', function (e) {
-		newQuote = $(this).serialize();
-		$.post('/api/quotes', function (data) {
+	$createQuote.on('submit', function (e) {
+		quoteNew = $(this).serialize();
+		
+		$.post('/api/quotes', quoteNew, function (data) {
 			console.log(data); 
+			//adding to array of all quotes
+			allQuotes.push(data);
+			//render onto screen
+			var quotesHtml = template({ quotes: allQuotes });
+			$('#quotes-list').append(quotesHtml);
+
+
 		});
 	});
 		

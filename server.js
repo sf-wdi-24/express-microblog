@@ -37,12 +37,21 @@ app.get('/', function (req, res){
 ];*/
 
 
-
+//GET all quotes on pageload
 app.get('/api/quotes', function (req, res){
 	//allQuotes is a taco...it's what is returned from the database.
 	Quote.find(function (err, allQuotes) {
 		res.json({quotes: allQuotes});
-		console.log(allQuotes);console.log(allQuotes);
+	});
+});
+
+//POST new quote
+app.post('/api/quotes', function (req, res) {
+	var newQuote = new Quote(req.body);
+
+	//save into db
+	newQuote.save(function (savedQuote){
+		res.json(savedQuote);
 	});
 });
 
