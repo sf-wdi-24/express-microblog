@@ -1,0 +1,24 @@
+
+body {
+	background-color: #DCEAD5;
+}
+h1 {
+	font-size: 75px;
+}
+.page-header {
+	font-family: 'Courgette', cursive;
+}
+
+#show-all {
+	padding: 55px;
+}
+
+#quotes-list {
+ background-color: #ECEAE0;
+}
+
+p {
+font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+}
+
+
