@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 
-// Get ALl Task 
+// Get ALl Blogs 
 app.get('/api/blogs', function(req, res) {
 	//mongoose
 	blog.find(function(err, allBlogs) {
@@ -31,7 +31,7 @@ app.get('/api/blogs', function(req, res) {
 
 });
 
-	//Post single task
+	//Post single blog
 	app.post('/api/blogs/', function(req, res) {
 		//New blog with form data
 		var newBlog = new Blog(req.body); 
@@ -41,7 +41,7 @@ app.get('/api/blogs', function(req, res) {
 	});
 
 
-// delete todo
+// delete blog
 app.delete('/api/blogs/:id', function (req, res) {
   // get blog id from url params (`req.params`)
   var blogId = req.params.id;
@@ -52,6 +52,33 @@ app.delete('/api/blogs/:id', function (req, res) {
       res.status(500).json({ error: err.message });
     } else {
       res.json(deletedBlog);
+    }
+  });
+});
+
+
+// update task
+
+app.put('/api/blogs/:id', function (req, res) {
+  var blogId = req.params.id;
+
+  blog.findOne({ _id: blogId }, function (err, foundBlog) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+     
+      foundBlog.place = req.body.place;
+      foundBlog.description = req.body.description;
+      foundBlog.image = req.body.image;
+
+      // save updated blog in db
+      foundBlog.save(function (err, savedBlog) {
+        if (err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.json(savedBlog);
+        }
+      });
     }
   });
 });

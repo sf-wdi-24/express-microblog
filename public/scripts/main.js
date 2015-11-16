@@ -66,5 +66,33 @@ $(document).ready(function() {
     $blog_input.find('input').first().focus();
   });
 
+// delete task 
+
+$('body').on('click','.delete-book', function (event) {
+      event.preventDefault();
+
+      var blogId = $(this).closest('.blog').attr('data-id');
+
+      var blogToDelete = allBlogs.filter(function (blog) {
+        return blog._id == blogId;
+      })[0];
+
+      $.ajax({
+        type: 'DELETE',
+        url: baseUrl + '/' + blogId,
+        success: function(data) {
+          // remove deleted book from all books
+          allBlogs.splice(allBlogs.indexOf(blogToDelete), 1);
+
+          // render all books to view
+          render();
+        }
+      });
+    });
+
+
+
+
+
 
 });
