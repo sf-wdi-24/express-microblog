@@ -1,4 +1,4 @@
-// require express and other modules
+// require express and other libraries
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
@@ -16,9 +16,9 @@ app.set('view engine', 'hbs');
 // connect to mongodb
 mongoose.connect('mongodb://localhost/blogPost-app');
 
-// require Workout model
-var Workout = require('./models/blogPost');
-
+// require Post and User model
+var blogPost = require('./models/blogPost');
+var User = require('./models/users');
 
 // HOMEPAGE ROUTE
 
@@ -29,16 +29,67 @@ app.get('/', function (req, res) {
 
 // API ROUTES
 
-// test data
-// var allWorkouts = [
-//   { exercise: 'Ran 3 miles', category: 'cardio' },
-//   { exercise: 'Yoga', category: 'stretching' }
-// ];
-
+// 
+// Read all blogsPosts from server
 app.get('/api/blogPosts', function (req, res) {
-  Workout.find(function (err, allWorkouts) {
+  blogPost.find(function (err, allblogPosts) {
     res.json({ blogPosts: allblogPosts });
   });
+});
+
+// read one specific blog 
+app.get('/api/blogPosts/:id', function (req, res) {
+   var BlogPostId = parseInt(req.params.id);
+
+   var foundBlogPost = blogPosts.filter(function (todo) {
+   return blogPosts._id == blogPostsId;
+   })[0];
+
+ res.json(foundBlogPost);
+});
+
+// post new blog entry
+app.post('/api/blogPosts', function (req, res) {
+  var newBlogPost = req.body;
+
+  if (blogPosts.length > 0) {
+    newBlogPost._id = blogPosts[blogPosts.length - 1]._id + 1;
+  } else {
+    newblogPosts._id = 1;
+  }
+
+  blogPosts.push(newBlogPosts);
+
+  res.json(newBlogPost);
+});
+
+// Update bloPost
+app.put('/api/blogPosts/:id', function (req, res) {
+  var blogPostId = parseInt(req.params.id);
+
+  var blogPostToUpdate = blogPosts.filter(function (todo) {
+    return blobPosts._id == blogPostId;
+  })[0];
+
+  blogPostToUpdate.task = req.body.task;
+  blogPostToUpdate.description = req.body.description;
+
+  res.json(blogPostToUpdate);
+});
+
+
+//Delete a blog Post
+
+app.delete('/api/blogPosts/:id', function (req, res) {
+  var blogPostsId = parseInt(req.params.id);
+
+  var BlogPostToDelete = todos.filter(function (todo) {
+    return blogPosts._id == blogPostsId;
+  })[0];
+
+  blogPosts.splice(blogPosts.indexOf(BlogPostToDelete), 1);
+
+  res.json(blogPostToDelete);
 });
 
 
