@@ -10,6 +10,15 @@ body {
 }
 .newBlogTitle {
 	font-size: 35px;
+	background-color: #337AB7;
+	border: 2px solid #FFFFFF;
+	border-radius: 10px;
+	display: inline-block;
+	padding: 5px;
+}
+.newBlogTitle:hover {
+	background-color: #286090;
+	cursor: pointer;
 }
 .blog-content {
 	background-color: #524938;

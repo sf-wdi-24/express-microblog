@@ -9,7 +9,7 @@ $(function(){
 	var template = Handlebars.compile(source);
 	var allBlogs;
 	var blogHtml = template({blogs: allBlogs});
-
+	$('.newBlog').hide();
 	//Render page function
 	function render() {
 		$('.insertContainer').empty();
@@ -23,7 +23,10 @@ $(function(){
 		var blogHtml = template({blogs: allBlogs});
 		$('.insertContainer').append(blogHtml);
 	});
-
+	//show new blog post form
+	$('.newBlogTitle').on('click', function(event){
+		$('.newBlog').show();
+	});
 	//add new blog post to website
 	$('.newBlog').on('submit',function(event) {
 		event.preventDefault();
@@ -36,7 +39,9 @@ $(function(){
 				this.reset();
 			});
 		});
+			$('.newBlog').hide();
 	});
+
 	//update existing blog 
 	$('.insertContainer').on('click', '.edit', function(event){
 		var blogId = $(this).closest('.blog-content').attr('data-id');
