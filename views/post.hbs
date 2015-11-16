@@ -13,21 +13,68 @@
 	<title>Post</title>
 </head>
 <body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div clas="row">
+        <div class="col-sm-1">
+          <img src="https://pbs.twimg.com/profile_images/565291259351166976/ftSG_Wwt_400x400.jpeg" id="profile-pic" class="img-circle">
+        </div>
+        <div class="col-sm-5" id="nav-header">
+          <a href="http://localhost:3000/posts"><div id="all-posts-title">All Posts</a> <span class="badge" id="total-count-badge"></span>
+          </div>
+        </div>
+        <div class="col-sm-6" id="new-post-button">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#NewPostModal">New Post</button>
+        </div>
+      </div>
+    </div>
+  </nav>
 	
 	<div class="thumbnail" id="post">
 		<script id="posts-template" type="text/x-handlebars-template">
 			<p>\{{post.title}}</p>
 			<p>\{{post.body}}<br>
-			   \{{post.url}}<br>
-			   \{{post.favorite}}</p>
+			   \{{post.url}}</p>
 		</script>
-		<div class="row" id="post-server">
-			<b><p>{{post.title}}</p></b>
-			<p>{{post.body}}<br>
-				{{post.url}}</p>
+		<div class="row" id="post-server" data-id="{{post.favorite}}">
+      <div class="row" id="single-post-header">
+			 <b>{{post.title}}</b><div class="glyphicon glyphicon-heart" id="post-favorite"></div>
+      </div>
+			<p>{{post.body}} (<a href="{{post.url}}" target="_blank">More Info Here</a>)</p>
 		</div>
 
-    <div class="glyphicon glyphicon-heart" id="post-favorite"></div>
+    <div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="NewPostModal">New Post</h4>
+        </div>
+        <form class="new-post-form">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="new-title" class="control-label">Title</label>
+                <input type="text" class="form-control" id="new-title">
+              </div>
+              <div class="form-group">
+                <label for="new-body" class="control-label">Body</label>
+                <textarea class="form-control" id="new-body"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="new-url" class="control-label">URL</label>
+                <input type="text" class="form-control" id="new-url">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-info" value="submit"></input>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 		<!-- edit button to toggle form -->
         <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil"></div>
         </a>
@@ -48,9 +95,9 @@
             <div class="form-group">
               <input type="text" name="url" class="form-control" placeholder="URL" value="{{post.url}}" id="updateURL">
             </div>
-            <div class="form-group">
-              <input type="checkbox" name="favorite" class="form-control" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite">
-            </div>
+            
+              <input type="checkbox" name="favorite" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite" checked="checked">  Favorite
+            
             <div class="form-group">
               <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
             </div>
