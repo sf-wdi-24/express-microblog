@@ -48,7 +48,16 @@
 	        </div>
 				</div>
 				<div class="row info">
-					<button class="btn btn-block btn-info">Add Post</button>
+					<button class="btn btn-block btn-info" id="add-post-btn">Add Post</button>
+          <form class="add-post-form">
+            <div class="form-group">
+							<br>
+              <input type="text" class="formdata form-control form-group" name="post" placeholder="Post">
+              <input type="text" class="formdata form-control form-group" name="name" placeholder="Name">
+              <input type="text" class="formdata form-control form-group" name="category" placeholder="Category">
+              <input type="submit" class="btn btn-info btn-block" value="Submit">
+            </div>
+          </form>
 				</div>
 				<div class="row info" id="posts-results">
 					<script type="text/x-handlebars-template" id="posts-template">
@@ -62,8 +71,9 @@
               </div></p>
               <form class="editPost" id="form\{{_id}}">
                 <div class="form-group">
-                  <input type="text" class="formdata form-control form-group" name="task" value="\{{task}}">
-                  <input type="text" class="formdata form-control form-group" name="description" value="\{{description}}">
+                  <input type="text" class="formdata form-control form-group" name="post" value="\{{post}}">
+                  <input type="text" class="formdata form-control form-group" name="name" value="\{{name}}">
+                  <input type="text" class="formdata form-control form-group" name="category" value="\{{category}}">
                   <input type="submit" class="btn btn-info btn-block" value="Submit">
                 </div>
               </form>

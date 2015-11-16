@@ -36,3 +36,7 @@ p.name {
 .editPost {
 	display: none;
 }
+
+.add-post-form {
+	display:none;
+}
