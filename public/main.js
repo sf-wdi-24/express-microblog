@@ -7,7 +7,7 @@ $(function () {
 
 	function render() {
 		$postList.empty();
-		$("form").find("input[name='title'], textarea[name='description']").val("");
+		$("form").find("input[name='title'], input[name='category'], textarea[name='description']").val("");
 		var postsHtml = template({ posts: allPosts});
 		$postList.append(postsHtml);
 	}
@@ -109,18 +109,23 @@ $(function () {
 				foundCategoryPosts.push(post);
 			}
 		});
-		var allCategory = ["news", "sports", "economy", "finances"]
-		if (foundCategoryPosts.length === 0) {
+		var allCategory = ["news", "sports", "economy", "sciences", "finances"];
+		if (foundCategoryPosts.length === 0 && filterCategory === "more") {
 			allPosts.forEach(function (post) {
 				if (allCategory.indexOf(post.category) < 0) {
 					foundCategoryPosts.push(post);
 				}
 			});
 		}
-		$.get(baseUrl, function () {
+		if (foundCategoryPosts.length === 0) {
 			$postList.empty();
-			var postsHtml = template({ posts: foundCategoryPosts});
-			$postList.append(postsHtml);
-		});
+			$postList.addClass("text-center").append("<h3>No Post for This Category</h3>");
+		} else {
+			$.get(baseUrl, function () {
+				$postList.empty();
+				var postsHtml = template({ posts: foundCategoryPosts});
+				$postList.append(postsHtml);
+			});
+		}
 	});
 });
