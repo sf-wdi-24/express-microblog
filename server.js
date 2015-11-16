@@ -90,6 +90,14 @@ app.delete('/api/posts/:id', function(req, res) {
 
 
 
+
+
+
+
+
+
+
+
 var server = app.listen(process.env.PORT || 3000, function() {
 	console.log("WASABII");
 });
