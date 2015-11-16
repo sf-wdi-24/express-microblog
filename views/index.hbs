@@ -19,24 +19,37 @@
 		
 		<div class="row" >
 			<div class="col-md-3" id="entry">
-				<h3>test</h3>
-				<div class="fields">
+				<div id="fields">
 					<div class="btn-group" role="group">
-	  					<button type="button" class="btn btn-default">Show All Quotes</button>
+	  					<button type="button" class="btn btn-success" id="showAll">Show All Quotes</button>
 					</div>
+					<form id="create-quote">
+			          <div class="form-group">
+			            <input type="text" name="title" class="form-control" placeholder="Book, Movie, Song, Life, Other" autofocus>
+			          </div>
+			          <div class="form-group">
+			            <input type="text" name="title" class="form-control" placeholder="Author" autofocus>
+			          </div>
+			          <div class="form-group">
+			            <textarea type="text" class="form-control" placeholder="Quote" rows="3"></textarea>
+			          </div>
+			          <div class="form-group" id="quote-submit">
+			            <input type="submit" class="btn btn-block btn-primary" value="Post Quote">
+			          </div>
+			        </form>
 					<!-- <form id="quoteSearch">
 						<input id="quoteSearch" type: "text" placeholder="Find here">
 						<input class="btn btn-default" id="submitSearch" type"submit" value="Search quote!">
-					</form>	 -->
+					</form> -->	
 				</div><!-- closing feilds -->
 			</div> 
-			<div class="col-md-8 col-md-offset-3" id="quotes-list">
+			<div class="col-md-6 col-sm-offset-3" id="quotes-list">
 				<!-- Handlebars -->
 				<script id="quotePost-template" type="text/x-handlebars-template">
-					\{{#each quotesbars}}
+					\{{#each quotes}}
 						<h4>\{{statement}}</h4>
 						<hr>
-						<p>\{{category}}.  By: <strong>\{{author}}</strong><br />Date</p>
+						<p>\{{category}}.  Said by: <strong>\{{author}}</strong><br />{{id}}</p>
 						<br />
 					\{{/each}}
 				</script>

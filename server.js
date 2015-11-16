@@ -41,7 +41,7 @@ app.get('/', function (req, res){
 app.get('/api/quotes', function (req, res){
 	//allQuotes is a taco...it's what is returned from the database.
 	Quote.find(function (err, allQuotes) {
-		res.json({quotesbars: allQuotes});
+		res.json({quotes: allQuotes});
 		console.log(allQuotes);console.log(allQuotes);
 	});
 });

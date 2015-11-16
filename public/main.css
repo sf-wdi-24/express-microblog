@@ -3,6 +3,7 @@
 	height: 500px;
 };
 
-.fields {
+#entry {
 	padding: 55px;
+	/*background-color: red;*/
 }

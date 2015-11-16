@@ -17,13 +17,39 @@ $(function (){
 		author: "Cristina"}
 	];
 
-	//Ajax call to get allQuotes
+
+
+	//Show all quotes on pageload
 	$.get('/api/quotes', function (data){
-		/*console.log(data);*/
-		allQuotes = data.quotes;
-		var quotesHtml = template({ quotesbars: allQuotes });
-		$('#quotes-list').append(quotesHtml);
+			/*console.log(data);*/
+			allQuotes = data.quotes;
+			var quotesHtml = template({ quotes: allQuotes });
+			$('#quotes-list').append(quotesHtml);
+			
 	});
+
+	//Show all quotes on submit
+	$('#showAll').on('click', function (e){
+		$.get('/api/quotes', function (data){
+			/*console.log(data);*/
+			allQuotes = data.quotes;
+			var quotesHtml = template({ quotes: allQuotes });
+			$('#quotes-list').append(quotesHtml);
+		});
+	});
+
+	//Make new quote
+	//NEEDS WORK
+	$('#create-quote').on('submit', function (e) {
+		newQuote = $(this).serialize();
+		$.post('/api/quotes', function (data) {
+			console.log(data); 
+		});
+	});
+		
+		
+	
+		
 
 	/*var quotesHtml = template({ taco : allQuotes });
 	$('#quotes-list').append(quotesHtml);*/
