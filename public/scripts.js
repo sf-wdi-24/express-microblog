@@ -33,7 +33,6 @@ $(document).ready(function (){
 				console.log(id);
 				$('.glyphicon-remove').toggle();
 
-				console.log(this);
 			});
 
 	// POST new blogpost 
@@ -42,7 +41,6 @@ $(document).ready(function (){
 		var newBlogpost = $(this).serialize();
 
 		$.post('/api/posts', newBlogpost, function (data) {
-			console.log('POST DATA', data);
 
 			blogArr.push(data);
 
@@ -56,8 +54,6 @@ $(document).ready(function (){
 	$(document).on('submit', '.submitEdit', function (event) {
 		event.preventDefault();
 		var postId = $(this).closest('.pull-left').attr('id');
-		console.log("THIS", this);
-		console.log("POST ID", id);
 
 		var postToUpdate = blogArr.filter(function (post){
 			return post._id == postId;
@@ -67,17 +63,32 @@ $(document).ready(function (){
 
 		$.ajax({
 			type: 'PUT',
-			url: '/api/posts' + '/' + id,
+			url: '/api/posts/' + id,
 			data: updatedBlogpost,
 			success: function(data) {
 				blogArr.splice(blogArr.indexOf(postToUpdate), 1, data);
-				console.log()
 				addBlogpost();
 			}
 		});
 	});
 
+	$(document).on('click', '.glyphicon-remove', function (event) {
+		event.preventDefault();
+		var postId = $(this).closest('.pull-left').attr('id');
+		console.log('DELETE ID', postId);
+		var postToDelete = blogArr.filter(function (post) {
+			return post._id == postId;
+		})[0];
 
+		$.ajax({
+			type: 'DELETE',
+			url: '/api/posts/' + postId,
+			success: function (data) {
+				blogArr.splice(blogArr.indexOf(postToDelete), 1);
+				addBlogpost();
+			}
+		});
+	});
 
 
 });

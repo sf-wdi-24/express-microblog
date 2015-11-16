@@ -58,6 +58,12 @@ app.put('/api/posts/:id', function (req, res){
 	});
 });
 
+app.delete('/api/posts/:id', function (req, res) {
+	var postId = req.params.id;
+	Blogpost.findOneAndRemove({_id: postId}, function (err, deletedBlogpost) {
+		res.json(deletedBlogpost);
+	});
+});
 
 // Server listening?
 var server = app.listen(process.env.PORT || 3000, function(){
