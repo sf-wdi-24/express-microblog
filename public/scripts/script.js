@@ -5,6 +5,7 @@ $(function() {
  	var template = Handlebars.compile(source);
 
  	getAllPosts();
+ 	getAllComments();
  	showFaves($('#updateFavorite').val());
 
 
@@ -65,11 +66,22 @@ $(function() {
 		});
 	});
 
+	// Open Comment Form
+	$('#add-comment').on('click', function(data){
+		// Add Single Comment
+		$('.comment-add-form').on('submit', function(e){
+			e.preventDefault();
+			var postId = $('#addCommentPostId').val();
+			var body = $('#commentBody').val();
+			$('#add-comment-' + postId).slideUp('slow');
+			addComment(postId, body);
+		});
+	});
+
 	// Get Single Post
 	function getSinglePost(id){
 		$.get('/api/posts/'+id, function(data){
 			var postsHtml = template({ post: data.post });
-			console.log(data.post);
 			$('#post').prepend(postsHtml);
 		});
 	}
@@ -157,6 +169,33 @@ $(function() {
 		console.log(base_url);
 		$.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20contentanalysis.analyze%20where%20text%3D%27Financial%20EmpowermentSquare%20stands%20for%20economic%20empowerment.%20We%20stand%20for%20financial%20systems%20that%20serve%20instead%20of%20rule.%20We%20stand%20for%20leveling%20the%20playing%20field%27%3B&format=json&diagnostics=true', function(data){
 			console.log(data);
+		});
+	}
+
+	// addComment function - calls API
+	function addComment(id, body){
+		$.ajax({
+	      type: "POST",
+	      url: 'http://localhost:3000/api/posts/' + id,
+	      data: {body: body},
+	      success: function (data) {
+	        console.log("Added new comment!");
+	      },
+	      error: function (error) {
+	        console.error(error);
+	      }
+	    });
+	}
+
+	// Get All Comments
+ 	function getAllComments(){
+ 		console.log("inside gac");
+		$.get('/api/posts/:id/comments', function(data){
+			console.log("gac" + data);
+
+			//var allComments = data.post.comments;
+			//var postsHtml = template({ posts: allComments });
+			//$('#comments-list').append(postsHtml);
 		});
 	}
 

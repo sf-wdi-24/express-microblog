@@ -7,6 +7,7 @@ var hbs = require('hbs');
 var app = express();
 var mongoose = require('mongoose');
 var Post = require('./models/post');
+var Comment = require('./models/comment');
 mongoose.connect('mongodb://localhost/express-microblog');
 app.set('view engine', 'hbs');
 app.use(express.static('public'));
@@ -21,7 +22,6 @@ app.get('/posts', function(req,res){
 app.get('/posts/:id', function(req, res){
 	var postId = req.params.id;
 	Post.findOne({_id: postId}, function(err, singlePost){
-		console.log(singlePost);
 		res.render('post', {post: singlePost});
 	});
 });
@@ -47,7 +47,6 @@ app.post('/api/posts', function(req, res){
 });
 // Update - API - Single Post
 app.put('/api/posts/:id', function(req, res){
-	console.log(req.body);
 	var body = req.body;
 	var postId = req.params.id;
 	Post.findOne({_id: postId}, function(err, singlePost){
@@ -66,6 +65,30 @@ app.delete('/api/posts/:id', function(req, res){
 	Post.findOneAndRemove({_id: postId}, function(err, singlePost){
 		res.json(singlePost);
 	});
+});
+// Post - API - Single Comment
+app.post('/api/posts/:id', function(req, res){
+	var newComment = new Comment(req.body);
+	var postId = req.params.id;
+	newComment.save(function(err, savedComment){
+		if(err) {return console.error(err);}
+ 		else console.log(savedComment);
+	});
+	Post.findOne({_id: postId}, function(err, singlePost){
+		singlePost.comments.push(newComment);
+		singlePost.save();
+	});
+	res.json(newComment);
+});
+// Get - API - All Comments
+app.get('/api/posts/:id/comments', function(req, res){
+	console.log('/api/posts/:id/comments');
+	var postId = req.params.id;
+	Post.find({_id: postId})
+		.populate('comments')
+				.exec(function(err, foundPost){
+					res.json(foundPost);
+				});
 });
 
 

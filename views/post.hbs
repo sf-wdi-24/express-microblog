@@ -46,41 +46,80 @@
       </div>
     </div>
 
-  
-		<!-- edit button to toggle form -->
-    <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil" id="single-post-pencil"></div></a>
-      
-    <!-- delete button -->
-    <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{post._id}}"></div>
-      
-    <!-- form to update post -->
-    <div class="collapse" id="update-{{post._id}}">
-      <br>
-      <form class="edit-form">
-        <div class="form-group">
-          <input type="text" name="title" class="form-control" placeholder="Title" value="{{post.title}}" id="updateTitle">
-        </div>
-        <div class="form-group">
-          <input type="text" name="body" class="form-control" placeholder="Body" value="{{post.body}}" id="updateBody">
-        </div>
-        <div class="form-group">
-          <input type="text" name="url" class="form-control" placeholder="URL" value="{{post.url}}" id="updateURL">
+    <div class="row">
+      <div class="col-xs-4">
+    		<!-- Edit Post button -->
+        <a href="javascript:void(0)" class="edit-form" data-toggle="collapse" data-target="#update-{{post._id}}"><div class="glyphicon glyphicon-pencil" id="single-post-pencil"></div></a>
+        <!-- Delete Post button -->
+        <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{post._id}}"></div>
+        <!-- Add Comment button -->
+        <a href="javascript:void(0)" class="comment-add-form" data-toggle="collapse" data-target="#add-comment-{{post._id}}"><div class="glyphicon glyphicon-comment" id="add-comment"></div></a>
+        <!-- Tag Suggestion button -->
+        <div class="glyphicon glyphicon-tag" id="single-post-tag">
+      </div>
+        <!-- form to update post -->
+        <div class="collapse" id="update-{{post._id}}">
+          <br>
+          <form class="edit-form">
+            <div class="form-group">
+              <input type="text" name="title" class="form-control" placeholder="Title" value="{{post.title}}" id="updateTitle">
+            </div>
+            <div class="form-group">
+              <input type="text" name="body" class="form-control" placeholder="Body" value="{{post.body}}" id="updateBody">
+            </div>
+            <div class="form-group">
+              <input type="text" name="url" class="form-control" placeholder="URL" value="{{post.url}}" id="updateURL">
+            </div>
+            
+              <input type="checkbox" name="favorite" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite" checked="checked">  Favorite
+            
+            <div class="form-group">
+              <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-block btn-info" value="Update">
+            </div>
+          </form>
         </div>
         
-          <input type="checkbox" name="favorite" placeholder="Favorite" value="{{post.favorite}}" id="updateFavorite" checked="checked">  Favorite
-        
-        <div class="form-group">
-          <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
+        <!-- form to add comment -->
+        <div class="collapse" id="add-comment-{{post._id}}">
+          <br>
+          <form class="comment-add-form">
+            <div class="form-group">
+              <textarea class="form-control" name="body" value="{{comment.body}}" id="commentBody"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="addCommentPostId">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-block btn-info" value="Update">
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-block btn-info" value="Update">
+         
         </div>
-      </form>
-    </div>
-    <div class="glyphicon glyphicon-tag" id="single-post-tag">
-     
-    </div>
-	</div>
+    	</div>
+
+  </div>
+  <!-- end of forms -->
+
+  <!-- comments -->
+  <div class="row"  id="comments-list">
+    <script id="posts-template" type="text/x-handlebars-template">
+    \{{#each comments}}
+      <div class="thumbnail" id="thumbnail-posts-list">
+        <div class="row">
+          <p>\{{body}}</p>
+        </div>
+      </div>
+    \{{/each}}
+    </script>
+  </div>
+  <!-- end of comments -->
+
+
+
 	<br><br>
 
   <div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
