@@ -5,7 +5,6 @@ $(function() {
  	var template = Handlebars.compile(source);
 
  	getAllPosts();
- 	getAllComments();
  	showFaves($('#updateFavorite').val());
 
 

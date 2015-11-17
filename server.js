@@ -21,22 +21,28 @@ app.get('/posts', function(req,res){
 // Get - Single Post
 app.get('/posts/:id', function(req, res){
 	var postId = req.params.id;
-	Post.findOne({_id: postId}, function(err, singlePost){
-		res.render('post', {post: singlePost});
-	});
-});
-// Get - API - All Posts
-app.get('/api/posts/:id', function(req, res){
-	var postId = req.params.id;
-	Post.findOne({_id: postId}, function(err, singlePost){
-		res.json({post: singlePost});
-	});
+	Post.findOne({_id: postId})
+		.populate('comments')
+			.exec(function(err, singlePost){
+				res.render('post', {post: singlePost});
+			});
 });
 // Get - API - Single Post
+app.get('/api/posts/:id', function(req, res){
+	var postId = req.params.id;
+	Post.findOne({_id: postId})
+		.populate('comments')
+				.exec(function(err, foundPost){
+					res.json(foundPost);
+				});
+});
+// Get - API - All Posts
 app.get('/api/posts', function(req, res){
-	Post.find(function(err, allPosts){
-		res.json({posts: allPosts});
-	});
+	Post.find()
+		.populate('comments')
+			.exec(function(err, allPosts){
+				res.json(allPosts);
+			});
 });
 // Post - API - Single Post
 app.post('/api/posts', function(req, res){
@@ -80,9 +86,8 @@ app.post('/api/posts/:id', function(req, res){
 	});
 	res.json(newComment);
 });
-// Get - API - All Comments
+// Get - API - All Comments for Single Post
 app.get('/api/posts/:id/comments', function(req, res){
-	console.log('/api/posts/:id/comments');
 	var postId = req.params.id;
 	Post.find({_id: postId})
 		.populate('comments')

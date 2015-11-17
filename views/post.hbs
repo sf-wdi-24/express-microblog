@@ -82,21 +82,7 @@
           </form>
         </div>
         
-        <!-- form to add comment -->
-        <div class="collapse" id="add-comment-{{post._id}}">
-          <br>
-          <form class="comment-add-form">
-            <div class="form-group">
-              <textarea class="form-control" name="body" value="{{comment.body}}" id="commentBody"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="addCommentPostId">
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btn btn-block btn-info" value="Update">
-            </div>
-          </form>
-        </div>
+        
          
         </div>
     	</div>
@@ -106,15 +92,43 @@
 
   <!-- comments -->
   <div class="row"  id="comments-list">
-    <script id="posts-template" type="text/x-handlebars-template">
-    \{{#each comments}}
-      <div class="thumbnail" id="thumbnail-posts-list">
-        <div class="row">
-          <p>\{{body}}</p>
-        </div>
+    <div class="col-xs-4">
+    </div>
+    <div class="col-xs-8">
+      <!-- form to add comment -->
+      <div class="collapse" id="add-comment-{{post._id}}">
+        <br>
+        <form class="comment-add-form">
+          <div class="form-group">
+            <textarea class="form-control" name="body" value="{{comment.body}}" id="commentBody"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="addCommentPostId">
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-block btn-info" value="Update">
+          </div>
+        </form>
       </div>
-    \{{/each}}
-    </script>
+      <script id="posts-template" type="text/x-handlebars-template">
+      \{{#each comments}}
+        <div class="thumbnail" id="thumbnail-posts-list">
+          <div class="row">
+            <p>\{{body}}</p>
+          </div>
+        </div>
+      \{{/each}}
+      </script>
+      <div class="row" id="comments-server">
+      {{#each post.comments}}
+        <div class="thumbnail" id="thumbnail-comments-list">
+          <div class="row">
+            <p>{{body}}</p>
+          </div>
+        </div>
+      {{/each}}
+      </div>
+    </div>
   </div>
   <!-- end of comments -->
 
