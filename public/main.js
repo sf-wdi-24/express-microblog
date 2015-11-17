@@ -18,6 +18,10 @@ $(function () {
 		render();
 	});
 
+	$("#new-story").click(function () {
+		$("#new-post").toggle(); 
+	});
+
 	$("#new-post").on("submit", function (event) {
 		event.preventDefault();
 		var newPost = $(this).serialize();
@@ -98,7 +102,9 @@ $(function () {
 		});
 	});
 
-	$("span").click(function () {
+	$("li").click(function () {
+		$("li").removeClass("active");
+		$(this).addClass("active");
 		var filterCategory = $(this).text().toLowerCase();
 		console.log(filterCategory);
 		foundCategoryPosts = [];
@@ -131,6 +137,7 @@ $(function () {
 		}
 	});
 
+	//add comment to post
 	$postList.on("click", ".comment-button", function (event) {
 		var id = $(this).attr("id").slice(7);
 		$("#comment-form" + id).toggle();
