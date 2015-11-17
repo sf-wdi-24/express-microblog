@@ -70,16 +70,16 @@ app.put('/api/blogs/:id', function (req,res) {
 	});
 });
 
-//show comments route
-app.get('/api/blogs/:id/comments', function(req,res){
-	var blogId = req.params.id;
-	Blog.findOne({_id: blogID}).populate('comments').exec(function(err, foundComment){
-		res.json(foundComment);
-	});
-});
+// //show comments route
+// app.get('/api/blogs/:id/comments', function(req,res){
+// 	var blogId = req.params.id;
+// 	Blog.findOne({_id: blogID}).populate('comments').exec(function(err, foundComment){
+// 		res.json(foundComment);
+// 	});
+// });
 
 //add new comments
-app.post('/api/blogs/:id/comments', function (req,res){
+app.post('/api/blogs/:id/comments/', function (req,res){
 	var blogId = req.params.id;
 	Blog.findOne({_id: blogId}, function(err, foundBlog){
 		var newComment = new Comment (req.body);

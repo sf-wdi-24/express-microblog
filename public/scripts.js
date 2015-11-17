@@ -16,17 +16,12 @@ $(function(){
 		$('.insertContainer').append(blogHtml);
 	}
 
-	//add blog postings to website
+	//populate website with blog postings
 	$.get('/api/blogs', function(data) {
 		allBlogs = data.blogs;
 		var blogHtml = template({blogs: allBlogs});
 		$('.insertContainer').append(blogHtml);
 	});
-
-	// //show new blog post form
-	// $('.newBlogTitle').on('click', function(event){
-	// 	$('.newBlog').show();
-	// });
 	
 	//add new blog post to website
 	$('.newBlog').on('submit',function(event) {
@@ -43,17 +38,26 @@ $(function(){
 			$('.newBlog').hide();
 	});
 
+	//add comments to existing blog
+	$('.insertContainer').on('submit', '.addCommentForm', function(event){
+		event.preventDefault();
+		console.log('testing');
+		var blogId = $(this).closest('.blog-content').attr('data-id');
+		var commentAdd = $(this).serialize();
+		$.post('api/blogs/'+blogId+'/comments/', commentAdd, function(data) {
+			render();
+		});
+		});
+	
+
 	//update existing blog 
 	$('.insertContainer').on('submit', '.editBlogForm', function(event){
 		event.preventDefault();
 		var blogId = $(this).closest('.blog-content').attr('data-id');
-		console.log("blogid2",blogId);
 		var blogEdits = $(this).serialize();
-		console.log('blog edits',blogEdits);
 		var blogUpdate = allBlogs.filter(function (blog) {
 			return (blog._id === blogId);
 		})[0];
-		console.log('blogupdate',blogUpdate);
 		$.ajax({
 			type: 'PUT',
 			url: '/api/blogs/'+blogId,
@@ -64,6 +68,17 @@ $(function(){
 			}
 		});
 	});
+
+ //update comment
+	// $('.insertContainer').on('submit', '.editCommentForm', function(event) {
+	// 	event.preventDefault();
+	// 	var blogId = $(this).closest('.blog-content').attr('data-id');
+	// 	var commentId = 
+	// 	$.ajax({
+	// 			type: 'PUT',
+	// 			url: '/api/blogs/:id/comments/:comment-id'
+	// 	});
+	// });
 
 //delete blog posting
 $('.insertContainer').on('click', '.delete', function(event){
@@ -82,14 +97,6 @@ $('.insertContainer').on('click', '.delete', function(event){
 		}
 	});
 });
-
-
-
-
-
-
-
-
 
 
 });

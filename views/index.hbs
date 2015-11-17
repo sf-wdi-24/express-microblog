@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<!-- custom css -->
 	<link rel="stylesheet" href="styles.css">
-	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Tillana' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="container">
@@ -16,7 +16,7 @@
 		<hr>
 	</div> <!-- end of title row -->
 	<div class="row blog-container">
-		<div class="newBlogPost col-md-8 col-md-offset-2">
+		<div class="newBlogPost text-center col-md-8 col-md-offset-2">
 			<button class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#newBlogButton">add a post</button>
 			<form id="newBlogButton" class="newBlog collapse">
 				<input type="text" class="newTitle form-control" placeholder="Title" name="title">
@@ -36,8 +36,8 @@
 				<div class="editFormDiv">
 				
 				{{!-- css form effect --}}
-				<button data-toggle="collapse" data-target="#edit-\{{_id}}"class="edit btn btn-sm btn-primary pull-right">Edit</button>
-				<button class="delete btn btn-primary btn-sm pull-right">Remove</button>
+				<button data-toggle="collapse" data-target="#edit-\{{_id}}"class="edit btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  Edit</button>
+				<button class="delete btn btn-primary btn-sm pull-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  Remove</button>
 				<form class="editBlogForm form-group collapse" id="edit-\{{_id}}">
         	<input type="text" class="editTitle form-control" placeholder="Title" name="title">
         	<input type="text" class="editCategory form-control" placeholder="Category" name="category">
@@ -48,9 +48,8 @@
         {{!-- end css form effect --}}
 
 				<h2 class="mainBlogTitle text-center">\{{ title }}</h2>
-				<p class="blogPostContent">Content: \{{ blogContent }}</p>
-				<p class="category">Category: \{{ category }}</p>
-				{{!-- <button class="addComment btn btn-primary btm-sm">thoughts?</button> --}}
+				<p class="blogPostContent">\{{ blogContent }}</p>
+				<p class="category">\{{ category }}</p>
 				{{!-- css comment form --}}
 				<button data-toggle="collapse" data-target="#addComment-\{{_id}}"class="addComment btn btn-sm btn-primary">thoughts?</button>
 				<form class="addCommentForm form-group collapse" id="addComment-\{{_id}}">
