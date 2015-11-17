@@ -95,15 +95,13 @@ app.post("/api/posts/:postId/comments", function (req, res) {
 	});
 });
 
-// app.delete("/api/posts/:postId/comments/:commentId", function (req, res) {
-// 	var postId = req.params.postId;
-// 	var commentId = req.params.commentId;
-// 	Post.findOne({ _id: postId}, function (err, foundPost) {
-// 		foundPost.findOneAndRemove({ _id: commentId}, function (err, deleteComment) {
-// 			res.json(deleteComment);
-// 		});
-// 	});
-// });
+//route to delete comment
+app.delete("/api/posts/:postId/comments/:commentId", function (req, res) {
+	var commentId = req.params.commentId;
+		Comment.findOneAndRemove({ _id: commentId}, function (err, deleteComment) {
+			res.json(deleteComment);
+		});
+});
 
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
