@@ -27,10 +27,12 @@ $(document).ready(function(){
 	$("#newPostForm").submit(function(event){
 		event.preventDefault();
 		var dataPost = $("#newPostForm").serialize();
+		console.log(dataPost);
 		dataPost.likes = 0;
 
 		$.post("/api/blog-posts", dataPost, function(data){
 			console.log(dataPost);
+
 			//clean the actual list before creating a new list
 			$("#results >div").remove();
 			createList();
@@ -135,36 +137,88 @@ $(document).ready(function(){
 // });
 
 //like counter and update - incomplete 
+// $("#results").on("click", ".like", function(event){
 
-$("#results").on("click", ".like", function(event){
+// 	//item ID
+// 	editId = $(this).attr("id");
 
-	//item ID
-	editId = $(this).attr("id");
-
- 	//search for thre item in the DB
- 	$.get("/api/blog-posts/"+editId, function(data){
-		 var ItemToUpdate = $(this).serialize();
-		 ItemToUpdate.likes+=1;
-		 console.log(ItemToUpdate);
- 		$.ajax({
-				type: "PUT",
-				url: "/api/blog-posts/"+editId,
-				data: ItemToUpdate,
-					success: function(data){
-								console.log(ItemToUpdate + "updated");
+//  	//search for thre item in the DB
+//  	$.get("/api/blog-posts/"+editId, function(data){
+// 		 var ItemToUpdate = $(this).serialize();
+// 		 ItemToUpdate.likes+=1;
+// 		 console.log(ItemToUpdate);
+//  		$.ajax({
+// 				type: "PUT",
+// 				url: "/api/blog-posts/"+editId,
+// 				data: ItemToUpdate,
+// 					success: function(data){
+// 								console.log(ItemToUpdate + "updated");
 								
-								//clean the actual list before creating a new list
-								$("#results >div").remove();
-								createList();
-					},
-					error: function(err){
-						console.log(err);
-					}
-		});
+// 								//clean the actual list before creating a new list
+// 								$("#results >div").remove();
+// 								createList();
+// 					},
+// 					error: function(err){
+// 						console.log(err);
+// 					}
+// 		});
+// 	});
+
+// });
+
+//add comment to the db
+$("#results").on("submit", ".commentForm", function(event){
+
+	event.preventDefault();
+	newComment = $(this).serialize();
+	var itemId = $(this).attr("id");
+
+	//create url to the route 
+	var url = "/api/blog-posts/"+itemId+"/comments";
+
+	$.post(url, newComment, function(data){
+
+			//clean the actual list before creating a new list
+			$("#results >div").remove();
+			createList();
+			$(".comments").val("");
+	});
+});
+
+//delete a comment
+$("#results").on("click", ".deleteComment", function(event){
+	event.preventDefault();
+	var itemId=$(this).attr("id");
+
+	$.ajax({
+		type: "DELETE",
+		url:"/api/blog-posts/comments/"+itemId,
+		success: function(data){
+			console.log(itemId + " comment deleted");
+			$("#results >div").remove();
+			createList();
+		},
+		error: function(err){
+			console.log(err);
+		}
 	});
 
 });
 
+//update a comment 
+$("#results").on("click", ".editComment", function(event){
+	event.preventDefault();
+	var itemId = $(this).attr("id");
+	console.log(itemId);
+	$.get("/api/blog-posts/comments/"+itemId, function(data){
+		$("#commentBar"+itemId).val(data.text);
+	});
+	// $.ajax({
+	// 	type: "PUT",
+	// 	url:"/api/blog-posts/comments/"+itemId,
+		 
+
+	});
 
 createList();
 });

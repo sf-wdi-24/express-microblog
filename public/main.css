@@ -68,3 +68,14 @@ body{
 #newLikes{
 	display: none;
 }
+h1{
+	margin-left: 52px;
+}
+.commentDiv{
+	background-color: rgba(148, 141, 141, 0.7);
+	border-bottom: 1px solid black;
+	margin:3px;
+}
+.commentText{
+	margin-right: 810px;
+}

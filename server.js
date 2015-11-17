@@ -11,8 +11,9 @@ var mongoose = require("mongoose");
 //connect the data base
 mongoose.connect("mongodb://localhost/blog-posts-app");
 
-//require schema
+//require schemas
 var Post = require("./models/blogpost");
+var Comment = require("./models/comment");
 
 //apply body parser package
 app.use(bodyParser.urlencoded({extended:true}));
@@ -22,7 +23,7 @@ app.use(express.static(__dirname + "/public"));
 
 //defind server and connect to local host 3000
 var server = app.listen(process.env.PORT || 3000, function(){
-	console.log("listeniing");
+	console.log("listening");
 });
 
 //defind view engine for handelbars
@@ -35,7 +36,7 @@ app.get("/blog", function(req,res){
 
 //get all the blog posts from the db
 app.get("/api/blog-posts", function(req, res){
-	Post.find(function(err, results){
+	Post.find().populate("comments").exec(function(err, results){
 		res.json({posts:results});
 	});
 });
@@ -50,6 +51,9 @@ app.get("/api/blog-posts/:id", function(req, res){
 		res.json(result);
 	});
 });
+
+
+
 
 //add new  blog post to the db
 app.post("/api/blog-posts", function(req, res){
@@ -91,6 +95,72 @@ app.put("/api/blog-posts/:id", function(req, res){
 	});
 
 });
+
+//add comment and save in the db
+app.post("/api/blog-posts/:id/comments", function(req,res){
+
+	//post id to update
+	var postId = req.params.id;
+	console.log(req.body);
+
+	Post.findOne({_id:postId}, function(err, foundPost){
+
+		//new comment 
+		var newComment = new Comment(req.body);
+
+		console.log("comment:" + newComment);
+		newComment.save();
+
+		console.log(foundPost);
+		foundPost.comments.push(newComment);
+		foundPost.save();
+		res.json(foundPost.comments);
+
+	});
+});
+
+//delete a comment 
+app.delete("/api/blog-posts/comments/:id", function(req,res){
+
+	var commentId = req.params.id;
+	Comment.findOneAndRemove({_id:commentId}, function(err, deletedComment){
+		console.log(deletedComment);
+		res.json(deletedComment);
+	});
+});
+
+//get one comment
+app.get("/api/blog-posts/comments/:id", function(req, res){
+
+	//post id to search
+	var commentId = req.params.id;
+	Comment.findOne({_id: commentId}, function(err, result){
+		console.log(result);
+		res.json(result);
+	});
+});
+
+
+//update a comment
+
+app.put("/api/blog-posts/:id/comments/:id", function(req,res){
+
+	var commentId = req.params.id;
+
+	console.log(commentId + "text:" + req);
+	Comment.findOne({_id:commentId}, function(err, CommentToUpdate){
+		CommentToUpdate.text = req.body.text;
+		CommentToUpdate.save(function(err, updatedComment){
+			console.log(updatedComment);
+			res.json(CommentToUpdate);
+		});	
+	});
+});
+
+
+
+
+
 
 
 
