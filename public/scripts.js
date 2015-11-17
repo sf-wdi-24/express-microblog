@@ -63,15 +63,15 @@ $(document).ready(function (){
 	$(document).on('submit', '.submitComment', function (event) {
 		event.preventDefault();
 		var newComment = $(this).serialize();
-		// postId = $(this).$(this).closest('.pull-left').attr('id');
-
 		$.ajax ({
 			type: 'POST',
 			url: '/api/posts/' + id + '/comments',
 			data: newComment,
 			success: function(data) {
-				console.log('Commentposted');
-				blogArr.push(data);
+				var post = blogArr.filter(function (post){
+					return post._id == id;
+				})[0];
+				post.comments.push(data);
 				addBlogpost();
 			}
 		});
