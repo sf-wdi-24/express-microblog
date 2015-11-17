@@ -64,8 +64,8 @@ $(function(){
 					render();
 				}
 			});
-			$('.modal-backdrop.fade.in').remove();
-			$('body').removeClass('modal-open');	
+			// $('.modal-backdrop.fade.in').remove();
+			// $('body').removeClass('modal-open');	
 		});
  	});
 
