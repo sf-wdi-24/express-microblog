@@ -41,7 +41,25 @@
 												</form>
 											
 												<span class="glyphicon glyphicon-remove btn btn-primary" id="\{{_id}}" aria-hidden="true"> </span>
-										</div>
+												
+												<a href="javascript:void(0)" data-toggle="collapse" data-target="#commentForm\{{_id}}">
+				                    <span class="glyphicon glyphicon-comment btn btn-primary" id='\{{_id}}'></span>
+											</a>
+												<form class="editDropComment submitComment" id="commentForm\{{_id}}">
+															<input type="text" class="form-control" name="title" placeholder="Comment title">
+															<textarea class="form-control" name='content' form="commentForm\{{_id}}" placeholder="Your comment here..."></textarea><br>
+															<input type="submit" class="btn btn-primary" id="\{{_id}}">
+												</form>
+										</div><br><br>
+										<div class="col-md-12 comment">Comments :</div>
+											\{{#each comments}}
+												<div class="row">
+													<div class="col-md-12" id="\{{_id}}">
+														<h4>\{{title}} \\\\\</h4>
+														<p>\{{content}}</p>
+													</div>
+												</div>
+											\{{/each}}
 					</div>
 				</div>
 				\{{/each}}

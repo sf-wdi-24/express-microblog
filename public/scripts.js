@@ -31,6 +31,16 @@ $(document).ready(function (){
 				event.preventDefault();
 				id = $(this).attr('id');
 				$('.glyphicon-remove').toggle();
+				$('.glyphicon-comment').toggle();
+
+			});
+
+		$(document).on('click', '.glyphicon-comment', function (event) {
+				event.preventDefault();
+				id = $(this).attr('id');
+				console.log('THIS ID', id);
+				$('.glyphicon-remove').toggle();
+				$('.glyphicon-pencil').toggle();
 
 			});
 
@@ -44,6 +54,26 @@ $(document).ready(function (){
 			blogArr.push(data);
 
 			addBlogpost();
+		});
+
+		document.getElementById('newBlogForm').reset();
+	});
+
+		// POST new comment 
+	$(document).on('submit', '.submitComment', function (event) {
+		event.preventDefault();
+		var newComment = $(this).serialize();
+		// postId = $(this).$(this).closest('.pull-left').attr('id');
+
+		$.ajax ({
+			type: 'POST',
+			url: '/api/posts/' + id + '/comments',
+			data: newComment,
+			success: function(data) {
+				console.log('Commentposted');
+				blogArr.push(data);
+				addBlogpost();
+			}
 		});
 
 		document.getElementById('newBlogForm').reset();

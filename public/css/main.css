@@ -19,6 +19,10 @@ body {
     display: none;
 }
 
+.editDropComment {
+    display: none;
+}
+
 .container {
     background-color: white;
     border: magenta solid 4px;
@@ -53,6 +57,11 @@ body {
 
 }
 
+.comment {
+    background-color: magenta;
+    font-family: 'ziamimiregular';
+}
+
 hr {
     border: 2px solid magenta;
     border-width: 50%;
@@ -62,6 +71,11 @@ hr {
 h2 {
     display: inline-block;
     margin-top: 10px;
+}
+
+h4 {
+    font-family: 'ziamimiregular';
+    background-color: yellow;
 }
 
 textarea {
