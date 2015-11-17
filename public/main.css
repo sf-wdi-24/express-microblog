@@ -1,0 +1,81 @@
+body{
+	background-image: url("http://parisphotos.net/wp-content/uploads/2014/11/paris-hd-wallpaper-520207.jpg");
+	background-attachment: fixed;
+}
+#header{
+	padding-left: 216px;
+}
+#newPost{
+	width: 192px;
+	height: 50px;
+	background-color: rgba(148, 141, 141, 0.5);
+}
+#submitButton{
+	width: 505px;
+	height: 50px;
+	font-size: 30px;
+	margin-top: 5px;
+}
+#formDiv{
+	margin-left: -127px;
+	margin-right: 127px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.form-control{
+	background-color: rgba(148, 141, 141, 0.5);
+}
+
+.articleDiv{
+	background-color: rgba(148, 141, 141, 0.7);
+	margin-left: 34px;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#formDiv{
+	display: none;
+}
+.postFunctions{
+	margin-left: 738px;
+}
+.like{
+	width: 82px;
+}
+.updatePostForm{
+	margin: 10px;
+	display: none;
+}
+#noResult{
+	display: none;
+	background-color: rgba(148, 141, 141, 0.5);
+	margin-left: 206px;
+	padding: 57px;
+	margin-top: 197px;
+	margin-bottom: 10px;
+	padding-left: 261px;
+	font-size: 30px;
+}
+#results{
+	overflow-y:scroll;
+}
+#searchBar{
+	margin-left: -71px;
+	width: 334px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#newLikes{
+	display: none;
+}
+h1{
+	margin-left: 52px;
+}
+.commentDiv{
+	background-color: rgba(148, 141, 141, 0.7);
+	border-bottom: 1px solid black;
+	margin:3px;
+}
+.commentText{
+	margin-right: 810px;
+}
