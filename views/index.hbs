@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MicroBlog</title>
+
+	<!-- bootstrap -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	
+	<link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+	<!-- customs -->
+	<link type="text/css" rel="stylesheet" href="main.css">
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="page-header">
+				<h1>Post a Quote</h1> 
+				<h4>Share something great you heard or read</h4>
+			</div>
+		</div><!-- closing row -->
+		
+		<div class="row">
+			<div class="blog">
+				<div class="col-md-4" id="entry">
+						<form class="form-group" id="show-all">
+		  					<button type="button" id="showAll" class="btn btn-lg btn-block btn-success">Show All Quotes</button>
+						</form>
+						<form id="create-quote">
+				          <div class="form-group">
+				            <input type="text" name="title" class="form-control" placeholder="Quote from: Movie, Book, Song, Life, Other" autofocus>
+				          </div>
+				          <div class="form-group">
+				            <input type="text" name="title" class="form-control" placeholder="Author" autofocus>
+				          </div>
+				          <div class="form-group">
+				            <input type="text" name="title" class="form-control" placeholder="Work" autofocus>
+				          </div>
+				          <div class="form-group">
+				            <textarea type="text" class="form-control" placeholder="Quote" rows="4"></textarea>
+				          </div>
+				          <div class="form-group" id="quote-submit">
+				            <input type="submit" class="btn btn-block btn-primary" value="Post Quote">
+				          </div>
+				        </form>
+						 <!-- <form id="quoteSearch">
+							<input id="quoteSearch" type: "text" placeholder="Find here">
+							<input class="btn btn-default" id="submitSearch" type"submit" value="Search quote!">
+						</form>  -->
+					</div><!-- closing entry -->
+				</div> 
+				<div class="col-md-8" id="quotes-list">
+					<!-- Handlebars -->
+					<script id="quotePost-template" type="text/x-handlebars-template">
+						\{{#each quotes}}
+							<blockquote>
+							<p><q>\{{statement}}</q></p>
+							<hr>
+							<footer>Category: <b>\{{category}}.</b>		Said by:  <b>\{{author}}.</b>		From: <b>\{{work}}.</b><br />\{{id}}</footer>
+							<br />
+							<div class="form-group" id="delete-quote">
+				            	<input type="submit" class="btn btn-sm btn-danger" value="Delete Quote">
+				          </div>
+							</blockquote>
+						\{{/each}}
+					</script>
+					
+					<!-- <h4>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam autem in sequi ducimus, nesciunt eos enim beatae aspernatur, quaerat obcaecati delectus, eligendi culpa optio veniam esse dolores adipisci excepturi consequuntur."</h4>
+					<hr>
+					<p>Category, By: <strong>Author</strong><br />Date</p> -->
+
+					<!-- handlebars -->
+				</div>
+			</div>
+		</div><!-- closing row -->	
+
+	</div><!-- closing container -->
+
+	<!-- jQuery  -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+	<!-- handlebars -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+	<!-- custom -->
+	<script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>
