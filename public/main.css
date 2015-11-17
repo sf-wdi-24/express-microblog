@@ -37,6 +37,10 @@ p {
 	display: none;
 }
 
+.addComment {
+	display: none;
+}
+
 .editComment {
 	display: none;
 }

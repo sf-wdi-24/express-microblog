@@ -99,7 +99,7 @@ $(function() {
 	$newPost.on('click', addPost);
 	$postsResults.on('click', '.glyphicon-pencil', putPost);
 	$postsResults.on('click', '.glyphicon-trash', deletePost);
-	$postsResults.on('click', )
+	// $postsResults.on('click', );
 	// $postsResults.on('click', '.glyphicon-star-empty', ??????);
 
 });
