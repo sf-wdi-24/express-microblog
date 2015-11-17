@@ -7,6 +7,7 @@ $(function() {
 	var template = Handlebars.compile(source);
 
 	var allPosts = [];
+	var allComments = [];
 
 	var $postform = $('.post-form');
 
@@ -50,10 +51,10 @@ $(function() {
 	//EDIT 
 	//add event-handlers to posts for updating/deleting
 
-	
+
 
 	$("body").on("click", ".update-post", function(event) {
-		
+
 		event.preventDefault();
 		console.log("yoyoyoyo");
 		// var postId = $(this).attr('data-id');
@@ -74,69 +75,59 @@ $(function() {
 			}
 		});
 
-	
+
 
 	});
 
 
 
-$("body").on("click", ".delete-post", function (event) {
-      event.preventDefault();
-      console.log("HEY THERE");
+	$("body").on("click", ".delete-post", function(event) {
+		event.preventDefault();
+		console.log("HEY THERE");
 
-      // find the todo's id (stored in HTML as `data-id`)
-      var postId = $(this).attr("data-id");
+		// find the todo's id (stored in HTML as `data-id`)
+		var postId = $(this).attr("data-id");
 
-      // find the todo to delete by its id
-      var postToDelete = allPosts.filter(function (todo) {
-        return post._id == postId;
-      })[0];
+		// find the todo to delete by its id
+		var postToDelete = allPosts.filter(function(todo) {
+			return post._id == postId;
+		})[0];
 
-      // DELETE request to delete todo
-      $.ajax({
-        type: "DELETE",
-        url: '/api/posts/' + postId,
-        success: function(data) {
-          // remove deleted todo from all todos
-          allPosts.splice(allPosts.indexOf(postToDelete), 1);
+		// DELETE request to delete todo
+		$.ajax({
+			type: "DELETE",
+			url: '/api/posts/' + postId,
+			success: function(data) {
+				// remove deleted todo from all todos
+				allPosts.splice(allPosts.indexOf(postToDelete), 1);
 
-          // render all todos to view
-          render();
-        }
-      });
-    });
-
-
+				// render all todos to view
+				render();
+			}
+		});
+	});
 
 
+	//POSTING COMMENTS
+	$('.comment-form').on('submit', function(event) {
+		event.preventDefault();
+		//serialize form data
 
+		var newComment = $(this).serialize();
+		//POST request to create new book
+		$.comment('/api/posts/:id/comments', newComment, function(data) {
+			console.log(data);
+			allComments.push(data);
+			render();
+		});
 
+		//resetting form
+		$postform[0].reset();
+		$postform.find('input').first().focus();
 
-
-
-
+	});
 
 
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

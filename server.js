@@ -88,6 +88,47 @@ app.delete('/api/posts/:id', function(req, res) {
 	});
 });
 
+//IMBEDDING
+//get comments
+
+app.get('/api/posts/:id/comments', function(req, res) {
+	//getting post id from URL params  
+	var PostId = req.params.id;
+	//finding post in db by id
+	Post.findOne({
+		_id: PostId
+	}, function(err, foundPost) {
+		res.json(foundPost);
+	});
+
+});
+
+
+
+
+
+
+
+//ADDING IMBEDDED COMMENT ROUTE
+app.post('/api/posts/:id/comments', function(req,res) {
+	var PostId = req.params.id;
+	Post.findOne({ _id: PostId}, function(err, foundPost) {
+		//create new comment
+		var newComment = new Comment(req.body);
+		
+		//saving comment adds it to the comments collection
+		newComment.save();
+		//give it to foundPost comments
+		foundPost.comments.push(newComment);
+		//save foundPost with new comment added
+		foundPost.save();
+		res.json(newComment);
+	
+ 
+        });
+ });
+
+
 
 
 

@@ -1,3 +1,9 @@
+body {
+	background-color: #000000;
+	font-color: #4682B4;
+
+}
+
 h1 {
 	text-align: center;
 	font-family: 'Dancing Script', cursive;
@@ -8,11 +14,7 @@ p {
 	font-size: 30px;
 	text-align: center;
 }
-body {
-	background: #F5F5F5;
-	font-color: #4682B4;
 
-}
 #posts-list {
 	font-family: 'Alegreya Sans', sans-serif;
 	font-size:20px;
@@ -21,8 +23,15 @@ body {
 
 }
 
+.posting{
+	background-color: #000000;
+	font-color: blue;
+}
+
 #blog {
 	border-radius: 50px;
+	background-color: #000000;
+
 }
 
 
@@ -136,3 +145,5 @@ img {
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
 }
+
+
