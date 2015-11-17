@@ -1,0 +1,26 @@
+{
+  "name": "express-microblog",
+  "version": "1.0.0",
+  "description": "**Objective:** Use Node, Express, and MongoDB to build a full-stack microblog application.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "hbs": "^4.0.0",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abeytaadam/express-microblog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abeytaadam/express-microblog/issues"
+  },
+  "homepage": "https://github.com/abeytaadam/express-microblog#readme"
+}
