@@ -52,8 +52,7 @@
 				        	<input type="text" class="editTitle form-control" placeholder="Title" name="title">
 				        	<input type="text" class="editCategory form-control" placeholder="Category" name="category">
 				        	<input type="text" class="editBlogContent form-control" placeholder="Content" name="blogContent">
-				        	{{!-- <input type="submit" class="editSubmit"> --}}
-				        <input type="submit" class="editSubmit btn btn-primary form-control" data-id=\{{_id}}>
+				        	<input type="submit" class="editSubmit btn btn-primary form-control" data-id=\{{_id}}>
 				        </form>
 				      </div>
 				        <div class="modal-footer"></div>	
@@ -65,6 +64,11 @@
 				<p class="blogPostContent">Content: \{{ blogContent }}</p>	
 				<p class="category">Category: \{{ category }}</p>
 			</div>
+			\{{#each comments}}
+			<div class="commentsDiv">
+				<p class="comment">Comments: \{{text}}</p> 
+			</div>
+			\{{/each}}
 		</div>
 	</div>
 	\{{/each}}

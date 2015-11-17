@@ -3,7 +3,8 @@ var express = require('express');
 var hbs = require('hbs');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var Blog = require('./models/Blog');
+var Blog = require('./models/blog');
+var Comment = require('./models/comment');
 
 //connect mongo database to project
 mongoose.connect('mongodb://localhost/blogs_app');
@@ -26,7 +27,7 @@ app.get('/', function (req,res) {
 
 //gather blogs data from server
 app.get('/api/blogs', function (req,res) {
-	Blog.find(function (err , allBlogs) {
+	Blog.find().populate('comments').exec(function (err , allBlogs) {
 		res.json({blogs: allBlogs});
 	});
 });
@@ -66,6 +67,26 @@ app.put('/api/blogs/:id', function (req,res) {
 		updatedBlog.save(function (err, newUpdatedBlog) {
 			res.json(newUpdatedBlog);
 		});
+	});
+});
+
+//show comments route
+app.get('/api/blogs/:id/comments', function(req,res){
+	var blogId = req.params.id;
+	Blog.findOne({_id: blogID}).populate('comments').exec(function(err, foundComment){
+		res.json(foundComment);
+	});
+});
+
+//add new comments
+app.post('/api/blogs/:id/comments', function (req,res){
+	var blogId = req.params.id;
+	Blog.findOne({_id: blogId}, function(err, foundBlog){
+		var newComment = new Comment (req.body);
+		newComment.save();
+		foundBlog.comments.push(newComment);
+		foundBlog.save();
+		res.json(newComment);
 	});
 });
 
