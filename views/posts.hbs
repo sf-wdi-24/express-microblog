@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- set viewport to device width to make site responsive -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- bootstrap css -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- custom styles -->
+	<link rel="stylesheet" type="text/css" href="/styles/main.css">
+	<meta charset="UTF-8">
+	<title>All Posts</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	      <div clas="row">
+			<div class="col-xs-6" id="nav-header">
+				<a href="http://localhost:3000/posts"><div id="all-posts-title">All Posts</a> <span class="badge" id="total-count-badge"></span>
+				</div>
+			</div>
+			<div class="col-xs-6" id="new-post-button">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#NewPostModal">New Post</button>
+			</div>
+		  </div>
+	  </div>
+	</nav>
+	
+
+	<div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="NewPostModal">New Post</h4>
+	      </div>
+	      <form class="new-post-form">
+		      <div class="modal-body">
+		          <div class="form-group">
+		            <label for="new-title" class="control-label">Title</label>
+		            <input type="text" class="form-control" id="new-title">
+		          </div>
+		          <div class="form-group">
+		            <label for="new-body" class="control-label">Body</label>
+		            <textarea class="form-control" id="new-body"></textarea>
+		          </div>
+		          <div class="form-group">
+		            <label for="new-url" class="control-label">URL</label>
+		            <input type="text" class="form-control" id="new-url">
+		          </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <input type="submit" class="btn btn-info" value="submit"></input>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="row"  id="posts-list">
+		<script id="posts-template" type="text/x-handlebars-template">
+		\{{#each posts}}
+		<div class="thumbnail" id="thumbnail-posts-list">
+			<div class="row">
+				<div class="hidden-xs col-sm-1">
+	          		<img src="https://pbs.twimg.com/profile_images/565291259351166976/ftSG_Wwt_400x400.jpeg" id="profile-pic-two" class="img-circle">
+	          	</div>
+	        	<div class="col-sm-9">
+				<a href="http://localhost:3000/posts/\{{_id}}">\{{title}}</a><div class="glyphicon glyphicon-heart" id="post-favorite-\{{_id}}"></div><br>
+				<p>\{{body}}
+					(<a href="\{{url}}" target="_blank">More Info Here</a>)</p>
+				</div>
+			</div>
+	    </div>
+        \{{/each}}
+		</script>
+	</div>
+
+
+	<!-- jquery -->
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  	<!-- bootstrap js -->
+  	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  	<!-- handlebars -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+  	<script type="text/javascript" src="/scripts/script.js"></script>
+	
+</body>
+</html>

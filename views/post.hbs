@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- set viewport to device width to make site responsive -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- bootstrap css -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- custom styles -->
+	<link rel="stylesheet" type="text/css" href="/styles/main.css">
+	<meta charset="UTF-8">
+	<title>Post</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div clas="row">
+        <div class="col-xs-6" id="nav-header">
+          <a href="http://localhost:3000/posts"><div id="all-posts-title">All Posts</a> <span class="badge" id="total-count-badge"></span>
+          </div>
+        </div>
+        <div class="col-xs-6" id="new-post-button">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#NewPostModal">New Post</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+	
+	<div class="thumbnail" id="post">
+    <div class="row">
+      <div class="hidden-xs col-sm-1">
+          <img src="https://pbs.twimg.com/profile_images/565291259351166976/ftSG_Wwt_400x400.jpeg" id="profile-pic-two" class="img-circle">
+      </div>
+    	<div class="col-sm-9" id="post-server" data-id="{{post.favorite}}">
+        <script id="posts-template" type="text/x-handlebars-template">
+            <b><p>\{{post.title}}</p></b>
+            <p>\{{post.body}} (<a href="\{{post.url}}" target="_blank">More Info Here</a>)</p>
+        </script>
+        <div class="row" id="single-post-header">
+    			 <b>{{post.title}}</b><div class="glyphicon glyphicon-heart" id="post-favorite"></div>
+          </div>
+    			<p>{{post.body}} (<a href="{{post.url}}" target="_blank">More Info Here</a>)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Starting div for #buttons-and-comments-row -->
+    <div class="row" id="buttons-and-comments-row">
+    <!-- Begining of buttons -->
+      <div class="col-xs-4">
+    		<!-- Edit Post button -->
+        <div class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#EditPostModal" id="single-post-pencil"></div>
+        <!-- Delete Post button -->
+        <div class="glyphicon glyphicon-trash" id="delete-post-form" data-id="{{post._id}}"></div>
+        <!-- Add Comment button -->
+        <a href="javascript:void(0)" class="comment-add-form" data-toggle="collapse" data-target="#add-comment-{{post._id}}"><div class="glyphicon glyphicon-comment" id="add-comment"></div></a>
+        <!-- Tag Suggestion button -->
+        <div class="glyphicon glyphicon-tag" id="single-post-tag"></div>
+        <br><br>
+        <p id="tag-section"></p>
+      </div>
+    <!-- End of buttons -->
+
+    <!-- Comments Section -->
+    <div class="row"  id="comments-list">
+      <div class="col-xs-4">
+      </div>
+      <div class="col-xs-8">
+        <!-- form to add comment -->
+        <div class="collapse" id="add-comment-{{post._id}}">
+          <br>
+          <form class="comment-add-form">
+            <div class="form-group">
+              <textarea class="form-control" name="body" value="{{comment.body}}" id="commentBody"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="addCommentPostId">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-block btn-info" value="Update">
+            </div>
+          </form>
+        </div>
+        <script id="posts-template" type="text/x-handlebars-template">
+        \{{#each comments}}
+          <div class="thumbnail" id="thumbnail-posts-list">
+            <div class="row">
+              <p>\{{body}}</p>
+            </div>
+          </div>
+        \{{/each}}
+        </script>
+        <div class="row" id="comments-server">
+        {{#each post.comments}}
+          <div class="thumbnail" id="thumbnail-comments-list">
+            <div class="row">
+              <p>{{body}}</p>
+            </div>
+          </div>
+        {{/each}}
+        </div>
+      </div>
+    </div>
+  <!-- end of comments -->
+  </div> <!-- Ending div for #buttons-and-comments-row -->
+
+	<br><br>
+  <!-- Edit Post Modal -->
+  <div class="modal fade" id="EditPostModal" tabindex="-1" role="dialog" aria-labelledby="EditPostModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="EditPostModal">Edit Post</h4>
+        </div>
+        
+        <form class="edit-form">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="new-title" class="control-label">Title</label>
+                <input type="text" name="title" value="{{post.title}}" class="form-control" placeholder="Title" id="updateTitle">
+              </div>
+              <div class="form-group">
+                <label for="new-body" class="control-label">Body</label>
+                <input type="text" class="form-control" name="body" value="{{post.body}}" id="updateBody">
+              </div>
+              <div class="form-group">
+                <label for="new-url" class="control-label" id="update-url">URL</label>
+                <input type="text" class="form-control" value="{{post.url}}" id="updateURL">
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="id" class="form-control" value="{{post._id}}" id="updateId">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-info" value="submit"></input>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Post Modal -->
+  <div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="NewPostModal">New Post</h4>
+        </div>
+        
+        <form class="new-post-form">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="new-title" class="control-label">Title</label>
+                <input type="text" class="form-control" id="new-title">
+              </div>
+              <div class="form-group">
+                <label for="new-body" class="control-label">Body</label>
+                <textarea class="form-control" id="new-body"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="new-url" class="control-label">URL</label>
+                <input type="text" class="form-control" id="new-url">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-info" value="submit"></input>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+	<!-- jquery -->
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  	<!-- bootstrap js -->
+  	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  	<!-- handlebars -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+  	<script type="text/javascript" src="/scripts/script.js"></script>
+</body>
+</html>
