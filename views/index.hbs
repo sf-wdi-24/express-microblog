@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	
+	<link href='https://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Brawler' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="main.css">
+	<title>MicroBlog</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="text-center" id="header">
+					<h1>MicroBlog
+						<span id="sub-title">Share Your Stories</span>
+					</h1>
+				</div>
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1 text-center">
+						<ul class="nav nav-tabs nav-justified">
+						  <li class="active"><a href="#" disabled>All Categories</a></li>
+						  <li><a href="#" disabled>Economy</a></li>
+						  <li><a href="#" disabled>Finances</a></li>
+						  <li><a href="#" disabled>News</a></li>
+						  <li><a href="#" disabled>Sports</a></li>
+						  <li><a href="#" disabled>Finances</a></li>
+						  <li><a href="#" disabled>More</a></li>
+						</ul>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2">
+						<button type="button" class="btn btn-info btn-block" id="new-story">New Story</button>
+						<form class="form" id="new-post" hidden>
+							<div class="form-group">
+								<input type="text" class="form-control" name="title" placeholder="Title">
+								<input type="text" class="form-control" name="category" placeholder="Category">
+								<textarea class="form-control" name="description" rows="3" placeholder="Description"></textarea>
+								<input type="submit" class="btn btn-info" value="Post">
+							</div>
+						</form>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div id="posts-list">
+							<script id="blog-template" type="text/x-handlebars-template">
+								\{{#each posts}}
+									<div class="row">
+											<div class="col-xs-12">
+													<h3>\{{title}}</h3>
+											</div>
+									</div>
+									<div class="row">
+											<div class="col-xs-2">
+											</div>
+											<div class="col-xs-10">
+													<h4>\{{description}}</h4>
+													<h5><i> Posted: \{{time}} (\{{category}})</i></h5>
+													<button type="button" class="btn \{{#if like}}btn-info\{{else}}btn-default\{{/if}} like-button" aria-label="Left Align" id="like\{{_id}}">
+													<span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true">Like
+													</span>
+													</button>
+													<button type="button" class="btn btn-default comment-button" aria-label="Left Align" id="comment\{{_id}}">
+													<span class="glyphicon glyphicon-comment" aria-hidden="true">Comment
+													</span>
+													</button>
+													<button type="button" class="btn btn-default delete-button" aria-label="Left Align" id="del\{{_id}}">
+													<span class="glyphicon glyphicon-remove-circle glyphicon-align-left" aria-hidden="true">
+													</span>
+													</button>
+													<button type="button" class="btn btn-default edit-button" aria-label="Left Align" id="\{{_id}}">
+													<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
+													</span>
+													</button>
+													<form hidden id="comment-form\{{_id}}">
+														<div class="form-group">
+															<input type="text" class="form-control" name="text">
+															<input type="submit" class="btn btn-default" value="Post">
+														</div>
+													</form>
+
+													<form hidden id="form\{{_id}}">
+															<div class="form-group">
+																	<input type="text" class="form-control" name="title" value="\{{title}}">
+																	<input type="text" class="form-control" name="category" value="\{{category}}">
+																	<textarea class="form-control" name="description" rows="3">\{{description}}</textarea>
+																	<input type="submit" class="btn btn-default" value="Edit">
+															</div>
+													</form>
+													\{{#each comments}}
+														<div class="comments">
+															<h5>\{{text}}</h5>
+															<hr>
+														</div>
+													\{{/each}}
+											</div>
+									</div>
+									<hr>
+								\{{/each}}
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+		<!-- jquery -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		
+		<!-- bootstrap js -->
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+		<!-- handlebars -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+		
+		<!-- custom script -->
+		<script type="text/javascript" src="main.js"></script> <!-- change file name -->
+	</body>
+</html>

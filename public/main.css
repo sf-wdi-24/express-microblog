@@ -1,0 +1,40 @@
+#header {
+	background: #35cd95; /* Old browsers */
+background: -moz-linear-gradient(left, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #35cd95 0%,#46bebd 41%,#50b5d6 61%,#59adeb 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #35cd95 0%,#46bebd 41%,#50b5d6 61%,#59adeb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	height: 100px;
+}
+.col-sm-12 {
+	padding: 0;
+}
+#sub-title {
+	font-size: 30px;
+}
+.edit-button, .delete-button {
+	float: right;
+}
+h1 {
+	padding-top: 15px;
+	margin: 0px;
+	color: #f2f3f4;
+	font-size: 60px;
+	font-family: 'Berkshire Swash', cursive;
+}
+h3 {
+	font-size: 30px;
+	margin-left: 15px;
+	font-family: 'Playfair Display', serif;
+}
+h4 {
+	font-family: 'Brawler', serif;
+}
+li {
+	font-size: 18px;
+}
+li:hover {
+ cursor:pointer;
+}
+.comments {
+	margin-left: 30px;
+}
