@@ -90,6 +90,18 @@ app.post('/api/blogs/:id/comments', function (req,res){
 	});
 });
 
+//update individual comment
+app.put('/api/blogs/:id/comments/:comment-id', function(req,res){
+	var blogId = req.params.id;
+	var commentId = req.params.commentId;
+	Comment.findOne({_id : commentId}, function(err, foundComment){
+		updatedComment.text = req.body.text;
+		updatedComment.save();
+		res.json(updatedComment);
+	});
+});
+
+
 //set express to use localport
 app.listen(3000, function(){
 	console.log('ready to serve');

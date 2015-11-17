@@ -17,15 +17,15 @@
 	</div> <!-- end of title row -->
 	<div class="row blog-container">
 		<div class="newBlogPost col-md-8 col-md-offset-2">
-			<h1 class="newBlogTitle">Add new posting</h1>
-			<form class="newBlog">
+			<button class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#newBlogButton">add a post</button>
+			<form id="newBlogButton" class="newBlog collapse">
 				<input type="text" class="newTitle form-control" placeholder="Title" name="title">
 				<input type="text" class="newCategory form-control" placeholder="Category" name="category">
-				<input type="text" class="newblogContent form-control" placeholder="Content" name="blogContent"></input>
+				<textarea type="text" class=" main newblogContent form-control" placeholder="Content" name="blogContent"></textarea>
 				<input type="submit" class="createButton btn btn-primary form-control">
 			</form>
-		</div>
-	</div>
+		</div> {{!-- end new blog post class --}}
+	</div>  {{!-- end blog-container row --}}
 	<hr>
 	<div class="insertContainer">	
 	<script id="blog-template" type="text/x-handlebars-template">
@@ -33,44 +33,49 @@
 	<div class="row">
 		<div class="blog-inserts col-md-8 col-md-offset-2">
 			<div class="blog-content" data-id=\{{_id}}>
-				<!-- bootstrap popup -->
-				<!-- Button trigger modal -->
-				<button type="button" class="edit btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
-				  Edit
-				</button>
+				<div class="editFormDiv">
+				
+				{{!-- css form effect --}}
+				<button data-toggle="collapse" data-target="#edit-\{{_id}}"class="edit btn btn-sm btn-primary pull-right">Edit</button>
 				<button class="delete btn btn-primary btn-sm pull-right">Remove</button>
-				<!-- Modal -->
-				<div class="modal fade blogPostId" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Edit Blog</h4>
-				      </div>
-				      <div class="modal-body">
-				        <form class="editBlogForm form-group">
-				        	<input type="text" class="editTitle form-control" placeholder="Title" name="title">
-				        	<input type="text" class="editCategory form-control" placeholder="Category" name="category">
-				        	<input type="text" class="editBlogContent form-control" placeholder="Content" name="blogContent">
-				        	<input type="submit" class="editSubmit btn btn-primary form-control" data-id=\{{_id}}>
-				        </form>
-				      </div>
-				        <div class="modal-footer"></div>	
-				    </div>
-				  </div>
-				</div>
-				<!-- end of bootstrap popup -->
+				<form class="editBlogForm form-group collapse" id="edit-\{{_id}}">
+        	<input type="text" class="editTitle form-control" placeholder="Title" name="title">
+        	<input type="text" class="editCategory form-control" placeholder="Category" name="category">
+        	<textarea type="text" class=" main editBlogContent form-control" placeholder="Content" name="blogContent"></textarea>
+        	<input type="submit" class="editSubmit btn btn-primary form-control" data-id=\{{_id}}>
+        </form>
+        </div> {{!-- end editFormDiv --}}
+        {{!-- end css form effect --}}
+
 				<h2 class="mainBlogTitle text-center">\{{ title }}</h2>
-				<p class="blogPostContent">Content: \{{ blogContent }}</p>	
+				<p class="blogPostContent">Content: \{{ blogContent }}</p>
 				<p class="category">Category: \{{ category }}</p>
-			</div>
+				{{!-- <button class="addComment btn btn-primary btm-sm">thoughts?</button> --}}
+				{{!-- css comment form --}}
+				<button data-toggle="collapse" data-target="#addComment-\{{_id}}"class="addComment btn btn-sm btn-primary">thoughts?</button>
+				<form class="addCommentForm form-group collapse" id="addComment-\{{_id}}">
+        	<textarea type="text" class=" main commentTitle form-control" placeholder="Comments" name="text"></textarea>
+        	<input type="submit" class="commentSubmit btn btn-primary form-control" data-id=\{{_id}}>
+        </form>
+        </div> <!-- end blog content div -->
+        {{!-- end css comment form --}} 
+			</div> <!-- end blog inserts div -->
+		</div>	<!-- end row div -->
 			\{{#each comments}}
-			<div class="commentsDiv">
-				<p class="comment">Comments: \{{text}}</p> 
-			</div>
+			<div class="row">
+				<div class="commentsDiv col-md-8 col-md-offset-2">
+					<p class="comment">Comments: \{{text}}</p>
+					{{!-- css comment form --}}
+					<button data-toggle="collapse" data-target="#editComment-\{{_id}}"class="editComment btn btn-sm btn-primary">edit comment</button>
+					<button class="deleteEditedComment btn btn-primary btn-sm">remove comment</button>
+					<form class="editCommentForm form-group collapse" id="editComment-\{{_id}}">
+        		<textarea type="text" class=" main commentTitle form-control" placeholder="Comments" name="text"></textarea>
+        		<input type="submit" class="commentSubmit btn btn-primary form-control" data-id=\{{_id}}>
+        	</form>
+        </div> <!-- end comments div -->
+        {{!-- end css comment form --}} 
+			</div> <!-- end comment row -->
 			\{{/each}}
-		</div>
-	</div>
 	\{{/each}}
 	</script>
 	</div>	
