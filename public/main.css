@@ -28,13 +28,21 @@ p {
 	font-size: 24px;
 }
 
-p.name {
+.name {
 	font-size: 20px;
 	color: #59016B;
 }
 
 .editPost {
 	display: none;
+}
+
+.editComment {
+	display: none;
+}
+
+.commentRow {
+	background-color: lightpink;
 }
 
 .add-post-form {

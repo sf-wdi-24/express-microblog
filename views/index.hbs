@@ -62,22 +62,50 @@
 				<div class="row info" id="posts-results">
 					<script type="text/x-handlebars-template" id="posts-template">
 						\{{#each posts}}
-							<p>\{{post}}</p>
-							<p class="name text-right">by \{{name}} at \{{time}}
-				      <div class="btn-group pull-right">
-                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
-              </div></p>
-              <form class="editPost" id="form\{{_id}}">
-                <div class="form-group">
-                  <input type="text" class="formdata form-control form-group" name="post" value="\{{post}}">
-                  <input type="text" class="formdata form-control form-group" name="name" value="\{{name}}">
-                  <input type="text" class="formdata form-control form-group" name="category" value="\{{category}}">
-                  <input type="submit" class="btn btn-info btn-block" value="Submit">
-                </div>
-              </form>
-							<hr>
+							<div class="row">
+								<div class="col-md-10">
+									<p>\{{post}}<span class="name"> - by \{{name}} at \{{time}}</span></p>
+								</div>
+								<div class="col-md-2">
+									<div class="btn-group pull-right">
+		                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		              </div>
+		              <form class="editPost" id="form\{{_id}}">
+		                <div class="form-group">
+		                  <input type="text" class="formdata form-control form-group" name="post" value="\{{post}}">
+		                  <input type="text" class="formdata form-control form-group" name="name" value="\{{name}}">
+		                  <input type="text" class="formdata form-control form-group" name="category" value="\{{category}}">
+		                  <input type="submit" class="btn btn-info btn-block" value="Submit">
+		                </div>
+		              </form>
+		            </div>
+		        	</div>
+		        	\{{#if comments}}
+			        	\{{#each comments}}
+									<div class="row commentrow">
+										<div class="col-md-1"></div>
+										<div class="col-md-9">
+											<p>\{{commenttext}}<span class="name"> - by \{{commentname}} at \{{commenttime}}</span></p>
+										</div>
+										<div class="col-md-2">
+											<div class="btn-group pull-right">
+				                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+				                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+				                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+				              </div>
+				              <form class="editComment" id="form\{{_id}}">
+				                <div class="form-group">
+				                  <input type="text" class="formdata form-control form-group" name="post" value="\{{commenttext}}">
+				                  <input type="text" class="formdata form-control form-group" name="name" value="\{{commentname}}">
+				                  <input type="submit" class="btn btn-info btn-block" value="Submit">
+				                </div>
+				              </form>
+				            </div>
+				        	</div>
+			        	\{{/each}}
+			        \{{/if}}
 						\{{/each}}
 					</script>
 				</div>

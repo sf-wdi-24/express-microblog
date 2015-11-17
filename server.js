@@ -110,7 +110,17 @@ app.post('/api/posts/:postId/comments', function (req, res) {
 	});
 });
 
+app.put('/api/posts/:postId/comments/:commentId', function (req, res) {
+	// find post id from url params
+	var postId = req.params.postId;
 
+	// find post in db using id
+	Post.findOne({ _id: postId }, function(err, foundPost) {
+
+	//		
+
+	});
+});
 
 // start the server
 app.listen(process.env.PORT || 5000, function() {
