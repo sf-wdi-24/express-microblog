@@ -1,10 +1,10 @@
 $(function() {
   
   //make sure is retunring
-  console.log("client side js running")
+  console.log("client side js running");
 
   // compile handlebars template
-  var source = $('#microblog-template').html();
+  var source = $('#blogPost-list').html();
   var template = Handlebars.compile(source);
 
   // array of test data
@@ -13,7 +13,7 @@ $(function() {
     
   ];
 
-  // AJAX call to GET all workouts
+  // AJAX call to GET all blogPosts
   $.get('/api/blogPosts', function (data) {
     allblogPosts = data.blogPosts;
     

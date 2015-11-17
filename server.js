@@ -3,6 +3,10 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose');
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
 
 // configure body-parser (for form data)
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,7 +45,7 @@ app.get('/api/blogPosts', function (req, res) {
 app.get('/api/blogPosts/:id', function (req, res) {
    var BlogPostId = parseInt(req.params.id);
 
-   var foundBlogPost = blogPosts.filter(function (todo) {
+   var foundBlogPost = blogPosts.filter(function (blogPost) {
    return blogPosts._id == blogPostsId;
    })[0];
 
@@ -67,7 +71,7 @@ app.post('/api/blogPosts', function (req, res) {
 app.put('/api/blogPosts/:id', function (req, res) {
   var blogPostId = parseInt(req.params.id);
 
-  var blogPostToUpdate = blogPosts.filter(function (todo) {
+  var blogPostToUpdate = blogPosts.filter(function (blogPost) {
     return blobPosts._id == blogPostId;
   })[0];
 
