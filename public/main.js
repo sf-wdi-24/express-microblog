@@ -9,8 +9,10 @@ $(function (){
 
 	//button to show all quotes
 	var $showAll = $('#showAll');
-	//form to create new data
+	//form to create new quote
 	var $createQuote = $('#create-quote');
+	//form to delete a quote
+	var $deleteQuote = $('#delete-quote');
 	
 	//test data
 	var allQuotes = [];
@@ -67,7 +69,10 @@ $(function (){
 	});
 		
 		
-	
+	//Delete Quote
+	$deleteQuote.on('submit', function (e) {
+		
+	});
 		
 
 	/*var quotesHtml = template({ taco : allQuotes });

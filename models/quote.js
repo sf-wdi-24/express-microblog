@@ -1,12 +1,23 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
+	Comment = require('./comment');
 
 //Setting Schema
 var QuoteSchema = new Schema({
-	category : String,
-	statement: String,
-	author: String,
-	work: String
+	body: {
+		category : String,
+		statement: String,
+		author: String,
+		work: String
+	},
+	//EMBEDDING	
+	/*comments: [comment.schema]*/
+
+	//REFERENCING 
+	comments: [{
+		type: Schema.Types.ObjectId, 
+		ref: 'Comment'
+	}]
 });
 
 //Model 
