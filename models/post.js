@@ -6,7 +6,11 @@ var PostSchema = new Schema({
 	description: String,
 	like: Boolean,
 	time: String,
-	category: String
+	category: String,
+	comments: [{
+		type: Schema.Types.ObjectId,
+		ref: "Comment"
+	}]
 });
 
 var Post = mongoose.model("Post", PostSchema);

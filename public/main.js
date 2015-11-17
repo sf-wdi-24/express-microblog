@@ -13,6 +13,7 @@ $(function () {
 	}
 
 	$.get(baseUrl, function (data) {
+		console.log(data.posts);
 		allPosts = data.posts.reverse(); //to post newest first
 		render();
 	});
@@ -128,5 +129,22 @@ $(function () {
 				$postList.append(postsHtml);
 			});
 		}
+	});
+
+	$postList.on("click", ".comment-button", function (event) {
+		var id = $(this).attr("id").slice(7);
+		$("#comment-form" + id).toggle();
+		$("#comment-form" + id).on("submit", function (event) {
+			event.preventDefault();
+			var comment = $(this).serialize();
+			var commentedPost = allPosts.filter(function (post) {
+				return post._id == id;
+			})[0];
+			var url = baseUrl + "/" + id + "/comments";
+			$.post(url, comment, function(data) {
+				commentedPost.comments.push(data);
+				render();
+			});
+		});
 	});
 });

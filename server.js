@@ -13,6 +13,7 @@ app.set("view engine", "hbs");
 app.use(express.static("public"));
 
 var Post = require("./models/post");
+var Comment = require("./models/comment");
 
 app.get("/", function (req, res) {
 	res.render("index");
@@ -20,9 +21,14 @@ app.get("/", function (req, res) {
 
 //set up posts api
 app.get("/api/posts", function (req, res) {
-	Post.find(function (err, allPosts) {
-		res.json({posts: allPosts});
-	});
+	// Post.find(function (err, allPosts) {
+	// 	res.json({posts: allPosts});
+	// });
+	Post.find()
+		.populate("comments")
+			.exec(function (err, allPosts) {
+				res.json({posts: allPosts});
+			});
 });
 
 //create new post
@@ -74,6 +80,22 @@ app.delete("/api/posts/:id", function (req, res) {
 		res.json(deletedPost);
 	});
 });
+
+//route to create new comment 
+app.post("/api/posts/:postId/comments", function (req, res) {
+	var postId = req.params.postId;
+
+	Post.findOne({ _id: postId}, function (err, foundPost) {
+		var newComment = new Comment(req.body);
+
+		newComment.save();
+		foundPost.comments.push(newComment);
+		foundPost.save();
+		res.json(newComment);
+	});
+});
+
+///store/:store_id/items/:item_id
 
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {

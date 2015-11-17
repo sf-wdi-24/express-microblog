@@ -65,6 +65,10 @@
 													<span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true">Like
 													</span>
 													</button>
+													<button type="button" class="btn btn-default comment-button" aria-label="Left Align" id="comment\{{_id}}">
+													<span class="glyphicon glyphicon-comment" aria-hidden="true">Comment
+													</span>
+													</button>
 													<button type="button" class="btn btn-default delete-button" aria-label="Left Align" id="del\{{_id}}">
 													<span class="glyphicon glyphicon-remove-circle glyphicon-align-left" aria-hidden="true">
 													</span>
@@ -73,6 +77,13 @@
 													<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
 													</span>
 													</button>
+													<form hidden id="comment-form\{{_id}}">
+														<div class="form-group">
+															<input type="text" class="form-control" name="text">
+															<input type="submit" class="btn btn-default" value="Post">
+														</div>
+													</form>
+
 													<form hidden id="form\{{_id}}">
 															<div class="form-group">
 																	<input type="text" class="form-control" name="title" value="\{{title}}">
@@ -81,6 +92,9 @@
 																	<input type="submit" class="btn btn-default" value="Edit">
 															</div>
 													</form>
+													\{{#each comments}}
+														<h4>\{{text}}</h4>
+													\{{/each}}
 											</div>
 									</div>
 									<hr>
