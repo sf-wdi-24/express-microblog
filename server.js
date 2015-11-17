@@ -8,11 +8,29 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
+
+
 // configure body-parser (for form data)
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // use public folder for static files
 app.use(express.static(__dirname + '/public'));
+
+
+// // middleware for auth
+app.use(cookieParser());
+app.use(session({
+  secret: 'supersecretkey',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// // passport config
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // set hbs as server view engine
 app.set('view engine', 'hbs');
@@ -87,7 +105,7 @@ app.put('/api/blogPosts/:id', function (req, res) {
 app.delete('/api/blogPosts/:id', function (req, res) {
   var blogPostsId = parseInt(req.params.id);
 
-  var BlogPostToDelete = todos.filter(function (todo) {
+  var BlogPostToDelete = todos.filter(function (blogPost) {
     return blogPosts._id == blogPostsId;
   })[0];
 
