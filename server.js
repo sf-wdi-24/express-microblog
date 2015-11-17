@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 mongoose.connect('mongodb://localhost/blog');
 
 var Blog = require('./models/blog');
+var Comment = require('./models/comments');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -20,15 +21,30 @@ app.use(express.static(__dirname + '/public'));
 
 
 
-// Get ALl Blogs 
-app.get('/api/blogs', function(req, res) {
-	//mongoose
-	blog.find(function(err, allBlogs) {
-		res.json({
-			blog: allBlogs
-		}); 											
-	});
+// // Get ALl Blogs 
+// app.get('/api/blogs', function(req, res) {
+// 	//mongoose
+// 	blog.find(function(err, allBlogs) {
+// 		res.json({
+// 			blog: allBlogs
+// 		}); 											
+// 	});
 
+//});
+
+// get all blogs with comments
+
+// route to get all tweets
+app.get('/api/blogs', function (req, res) {
+  Tweet.find()
+    .populate('comments')
+      .exec(function (err, allBlogs) {
+        if (err) {
+          res.json(err);
+        } else {
+          res.json(allTweets);
+        }
+      });
 });
 
 	//Post single blog
