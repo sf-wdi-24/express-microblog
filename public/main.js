@@ -47,9 +47,9 @@ $(function (){
 	});
 
 	//Show and search for quote by id
-	/*$.get('/api/quotes/:id' function (data) {
-
-	});*/
+	$.get('/api/quote/:id', function () {
+		
+	});
 
 	//Make new quote
 	//NEEDS WORK
