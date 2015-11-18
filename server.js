@@ -87,7 +87,7 @@ app.get('/', function (req, res) {
 
 // show signup view
 app.get('/signup', function (req, res) {
-  // if user is logged in, don't let them sign up again
+  // if user is logged in, don't let them see signup view
   if (req.user) {
     res.redirect('/profile');
   } else {
@@ -114,7 +114,7 @@ app.post('/signup', function (req, res) {
 
 // show login view
 app.get('/login', function (req, res) {
-  // if user is logged in, don't let them sign up again
+  // if user is logged in, don't let them see login view
   if (req.user) {
     res.redirect('/profile');
   } else {
