@@ -41,7 +41,7 @@ app.use(express.static("public"));
 
 
 app.get("/", function (req, res) {
-	res.render("index");
+	res.render("index", { user: req.user});
 });
 
 //set up posts api
@@ -178,7 +178,7 @@ app.get("/login", function (req, res) {
 //log in user
 app.post('/login', passport.authenticate('local'), function (req, res) {
   // res.send('logged in!!!');
-  res.redirect("/profile");
+  res.redirect("/");
 });
 
 //logout user
