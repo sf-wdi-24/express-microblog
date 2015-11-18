@@ -26,7 +26,8 @@
 						<div>
 							<ul class="nav navbar-nav navbar-right">
 								{{#if user}}
-									<h3>{{user.username}}</h3>
+									<li><a href="/profile">Welcome {{user.username}}</a></li>
+									<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 								{{else }}
 									<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 									<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

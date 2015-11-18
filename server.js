@@ -143,19 +143,12 @@ app.put("/api/posts/:postId/comments/:commentId", function (req, res) {
 
 //show signup view
 app.get("/signup", function (req, res) {
-	res.render("signup");
-});
-
-//sign up new user then log them in
-//hash and salts password, save new user to db
-app.post("/signup", function (req, res) {
-	User.register(new User({ username: req.body.username}), req.body.password,
-		function (err, newUser) {
-			passport.authenticate("local")(req, res, function() {
-				// res.send("Signed up!");
-				res.redirect("/profile");
-			});
-		});
+	//if user is logged in, don't let them sign up again
+	if (req.user) {
+		res.redirect("/");
+	} else {
+		res.render("signup");
+	}
 });
 
 // sign up new user, then log them in
@@ -173,7 +166,12 @@ app.post('/signup', function (req, res) {
 
 //show login view
 app.get("/login", function (req, res) {
-	res.render("login");
+	//if user logged in, don't let any them see login page
+	if (req.user) {
+		res.redirect("/profile");
+	} else {
+		res.render("login", {user: req.user});
+	}
 });
 //log in user
 app.post('/login', passport.authenticate('local'), function (req, res) {
@@ -189,7 +187,12 @@ app.get("/logout", function (req, res) {
 
 // show user profile
 app.get("/profile", function (req, res) {
-	res.render("profile", {user: req.user});
+	//only show profile if user login
+	if (req.user) {
+		res.render("profile", {user: req.user});
+	}else {
+		res.redirect("/login");
+	}
 });
 
 //listen to port 3000
