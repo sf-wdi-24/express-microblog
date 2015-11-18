@@ -154,4 +154,29 @@ $(function () {
 			});
 		});
 	});
+
+	//delete comment
+	$postList.on("click", ".delete-comment", function (event) {
+		var id = $(this).attr("id");
+		console.log(id);
+		var commentIndex;
+		var thisPost;
+		allPosts.forEach(function (post) {
+			post.comments.forEach(function (comment) {
+				if (comment._id == id ) {
+					commentIndex = post.comments.indexOf(comment);
+					thisPost = post;
+				}
+			});
+		});
+		$.ajax({
+			type: "DELETE",
+			url: baseUrl + "/" + thisPost._id + "/comments/" + id,
+			data: thisPost.comments[commentIndex],
+			success: function (data) {
+				thisPost.comments.splice(commentIndex, 1);
+				render();
+			}
+		});
+	});
 });
