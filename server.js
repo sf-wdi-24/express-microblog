@@ -2,12 +2,13 @@
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
-
+    LocalStrategy = require('passport-local').Strategy,
+    Post = require('./models/blogPost'),
+    User = require('./models/user');
 
 
 // configure body-parser (for form data)
@@ -40,7 +41,7 @@ mongoose.connect('mongodb://localhost/blogPost-app');
 
 // require Post and User model
 var blogPost = require('./models/blogPost');
-var User = require('./models/users');
+var User = require('./models/user');
 
 // HOMEPAGE ROUTE
 
