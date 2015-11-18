@@ -40,8 +40,8 @@ app.use(passport.session());
 
 // passport config
 passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // passport-github config
 passport.use(new GitHubStrategy({
@@ -64,18 +64,6 @@ passport.use(new GitHubStrategy({
     }
   });
 }));
-
-// serialize and deserialize
-passport.serializeUser(function (user, done) {
-  console.log('serializeUser:', user._id);
-  done(null, user._id);
-});
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    console.log(user);
-    done(null, user);
-  });
-});
 
 
 // HOMEPAGE ROUTE
