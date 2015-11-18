@@ -45,7 +45,18 @@ var User = require('./models/user');
 
 
 
-// // Auth Routes
+
+// HOMEPAGE ROUTE
+
+app.get('/', function (req, res) {
+  res.render('index');
+});
+
+
+
+
+
+// // Set up AUTH ROUTES
 // show signup view
 app.get('/signup', function (req, res) {
   res.render('signup');
@@ -56,12 +67,18 @@ app.post('/signup', function (req, res) {
   User.register(new User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
-        res.send('signed up!!!');
+        // res.send('signed up!!!');
+        res.redirect('/profile');
       });
     }
   );
 });
 
+// log in user
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  // res.send('logged in!!!');
+  res.redirect('/profile');
+});
 
 // show login view
 app.get('/login', function (req, res) {
@@ -73,12 +90,27 @@ app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
+  
 
-// HOMEPAGE ROUTE
-
-app.get('/', function (req, res) {
-  res.render('index');
+  // // show user profile page
+app.get('/profile', function (req, res) {
+  res.render('profile', { user: req.user });
 });
+
+// sign up new user, then log them in
+// hashes and salts password, saves new user to db
+app.post('/signup', function (req, res) {
+  User.register(new User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        // res.send('signed up!!!');
+        res.redirect('/profile');
+      });
+    }
+  );
+});
+
+
 
 
 // API ROUTES
