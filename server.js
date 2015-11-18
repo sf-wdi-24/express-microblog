@@ -2,6 +2,7 @@
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
+    hbs = require('hbs'),
     mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
@@ -18,6 +19,7 @@ app.use(express.static(__dirname + '/public'));
 
 // set view engine to hbs (handlebars)
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // connect to mongodb
 mongoose.connect('mongodb://localhost/microblog-app');
@@ -79,7 +81,7 @@ passport.deserializeUser(function (id, done) {
 // HOMEPAGE ROUTE
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', { user: req.user });
 });
 
 
@@ -91,7 +93,7 @@ app.get('/signup', function (req, res) {
   if (req.user) {
     res.redirect('/profile');
   } else {
-    res.render('signup');
+    res.render('signup', { user: req.user });
   }
 });
 
@@ -118,7 +120,7 @@ app.get('/login', function (req, res) {
   if (req.user) {
     res.redirect('/profile');
   } else {
-    res.render('login');
+    res.render('login', { user: req.user });
   }
 });
 
@@ -172,17 +174,23 @@ app.get('/api/posts', function (req, res) {
 
 // create new post
 app.post('/api/posts', function (req, res) {
-  // create new post with form data (`req.body`)
-  var newPost = new Post(req.body);
+  if (req.user) {
+    // create new post with form data (`req.body`)
+    var newPost = new Post(req.body);
 
-  // save new post in db
-  newPost.save(function (err, savedPost) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-    } else {
-      res.json(savedPost);
-    }
-  });
+    // save new post in db
+    newPost.save(function (err, savedPost) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        req.user.posts.push(savedPost);
+        req.user.save();
+        res.json(savedPost);
+      }
+    });
+  } else {
+    res.status(401).json({ error: 'Unauthorized.' });
+  }
 });
 
 // get one post
