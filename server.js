@@ -167,6 +167,12 @@ app.post('/login', passport.authenticate('local'), function (req, res) {
   res.send('logged in!!!');
 });
 
+//logout user
+app.get("/logout", function (req, res) {
+	req.logout();
+	res.redirect("/");
+});
+
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("I'm listening");
