@@ -122,6 +122,23 @@ app.post('/signup', function (req, res) {
 		});
 });
 
+
+
+// Rendering login.hbs to /login
+app.get('/login', function (req, res){
+	res.render('login');
+});
+
+app.post('/login', passport.authenticate('local'), function (req, res){
+	res.send('Logged in!');
+});
+
+// Log out user
+app.get('/logout', function (req, res){
+	req.logout();
+	res.redirect('/');
+});
+
 // Server listening?
 var server = app.listen(process.env.PORT || 3000, function(){
 	console.log('HEY! LISTEN!');
