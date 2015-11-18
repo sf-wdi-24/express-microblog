@@ -194,9 +194,9 @@ app.get('/api/posts/:id', function (req, res) {
   Post.findOne({ _id: postId }, function (err, foundPost) {
     if (err) {
       if (err.name === "CastError") {
-        this.status(404).json({ error: "Nothing found by this ID." });
+        res.status(404).json({ error: "Nothing found by this ID." });
       } else {
-        this.status(500).json({ error: err.message });
+        res.status(500).json({ error: err.message });
       }
     } else {
       res.json(foundPost);
