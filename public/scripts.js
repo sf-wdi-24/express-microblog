@@ -62,6 +62,7 @@ $(document).ready(function (){
 		// POST new comment 
 	$(document).on('submit', '.submitComment', function (event) {
 		event.preventDefault();
+		console.log('THIS', this);
 		var newComment = $(this).serialize();
 		$.ajax ({
 			type: 'POST',
@@ -71,6 +72,8 @@ $(document).ready(function (){
 				var post = blogArr.filter(function (post){
 					return post._id == id;
 				})[0];
+				console.log('POST', post);
+				console.log('DATA', data);
 				post.comments.push(data);
 				addBlogpost();
 			}

@@ -4,9 +4,28 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/blogs');
 var Blogpost = require('./models/blogpost');
 var Comment = require('./models/comment');
-
+var User = require('./models/user');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
+
+// passport config
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(cookieParser());
+app.use(session({
+	secret: 'supersecretkey',
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 // Set up body-parser
@@ -22,9 +41,6 @@ app.set('view engine', 'hbs');
 app.get('/', function (req, res) {
 	res.render('index');
 });
-
-
-
 
 // GET all blogposts with comments
 app.get('/api/posts', function (req, res){
@@ -85,31 +101,26 @@ app.post('/api/posts/:postId/comments', function (req, res) {
 		newComment.save(); 
 		foundBlogpost.comments.push(newComment);
 		foundBlogpost.save();
-		res.json(foundBlogpost);
+		res.json(newComment);
 	});
 });
 
-// PUT (edit) comment
-app.put('/api/posts/:postId/comment/:commentId', function (req, res){
-	var postId = req.params.commentId;
-	Blogpost.findOne({_id: postId}, function (err, foundBlogpost){
-		foundBlogpost.title = req.body.title;
-		foundBlogpost.content = req.body.content;
 
-		foundBlogpost.save(function (err, savedBlogpost){
-			res.json(savedBlogpost);
+// AUTH ROUTES
+
+// Rendering signup.hbs to /signup
+app.get('/signup', function (req, res){
+	res.render('signup');
+});
+
+app.post('/signup', function (req, res) {
+	User.register(new User({ username : req.body.username}), req.body.password,
+		function (err, newUser){
+			passport.authenticate('local')(req, res, function() {
+				res.send('Signed up!');
+			});
 		});
-	});
 });
-
-// DELETE a comment
-app.delete('/api/posts/:id', function (req, res) {
-	var postId = req.params.id;
-	Blogpost.findOneAndRemove({_id: postId}, function (err, deletedBlogpost) {
-		res.json(deletedBlogpost);
-	});
-});
-
 
 // Server listening?
 var server = app.listen(process.env.PORT || 3000, function(){
