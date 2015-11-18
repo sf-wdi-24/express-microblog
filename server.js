@@ -63,6 +63,17 @@ app.post('/signup', function (req, res) {
 });
 
 
+// show login view
+app.get('/login', function (req, res) {
+  res.render('login');
+});
+
+// log out user
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
 // HOMEPAGE ROUTE
 
 app.get('/', function (req, res) {
