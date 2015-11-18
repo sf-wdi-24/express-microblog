@@ -2,6 +2,7 @@
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
+    hbs = require('hbs'),
     mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
@@ -16,6 +17,7 @@ app.use(express.static(__dirname + '/public'));
 
 // set view engine to hbs (handlebars)
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // connect to mongodb
 mongoose.connect('mongodb://localhost/microblog-app');
@@ -43,7 +45,7 @@ passport.deserializeUser(User.deserializeUser());
 // HOMEPAGE ROUTE
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', { user: req.user });
 });
 
 
@@ -51,30 +53,39 @@ app.get('/', function (req, res) {
 
 // show signup view
 app.get('/signup', function (req, res) {
-  res.render('signup');
-
   // if user is logged in, don't let them see signup view
+  if (req.user) {
+    res.redirect('/profile');
+  } else {
+    res.render('signup', { user: req.user });
+  }
 });
 
 // sign up new user, then log them in
 // hashes and salts password, saves new user to db
 app.post('/signup', function (req, res) {
-  User.register(new User({ username: req.body.username }), req.body.password,
-    function (err, newUser) {
-      passport.authenticate('local')(req, res, function () {
-        res.redirect('/profile');
-      });
-    }
-  );
-
   // if user is logged in, don't let them sign up again
+  if (req.user) {
+    res.redirect('/profile');
+  } else {
+    User.register(new User({ username: req.body.username }), req.body.password,
+      function (err, newUser) {
+        passport.authenticate('local')(req, res, function () {
+          res.redirect('/profile');
+        });
+      }
+    );
+  }
 });
 
 // show login view
 app.get('/login', function (req, res) {
-  res.render('login');
-
   // if user is logged in, don't let them see login view
+  if (req.user) {
+    res.redirect('/profile');
+  } else {
+    res.render('login', { user: req.user });
+  }
 });
 
 // log in user
@@ -90,9 +101,12 @@ app.get('/logout', function (req, res) {
 
 // show user profile page
 app.get('/profile', function (req, res) {
-  res.render('profile', { user: req.user });
-
   // only show profile if user is logged in
+  if (req.user) {
+    res.render('profile', { user: req.user });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 
@@ -112,17 +126,23 @@ app.get('/api/posts', function (req, res) {
 
 // create new post
 app.post('/api/posts', function (req, res) {
-  // create new post with form data (`req.body`)
-  var newPost = new Post(req.body);
+  if (req.user) {
+    // create new post with form data (`req.body`)
+    var newPost = new Post(req.body);
 
-  // save new post in db
-  newPost.save(function (err, savedPost) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-    } else {
-      res.json(savedPost);
-    }
-  });
+    // save new post in db
+    newPost.save(function (err, savedPost) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        req.user.posts.push(savedPost);
+        req.user.save();
+        res.json(savedPost);
+      }
+    });
+  } else {
+    res.status(401).json({ error: 'Unauthorized.' });
+  }
 });
 
 // get one post
