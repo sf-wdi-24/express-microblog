@@ -161,6 +161,8 @@ $(function () {
 		console.log(id);
 		var commentIndex;
 		var thisPost;
+		//loop to each post, and its comments to find tobe deleted comment id
+		//and find the id of post containing tobe deleted comment
 		allPosts.forEach(function (post) {
 			post.comments.forEach(function (comment) {
 				if (comment._id == id ) {
@@ -172,7 +174,7 @@ $(function () {
 		$.ajax({
 			type: "DELETE",
 			url: baseUrl + "/" + thisPost._id + "/comments/" + id,
-			data: thisPost.comments[commentIndex],
+			// data: thisPost.comments[commentIndex],
 			success: function (data) {
 				thisPost.comments.splice(commentIndex, 1);
 				render();
