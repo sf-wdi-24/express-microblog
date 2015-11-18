@@ -4,6 +4,7 @@ body {
 	background-image: url('background.jpg');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	background-attachment: fixed;
 	color: white;
 }
 
@@ -12,7 +13,7 @@ body {
 }
 
 .info {
-	margin: 20px 20px 10px 10px;
+	margin: 10px;
 	padding: 20px;
 	background-color: #EE3476;
 	border: 5px solid #8E0032;
@@ -37,7 +38,7 @@ p {
 	display: none;
 }
 
-.addComment {
+.add-comment-form {
 	display: none;
 }
 

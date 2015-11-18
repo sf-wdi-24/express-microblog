@@ -6,6 +6,7 @@ $(function() {
 	var apiUrl = baseUrl + 'api/posts/';
 	var $newPost = $('#add-post-btn');
 	var $addPostForm = $('.add-post-form');
+	var $addCommentForm = $('.add-comment-form');
 	var allPosts;
 
 
@@ -29,6 +30,18 @@ $(function() {
 		$addPostForm.toggle();
 		event.preventDefault();
 		$addPostForm.on('submit', function() {
+			var newPost = $(this).serialize();
+			$.post(apiUrl, newPost, function(data) {
+				allPosts.push(data);
+				refresh();
+			});
+		});
+	}
+
+	function addComment (data) {
+		$addCommentForm.toggle();
+		event.preventDefault();
+		$addCommentForm.on('submit', function() {
 			var newPost = $(this).serialize();
 			$.post(apiUrl, newPost, function(data) {
 				allPosts.push(data);
@@ -99,7 +112,7 @@ $(function() {
 	$newPost.on('click', addPost);
 	$postsResults.on('click', '.glyphicon-pencil', putPost);
 	$postsResults.on('click', '.glyphicon-trash', deletePost);
-	// $postsResults.on('click', );
+	$postsResults.on('click', '.glyphicon-comment', addComment);
 	// $postsResults.on('click', '.glyphicon-star-empty', ??????);
 
 });

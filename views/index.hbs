@@ -63,29 +63,29 @@
 					<script type="text/x-handlebars-template" id="posts-template">
 						\{{#each posts}}
 							<div class="row">
-								<div class="col-md-10"> // Column of 10 with post
+								<div class="col-md-9"> <!-- Column of 10 with post -->
 									<p>\{{post}}<span class="name"> - by \{{name}} at \{{time}}</span></p>
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="btn-group pull-right">
 		                <span class="glyphicon glyphicon-comment btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
 		                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
 		                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
 		                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
-		              </div> // Column of 2 with glyphs
+		              </div> <!-- Column of 2 with glyphs -->
 		            </div>
 		          </div>
-		          <div class="row">  // Row for add comment and update post
-		            <div class="col-md-10">
-		            	// Add comment form
-		              <form class="addComment" id="form\{{_id}}">
+		          <div class="row">   <!-- Row for add comment and update post -->
+		            <div class="col-md-9">
+		            	<!-- Add comment form -->
+		              <form class="add-comment-form" id="form\{{_id}}">
 		                <div class="form-group">
 		                  <input type="text" class="formdata form-control form-group" name="post" value="\{{commenttext}}">
 		                  <input type="text" class="formdata form-control form-group" name="name" value="\{{commentname}}">
 		                  <input type="submit" class="btn btn-info btn-block" value="Submit">
 		                </div>
 		              </form>
-		              // Edit post form
+		              <!-- Edit post form -->
 		              <form class="editPost" id="form\{{_id}}">
 		                <div class="form-group">
 		                  <input type="text" class="formdata form-control form-group" name="post" value="\{{post}}">

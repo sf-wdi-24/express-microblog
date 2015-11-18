@@ -2,12 +2,34 @@
 var express = require('express'),
 		app = express(),
 		bodyParser = require('body-parser'),
-		mongoose = require('mongoose');
+		mongoose = require('mongoose'),
+		cookieParser = require('cookie-parser'),
+		session = require('express-session'),
+		passport = require('passport'),
+		LocalStrategy = require('passport-local').Strategy;
 
+// require models
+var Post = require('./models/post'),
+		Comment = require('./models/comment'),
+		User = require('./models/user');
+
+// middleware for auth
+app.use(cookieParser());
+app.use(session({
+	secret: 'supersecretkey',
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport config
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// include body parser to handle form inputs
 app.use(bodyParser.urlencoded({ extended: true }));
-
-var Post = require('./models/post');
-var Comment = require('./models/comment');
 
 // set up public folder
 app.use(express.static(__dirname + '/public'));
@@ -25,6 +47,34 @@ mongoose.connect('mongodb://localhost/posts-app');
 
 // require Post model
 var Post = require('./models/post');
+
+// set up auth routes
+app.get('/signup', function(req, res) {
+	res.render('signup');
+});
+
+app.post('/signup', function(req, res) {
+	User.register(new User({ username: req.body.username}), req.body.password,
+		function (err, newUser) {
+			passport.authenticate('local')(req, res, function() {
+				res.send('signed up');
+			});
+		}
+	);
+});
+
+app.get('/login', function(req, res) {
+	res.render('login');
+});
+
+app.post('/login', passport.authenticate('local'), function(req, res) {
+	res.send('logged in');
+});
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
 
 // set up api routes
 app.get('/api/posts', function(req, res) {
