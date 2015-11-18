@@ -14,12 +14,31 @@ mongoose.connect("mongodb://localhost/blog-posts-app");
 //require schemas
 var Post = require("./models/blogpost");
 var Comment = require("./models/comment");
+var User = require('./models/user');
 
 //apply body parser package
 app.use(bodyParser.urlencoded({extended:true}));
 
 //connect public folder
 app.use(express.static(__dirname + "/public"));
+
+//log in settings
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+app.use(cookieParser());
+app.use(session({
+  secret: 'supersecretkey',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //defind server and connect to local host 3000
 var server = app.listen(process.env.PORT || 3000, function(){
@@ -28,6 +47,44 @@ var server = app.listen(process.env.PORT || 3000, function(){
 
 //defind view engine for handelbars
 app.set("view engine", "hbs");
+
+//signup page route
+app.get('/signup', function (req, res) {
+  res.render('signup');
+});
+
+
+//sign up post to the users db
+app.post('/signup', function (req, res) {
+  User.register(new User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        res.redirect('/profile');
+      });
+    }
+  );
+});
+
+
+//login page route
+app.get("/login", function(req, res){
+	res.render("login");
+});
+
+//login post route (confirm the user and post into the session)
+
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  res.redirect('/profile');
+});
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/blog');
+});
+
+//route to the profie page
+app.get('/profile', function (req, res) {
+  res.render('profile', { user: req.user });
+});
 
 //route for the blog posts page
 app.get("/blog", function(req,res){
@@ -51,9 +108,6 @@ app.get("/api/blog-posts/:id", function(req, res){
 		res.json(result);
 	});
 });
-
-
-
 
 //add new  blog post to the db
 app.post("/api/blog-posts", function(req, res){
