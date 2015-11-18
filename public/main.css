@@ -35,22 +35,10 @@ p {
 	color: #59016B;
 }
 
-.editPost {
-	display: none;
-}
-
-.add-comment-form {
-	display: none;
-}
-
-.editComment {
+.editPost, .add-comment-form, .editComment, .add-post-form {
 	display: none;
 }
 
 .commentRow {
 	background-color: lightpink;
-}
-
-.add-post-form {
-	display:none;
 }

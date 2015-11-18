@@ -11,21 +11,7 @@
 	<title>Sign Up</title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="container">
-	    {{#if user.username}}
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/profile"><span class="glyphicon glyphicon-home"></span> Profile</a></li>
-					<li><a href="/login"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-				</ul>
-			{{else}}
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</ul>
-			{{/if}}
-	  </div>
-	</nav>
+	{{> header}}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center">

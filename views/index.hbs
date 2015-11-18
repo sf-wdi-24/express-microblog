@@ -11,21 +11,7 @@
 	<title>Discussion Questions</title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="container">
-	    {{#if user.username}}
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/profile"><span class="glyphicon glyphicon-home"></span> Profile</a></li>
-					<li><a href="/login"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-				</ul>
-			{{else}}
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</ul>
-			{{/if}}
-	  </div>
-	</nav>
+	{{> header}}
 	<div class="container full-height">
 		<div class="row full-height">
 			<div class="col-md-4 full height">
@@ -78,7 +64,7 @@
 						\{{#each posts}}
 							<div class="row">
 								<div class="col-md-9"> <!-- Column of 10 with post -->
-									<p>\{{post}}<span class="name"> - by \{{name}} at \{{time}}</span></p>
+									<p>\{{post}}<span class="name"> - by \{{name}}</span></p>
 								</div>
 								<div class="col-md-3">
 									<div class="btn-group pull-right">
@@ -92,7 +78,7 @@
 		          <div class="row">   <!-- Row for add comment and update post -->
 		            <div class="col-md-9">
 		            	<!-- Add comment form -->
-		              <form class="add-comment-form" id="form\{{_id}}">
+		              <form class="add-comment-form" id="commentform\{{_id}}">
 		                <div class="form-group">
 		                  <input type="text" class="formdata form-control form-group" name="post" value="\{{commenttext}}">
 		                  <input type="text" class="formdata form-control form-group" name="name" value="\{{commentname}}">
@@ -115,7 +101,7 @@
 									<div class="row commentrow">
 										<div class="col-md-1"></div>
 										<div class="col-md-9">
-											<p>\{{commenttext}}<span class="name"> - by \{{commentname}} at \{{commenttime}}</span></p>
+											<p>\{{commenttext}}<span class="name"> - by \{{commentname}}</span></p>
 										</div>
 										<div class="col-md-2">
 											<div class="btn-group pull-right">

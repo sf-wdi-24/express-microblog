@@ -2,6 +2,7 @@
 var express = require('express'),
 		app = express(),
 		bodyParser = require('body-parser'),
+		hbs = require('hbs'),
 		mongoose = require('mongoose'),
 		cookieParser = require('cookie-parser'),
 		session = require('express-session'),
@@ -36,10 +37,11 @@ app.use(express.static(__dirname + '/public'));
 
 // set view engine to hbs
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // set up route for homepage
 app.get('/', function(req, res) {
-	res.render('index');
+	res.render('index', { user: req.user });
 });
 
 // connect to mongodb
@@ -50,22 +52,38 @@ var Post = require('./models/post');
 
 // set up auth routes
 app.get('/signup', function(req, res) {
-	res.render('signup');
+	res.render('signup', { user: req.user });
+	// if user is loged in don't let them see signup view
+	if (req.user) {
+		res.redirect('/profile');
+	} else {
+		res.render('signup', { user: req.user });
+	}
 });
 
 app.post('/signup', function(req, res) {
-	User.register(new User({ username: req.body.username}), req.body.password,
-		function (err, newUser) {
-			passport.authenticate('local')(req, res, function() {
-				// res.send('signed up');
-				res.redirect('/profile');
-			});
-		}
-	);
+	// if user is logged in, don't let them sign up again
+	if (req.user) {
+		res.redirect('/profile');
+	} else {
+		User.register(new User({ username: req.body.username}), req.body.password,
+			function (err, newUser) {
+				passport.authenticate('local')(req, res, function() {
+					// res.send('signed up');
+					res.redirect('/profile');
+				});
+			}
+		);
+	}
 });
 
 app.get('/login', function(req, res) {
-	res.render('login');
+	// if user is loged in don't let them see signup view
+	if (req.user) {
+		res.redirect('/profile');
+	} else {
+		res.render('login', { user: req.user });
+	}
 });
 
 app.post('/login', passport.authenticate('local'), function(req, res) {
@@ -79,7 +97,12 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/profile', function(req, res) {
-	res.render('profile', { user: req.user });
+	// if user is loged in don't let them see signup view
+	if (req.user) {
+		res.render('profile', { user: req.user });
+	} else {
+		res.render('login', { user: req.user });
+	}
 });
 
 // set up api routes
@@ -96,13 +119,21 @@ app.get('/api/posts', function(req, res) {
 });
 
 app.post('/api/posts', function(req, res) {
-	// use form data to create new post
-	var newPost = new Post(req.body);
+	if (req.user) {
+		// use form data to create new post
+		var newPost = new Post(req.body);
+		newPost.time = (new Date()).toDateString();
+		// newPost.name = req.user.username;
 
-	// save new post in the database
-	newPost.save(function(err, savedPost) {
-		res.json(savedPost);
-	});
+		// save new post in the database
+		newPost.save(function(err, savedPost) {
+			req.user.posts.push(savedPost);
+			req.user.save();
+			res.json(savedPost);
+		});
+	} else {
+		res.status(401).json({ error: 'Unauthorized.'});
+	}
 });
 
 app.get('/api/posts/:id', function(req, res) {
@@ -126,7 +157,7 @@ app.put('/api/posts/:id', function(req, res) {
 		// Update the posts's attributes
 		foundPost.post = req.body.post;
 		foundPost.name = req.body.name;
-		foundPost.time = req.body.time;
+		foundPost.time = (new Date()).toDateString();
 		foundPost.likes = req.body.likes;
 		foundPost.category = req.body.category;
 
@@ -157,6 +188,7 @@ app.post('/api/posts/:postId/comments', function (req, res) {
 		
 		// create new comment and save it
 		var newComment = new Comment(req.body);
+		newComment.commenttime = (new Date()).toDateString();
 		newComment.save();
 
 		// add new comment to the post, save it, and return the comment
