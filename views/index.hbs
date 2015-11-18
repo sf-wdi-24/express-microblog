@@ -43,8 +43,9 @@
 					<ul id="posts-list">
 						<script id="posts-template" type="text/x-handlebars-template">
 						\{{#each posts}}
+
 						<li class="list-group-item post" data-id="\{{_id}}"><strong>\{{title}}</strong><br>
-													
+														
 						\{{story}}</li>
 						
 						
@@ -71,21 +72,25 @@
 								<input type="submit" class="btn btn-block btn-default" value="update">
 							</div>
 						</form>
-
 						
+						
+                        \{{#each comments}}
+                        <li>\{{text}}</li>
+                        \{{/each}}
+
 
 						<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-			<form class="comment-form" id="create-comment" data-id="\{{_id}}">
-			<input type="text" name="comment" placeholder="comment">
-			<input type="submit" class="bttn" value="Add Comment">
-			</form>
-			</div>
-			</div>
+							<div class="col-md-10 col-md-offset-1">
+								<form class="comment-form" data-id="\{{_id}}">
+									<input type="text" name="text" placeholder="comment">
+									<input type="submit" class="bttn" value="Add Comment">
+								</form>
+							</div>
+						</div>
 						
 						
 						
-
+						
 
 
 						\{{/each}}
@@ -107,13 +112,8 @@
 				</div>
 			</div>
 			
-
 			
-
 			
-
-
-
 			<!-- jquery -->
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 			<!-- bootsrap js -->
