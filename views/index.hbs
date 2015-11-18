@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- viewport for responsive design / mobile -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<meta charset="UTF-8">
+		<title>Dave's Microblog</title>
+	</head>
+	<body>
+		<div class="medium-stuff row">
+			<img src="medium-logo.png" class="medium-left">
+			<button type="button" action="showposts" class="btn btn-primary btn-lg medium-left">
+			<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Show all
+			</button>
+			<button type="button" class="btn btn-primary btn-lg medium-left" data-toggle="modal" data-target="#myModal">
+			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> New post
+			</button>
+			
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+					
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Write a new post</h4>
+						</div>
+						<div class="modal-body">
+							<form class="contact" id="create-blogposts">
+								<div class="form-group">
+									<textarea type="text" name="title" class="input-xlarge form-control" placeholder="Title" value="\{{title}}"></textarea>
+								</div>
+								<div class="form-group">
+									<textarea type="text" class="input-xlarge form-control" name="story" placeholder="Story" value="\{{story}}"></textarea>
+									<br>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-inline btn-primary center-block" value="Submit">
+								</div>
+							</form>
+						</div>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 medium-left">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Go!</button>
+					</span>
+				</div>
+			</div>
+			<div class="medium-right">
+				<img src="DAS-profile.png" id="profile-photo">
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2" data-id="\{{_id}}">
+					<ul id="blogposts-list">
+						<script id="blogposts-template" type="text/x-handlebars-template">
+							\{{#each blogposts}}
+								<h3>\{{title}}</h3>
+								<p>\{{story}}</p>
+						<button type="button" class="btn btn-primary btn-md pull-right">
+						<span class="glyphicon glyphicon-pencil edit-blogpost" id="edit-blogpost" aria-hidden="true"></span> Edit </button>
+						<button type="button" class="btn btn-primary btn-md pull-right delete-blogpost">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete </button>
+							\{{/each}}
+						</script>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- jquery  -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<!-- handlebars -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+		<!-- bootstrap js -->
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!-- custom script -->
+		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>
