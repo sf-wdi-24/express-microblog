@@ -1,19 +1,44 @@
+//require express and needed modules
 var express = require("express"),
-	hbs = require("hbs");
-	bodyParser = require("body-parser");
-	mongoose = require("mongoose");
-	app = express();
+	hbs = require("hbs"),
+	bodyParser = require("body-parser"),
+	mongoose = require("mongoose"),
+	cookieParser = require("cookie-parser"),
+	session = require("express-session"),
+	passport = require("passport"),
+	LocalStrategy = require("passport-local").Strategy;
+
+var	app = express();
+
+var Post = require("./models/post");
+var Comment = require("./models/comment");
+var User = require('./models/user');
 
 
 mongoose.connect("mongodb://localhost/microbog-app");
 
 app.use(bodyParser.urlencoded({extended: true}));
+// middleware for auth
+app.use(cookieParser());
+app.use(session({
+	secret: 'supersecretkey',
+	resave: false,
+saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport config
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 
-var Post = require("./models/post");
-var Comment = require("./models/comment");
+
 
 app.get("/", function (req, res) {
 	res.render("index");
