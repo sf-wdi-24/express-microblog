@@ -10,15 +10,15 @@
 </head>
 <body>
 <div class="container">
-	<nav class="menuBar navbar navbar-default navbar-fixed-top">
-		<div class="navContainer">
-			<p class="navText text-center">Welcome {{ user.username }}</p>
-			<a href="/"><button class="navBtn homeButton btn btn-primary pull-right"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button></a>
-			<a href="/logout"><button class="navBtn logoutButton btn btn-primary pull-right">Log Out</button></a>
-		</div>
-	</nav>
+	{{> header }}
 	<div class="row">
-	
+		<h2>Welcome to your page {{ user.username}}</h2>
+		{{#each user.posts}}
+			<small>{{ date }}</small>
+			<p class="category">Categoty: {{ category }}</p>
+			<h2 class="mainBlogTitle text-center">{{ title }}</h2>
+			<p class="blogPostContent">{{ blogContent }}</p>
+		{{/each}}
 		
 	</div>
 	

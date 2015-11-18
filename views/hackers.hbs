@@ -11,19 +11,7 @@
 </head>	
 <body>
 	<div class="container">
-		<nav class="menuBar navbar navbar-default navbar-fixed-top">
-			<div class=" container text-center">
-				{{#if user}}
-				<p class="navText">Welcome {{user.username}}</p>
-				<a href="/logout"><button class="navBtn logoutButton btn btn-primary pull-right">Logout</button></a>
-				{{else}}
-				<p class="navText">Please sign in for a personal experience</p>
-				<a href="/signup"><button class="navBtn signUpButton btn btn-primary pull-right">Sign Up</button></a>
-				<a href="/login"><button class="navBtn loginButton btn btn-primary pull-right">Log In</button></a>
-				<a href="/"><button class="navBtn homeButton btn btn-primary pull-right"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button></a>
-				{{/if}}
-			</div>
-		</nav>
+		{{ > header }}
 	</div>
 	<div class="row">
 		<div class="hackers text-center col-md-8 col-md-offset-2">

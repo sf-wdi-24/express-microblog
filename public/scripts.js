@@ -31,12 +31,13 @@ $(function(){
 		$.post('/api/blogs/', blogData, function(data) {
 			data.date = new Date();
 			allBlogs.push(data);
+			console.log(allBlogs);
 			render();
 			$('.newBlog').each(function(){
 				this.reset();
 			});
 		});
-			$('.newBlog').hide();
+		$('.newBlog').hide();
 	});
 
 	//add comments to existing blog

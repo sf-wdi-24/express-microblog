@@ -40,6 +40,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //allow express to render hbs pages for client
 app.set('view engine','hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 //client home page
 app.get('/', function (req,res) {
@@ -63,11 +64,23 @@ app.get('/api/blogs/:id', function (req,res) {
 
 //create new blog posting
 app.post('/api/blogs', function (req, res) {
-	var newBlog = new Blog(req.body, req.user);
-	newBlog.postedBy = (req.user._id);
-	newBlog.save(function(err, savedBlog){
-		res.json(savedBlog);
-	});
+	if (req.user) {
+		var newBlog = new Blog(req.body, req.user);
+		newBlog.save(function(err, savedBlog){
+			if(err) {
+				res.status(500).json({error: err.message});
+			}
+			else {
+				req.user.posts.push(savedBlog);
+				req.user.save();
+				res.json(savedBlog);	
+			}
+		});	
+	}
+	else {
+		res.status(401).json({error: 'Unauthorized'});
+	}
+	
 });
 
 //delete existing blog post
@@ -135,30 +148,47 @@ app.delete("/api/blogs/:blogId/comments/:commentId", function (req, res) {
 
 //signin GET route for new users
 app.get('/signup', function (req,res) {
-	res.render('signup');
+	if (req.user){
+		res.redirect('/profile');
+	}
+	else {
+		res.render('signup', {user: req.user});
+	}
 });
 
 //sign up a new user and log them in
 app.post('/signup', function (req,res) {
-	User.register(new User({ username: req.body.username}), req.body.password, 
-		function (err, newUser) { 
-		passport.authenticate('local')(req,res, function(){
-			res.redirect('/');
+
+	//if user is logged in dont let them sign up again
+	if (req.user){
+		res.redirect('/profile');
+	}
+	else {
+		User.register(new User({ username: req.body.username}), req.body.password, 
+			function (err, newUser) { 
+			passport.authenticate('local')(req,res, function(){
+				res.redirect('/profile');
+			});
 		});
-	});
+	}
 });
 
 //show login page for an existing user
 app.get('/login', function (req,res) {
-	res.render('login');
+	if (req.user){
+		res.redirect('/profile');
+	}
+	else {
+		res.render('login', {user: req.user});
+	}
 });
 
 //post route for login user
 app.post('/login', passport.authenticate('local', 
-	{ successRedirect: '/',
+	{ successRedirect: '/profile',
 		failureRedirect: '/hackers'}),
 		 function (req,res) {
-	res.redirect('/');
+	res.redirect('/profile');
 });
 
 //unseccessful login
@@ -174,7 +204,12 @@ app.get('/logout', function (req,res) {
 
 //user profile page
 app.get('/profile', function (req,res) {
-	res.render('profile', { user: req.user });
+	if (req.user) {
+		res.render('profile', { user: req.user });
+	}
+	else {
+		res.redirect('/login');
+	}
 });
 
 //set express to use localport

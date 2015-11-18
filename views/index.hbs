@@ -11,19 +11,7 @@
 </head>
 <body>
 <div class="container">
-	<nav class="menuBar navbar navbar-default navbar-fixed-top">
-		<div class=" container">
-			{{#if user}}
-			<p class="navText">Welcome {{user.username}}</p>
-			<a href="/logout"><button class="navBtn logoutButton btn btn-primary pull-right">Logout</button></a>
-			{{else}}
-			<p class="navText">Please sign in for a personal experience</p>
-			<a href="/signup"><button class="navBtn signUpButton btn btn-primary pull-right">Sign Up</button></a>
-			<a href="/login"><button class="navBtn loginButton btn btn-primary pull-right">Log In</button></a>
-			{{/if}}
-		</div>
-	</nav>
-</div>
+	{{> header}}
 	<div class="row col-md-12">
 		<h1 class="blogTitle text-center">The Blog About Nothing</h1>
 		<hr>
@@ -95,7 +83,7 @@
 	</script>
 	</div>	
 </div> <!-- end of content div -->
-
+</div>
 
 
 	<!-- jquery -->
