@@ -128,6 +128,38 @@ app.delete("/api/posts/:postId/comments/:commentId", function (req, res) {
 		});
 });
 
+//AUTH ROUTES
+
+//show signup view
+
+app.get("/signup", function (req, res) {
+	res.render("signup");
+});
+
+//sign up new user then log them in
+//hash and salts password, save new user to db
+app.post("/signup", function (req, res) {
+	User.register(new User({ username: req.body.username}), req.body.password,
+		function (err, newUser) {
+			passport.authenticate("local")(req, res, function() {
+				res.send("Signed up!");
+			});
+		});
+});
+
+// sign up new user, then log them in
+// hashes and salts password, saves new user to db
+app.post('/signup', function (req, res) {
+  User.register(new User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        res.send('signed up!!!');
+      });
+    }
+  );
+});
+
+
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("I'm listening");
