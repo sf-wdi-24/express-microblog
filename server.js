@@ -141,7 +141,8 @@ app.post("/signup", function (req, res) {
 	User.register(new User({ username: req.body.username}), req.body.password,
 		function (err, newUser) {
 			passport.authenticate("local")(req, res, function() {
-				res.send("Signed up!");
+				// res.send("Signed up!");
+				res.redirect("/profile");
 			});
 		});
 });
@@ -152,7 +153,8 @@ app.post('/signup', function (req, res) {
   User.register(new User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
-        res.send('signed up!!!');
+        // res.send('signed up!!!');
+        res.redirect("/profile");
       });
     }
   );
@@ -171,6 +173,11 @@ app.post('/login', passport.authenticate('local'), function (req, res) {
 app.get("/logout", function (req, res) {
 	req.logout();
 	res.redirect("/");
+});
+
+// show user profile
+app.get("/profile", function (req, res) {
+	res.render("profile", {user: req.user});
 });
 
 //listen to port 3000
