@@ -73,17 +73,13 @@ app.get('/api/blogPosts/:id', function (req, res) {
 
 // post new blog entry
 app.post('/api/blogPosts', function (req, res) {
-  var newBlogPost = req.body;
+  var newBlogPost = new blogPost(req.body);
 
-  if (blogPosts.length > 0) {
-    newBlogPost._id = blogPosts[blogPosts.length - 1]._id + 1;
-  } else {
-    newblogPosts._id = 1;
-  }
+ // create new post - write new code---
+ newBlogPost.save(function (err, savedBlogPost) {
+  res.json(savedBlogPost);
+ });
 
-  blogPosts.push(newBlogPosts);
-
-  res.json(newBlogPost);
 });
 
 // Update bloPost

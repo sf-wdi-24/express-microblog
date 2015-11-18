@@ -17,9 +17,9 @@
       <div class="col-md-6 col-md-offset-3">
         <h1 class="text-center">blogPost App</h1>
         <ul id="blogPost-list">
-          <script id="Microblog-template" type="text/x-handlebars-template">
-            \{{#each blogPosts}}
-              <li><strong>\{{Post}}</strong> - \{{category}}</li>
+          <script id="blogPost-template" type="text/x-handlebars-template">
+            \{{#each posts}}
+              <li><strong>\{{title}}</strong> - \{{description}}</li>
             \{{/each}}
           </script>
         </ul>
