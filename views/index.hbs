@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- bootstrap css -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom styles -->
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<title>Blog</title>
+</head>
+<body>
+	<div class="continer">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3" id="header">
+				<h1>Blog</h1><br>
+				<button id="newPost">Add a New Blog Post</button>
+				<div>
+					<select class="form-control" name="search" id="searchBar" placeholder="topic">
+							  <option>Select topic to display associated blog posts</option>
+							  <option>All</option>
+							  <option>Food</option>
+							  <option>Fashion</option>
+							  <option>Lifestyle</option>
+							  <option>Home improvement</option>
+							  <option>Other</option>
+					</select>
+				</div>
+				<div id="formDiv">
+					<form id="newPostForm">
+						 <select class="form-control" name="topic" id="newTopic" placeholder="topic">
+							  <option>Select topic</option>
+							  <option>Other</option>
+							  <option>Food</option>
+							  <option>Fashion</option>
+							  <option>Lifestyle</option>
+							  <option>Home improvement</option>
+						 </select>
+						 <input type= "text" class="form-control" name="title" value= "" placeholder="Title" id="newTitle">
+						 <textarea class="form-control" name="content" rows="10" placeholder= "content" id="newContent"></textarea> 
+						  <input type= "number" class="form-control" name="likes" value= "0" id="newLikes">
+						 <input type="submit" id="submitButton" class="btn btn-default form-control" value="Post">
+					</form>
+				</div>
+			</div>
+		</div>
+
+	<!-- empy blog-incomplete  -->
+	<!-- 	<div class="row">
+				<div class="col-md-8 col-md-offset-2" id="noResult">
+					<p>Currently no blog was posted<p>
+				</div>
+			</div> -->
+			
+		<div id="results">
+			<script id= "posts" type="text/x-hendlebars-template">
+				\{{#each blogPosts}}
+				<div class="row blogPost" id="div\{{_id}}">
+					<div class="col-md-8 col-md-offset-2" id="col\{{_id}}">
+					<article class="articleDiv" id="paragraph\{{_id}}">
+					<h4 id="subject\{{_id}}">\{{title}} </h4><br><br>
+					<p id="content\{{_id}}">\{{content}}</p>
+					<p id="topic\{{_id}}"><small>Category: \{{topic}}</small></p>
+					  <div class="postFunctions ">
+					  	<button class="like" id="\{{_id}}">Like -\{{likes}}-</button> 
+						<button class="edit" id="\{{_id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+						<button class="delete" id="\{{_id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+					  </div>
+					  <div class="updateFormDiv">
+						<form class="updatePostForm" id="updateForm\{{_id}}">
+						 	<select class="form-control" id="updateTopic\{{_id}}" name="topic" value= "">
+							  <option>Select topic</option>
+							  <option>Other</option>
+							  <option>Food</option>
+							  <option>Fashion</option>
+							  <option>Lifestyle</option>
+							  <option>Home improvement</option>
+							 </select>
+							 <input type= "text" class="form-control" id="updateTitle\{{_id}}" name="title" value= "">
+							 <textarea class="form-control" id="updateContent\{{_id}}" name="content" rows="10" value= ""></textarea>
+							 <input type="submit" class="updateSubmitButton btn btn-default form-control" value="Update">
+						</form>
+					</div>
+					  <hr>
+					  <h6>Comments:</h6>
+					  \{{#each comments}}
+					  	<div class="commentDiv">
+					  		
+					  		<div class="commentFunctions">
+					  			<span class="commentText">\{{text}}</span>
+								<button class="editComment" id="\{{_id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+								<button class="deleteComment" id="\{{_id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+					  		</div>
+					  	</div>
+					  \{{/each}}
+					  <form id="\{{_id}}" class="commentForm">
+					  	<input type= "text"  id="commentBar\{{_id}}" class="form-control comment" name="text" value= "" placeholder="comment...">
+					  	<input type="submit" id="\{{_id}}" class="commentSubmitButton btn btn-default form-control" value="Comment">
+					  </form>
+					</article>
+					</div>
+				</div>
+				\{{/each}}
+			</script>
+		</div>
+
+	</div>
+	<!-- handlebars -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap js -->
+	 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- custom script -->
+	<script type="text/javascript" src="main.js"></script>	
+</body>
+
+</html>
