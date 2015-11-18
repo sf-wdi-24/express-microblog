@@ -1,0 +1,51 @@
+nav {
+	/*background-color: transparent !important;*/
+	background: #35cd95;
+	background: -webkit-linear-gradient(left, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%);
+	background: -o-linear-gradient(left, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%);
+	background: linear-gradient(to right, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%);
+	border: none !important;
+}
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+.image {
+	height : 200px;
+	background: url("images/StorypicTeller.png");
+	background-size: contain;
+}
+.col-sm-12 {
+	padding: 0;
+}
+#sub-title {
+	font-size: 16px;
+}
+.edit-button, .delete-button {
+	float: right;
+}
+h1 {
+	margin: 0px 0px 0px 15px;
+	color: #f2f3f4;
+	font-size: 25px;
+	font-family: 'Berkshire Swash', cursive;
+}
+h3 {
+	font-size: 30px;
+	margin-left: 15px;
+	font-family: 'Playfair Display', serif;
+}
+h4 {
+	font-family: 'Brawler', serif;
+}
+li {
+	font-size: 18px;
+}
+.categories li:hover {
+ cursor:pointer;
+}
+.comments {
+	margin-left: 30px;
+}
+.delete-comment, .edit-comment {
+	padding-right: 10px;
+}
