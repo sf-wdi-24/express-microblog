@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sign Up</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles.css">
+	<link href='https://fonts.googleapis.com/css?family=Tillana' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	{{> header}}
+	<div class="row">
+		<div class="login col-md-8 col-md-offset-2">
+			<h2>Sign Up</h2>
+			<hr>
+			<form method="POST" action="/signup">
+				<div class="form-group">
+					<input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" class="form-control" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn bn-block btn-primary form-control" value="Sign Up">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

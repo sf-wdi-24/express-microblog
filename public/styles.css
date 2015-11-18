@@ -1,0 +1,66 @@
+body {
+	background-color: #756955;
+	background-image: url('microBlogBack.png');
+	font-family: 'Tillana', cursive;
+	color: #FFFFFF;
+	padding-top: 70px;
+}
+.menuBar {
+	background-color: rgb(82, 73, 56);
+	border-color: rgb(82, 73, 56);
+}
+.navBtn {
+	margin-left: 10px;
+	margin-top: 7px;
+}
+.blogTitle {
+	font-size: 60px;		
+	text-shadow: 5px 5px 2px #000000;
+}
+.newBlogTitle {
+	font-size: 45px;
+	background-color: #337AB7;
+	border: 2px solid #FFFFFF;
+	border-radius: 10px;
+	display: inline-block;
+	padding: 5px;
+}
+.newBlogTitle:hover {
+	background-color: #286090;
+	cursor: pointer;
+}
+.blog-content {
+	background-color: #524938;
+	border: 1px solid #FFFFFF;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 5px;
+}
+.mainBlogTitle {
+	font-size: 35px;
+	text-decoration: underline;
+}
+.blogPostContent {
+	font-size: 25px;
+}
+.category {
+	font-size: 20px;
+}
+.commentDiv {
+	background-color: #8c9093;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	padding: 5px;
+}
+.addComment {
+	margin-bottom: 20px;
+}
+.navText {
+	font-size: 30px;
+	display: inline-block;
+}
+.hacking {
+	border: 2px solid #000000;
+	border-radius: 50px;
+	width: 500px;
+}

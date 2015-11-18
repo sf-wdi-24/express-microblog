@@ -1,0 +1,31 @@
+{
+  "name": "express-microblog",
+  "version": "1.0.0",
+  "description": "**Objective:** Use Node, Express, and MongoDB to build a full-stack microblog application.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrockway/express-microblog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrockway/express-microblog/issues"
+  },
+  "homepage": "https://github.com/mrockway/express-microblog#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "cookie-parser": "^1.4.0",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "hbs": "^4.0.0",
+    "mongoose": "^4.2.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^3.1.0"
+  }
+}

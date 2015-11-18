@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profile Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles.css">
+	<link href='https://fonts.googleapis.com/css?family=Tillana' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+	{{> header }}
+	<div class="row">
+		<h2>Welcome to your page {{ user.username}}</h2>
+		{{#each user.posts}}
+			<small>{{ date }}</small>
+			<p class="category">Categoty: {{ category }}</p>
+			<h2 class="mainBlogTitle text-center">{{ title }}</h2>
+			<p class="blogPostContent">{{ blogContent }}</p>
+		{{/each}}
+		
+	</div>
+	
+</div>
+
+
+</body>
+</html>
