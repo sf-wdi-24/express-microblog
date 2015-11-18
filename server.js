@@ -52,6 +52,8 @@ app.get('/', function (req, res) {
 // show signup view
 app.get('/signup', function (req, res) {
   res.render('signup');
+
+  // if user is logged in, don't let them see signup view
 });
 
 // sign up new user, then log them in
@@ -64,11 +66,15 @@ app.post('/signup', function (req, res) {
       });
     }
   );
+
+  // if user is logged in, don't let them sign up again
 });
 
 // show login view
 app.get('/login', function (req, res) {
   res.render('login');
+
+  // if user is logged in, don't let them see login view
 });
 
 // log in user
