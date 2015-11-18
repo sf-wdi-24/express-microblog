@@ -43,6 +43,26 @@ mongoose.connect('mongodb://localhost/blogPost-app');
 var blogPost = require('./models/blogPost');
 var User = require('./models/user');
 
+
+
+// // Auth Routes
+// show signup view
+app.get('/signup', function (req, res) {
+  res.render('signup');
+});
+// // sign up new user, then log them in
+// hashes and salts password, saves new user to db
+app.post('/signup', function (req, res) {
+  User.register(new User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        res.send('signed up!!!');
+      });
+    }
+  );
+});
+
+
 // HOMEPAGE ROUTE
 
 app.get('/', function (req, res) {
@@ -52,11 +72,8 @@ app.get('/', function (req, res) {
 
 // API ROUTES
 
-// Auth Routes
-// show signup view
-app.get('/signup', function (req, res) {
-  res.render('signup');
-});
+
+
 
 
 // 
