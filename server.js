@@ -85,6 +85,8 @@ app.get('/logout', function (req, res) {
 // show user profile page
 app.get('/profile', function (req, res) {
   res.render('profile', { user: req.user });
+
+  // only show profile if user is logged in
 });
 
 
