@@ -102,7 +102,7 @@ $(function () {
 		});
 	});
 
-	$("li").click(function () {
+	$(".categories li").click(function () {
 		$("li").removeClass("active");
 		$(this).addClass("active");
 		var filterCategory = $(this).text().toLowerCase();
@@ -179,6 +179,37 @@ $(function () {
 				thisPost.comments.splice(commentIndex, 1);
 				render();
 			}
+		});
+	});
+
+	//edit comment
+	$postList.on("click", ".edit-comment", function (event) {
+		var id = $(this).attr("id").slice(4);
+		$("#edit-comment" + id).toggle();
+		var commentIndex;
+		var thisPost;
+		//loop to each post, and its comments to find tobe deleted comment id
+		//and find the id of post containing tobe deleted comment
+		allPosts.forEach(function (post) {
+			post.comments.forEach(function (comment) {
+				if (comment._id == id ) {
+					commentIndex = post.comments.indexOf(comment);
+					thisPost = post;
+				}
+			});
+		});
+		$("#edit-comment" + id).on("submit", function (event) {
+			event.preventDefault();
+			var editComment = $(this).serialize();
+			$.ajax({
+				type: "PUT",
+				url: baseUrl + "/" + thisPost._id + "/comments/" + id,
+				data: editComment,
+				success: function(data) {
+					thisPost.comments.splice(commentIndex, 1, data);
+					render();
+				}
+			});
 		});
 	});
 });

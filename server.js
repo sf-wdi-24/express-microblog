@@ -128,6 +128,17 @@ app.delete("/api/posts/:postId/comments/:commentId", function (req, res) {
 		});
 });
 
+//route to edit comment
+app.put("/api/posts/:postId/comments/:commentId", function (req, res) {
+	var commentId = req.params.commentId;
+		Comment.findOne({ _id: commentId}, function (err, foundComment) {
+			foundComment.text = req.body.text;
+			foundComment.save(function (err, editComment) {
+				res.json(editComment);
+			});
+		});
+});
+
 //AUTH ROUTES
 
 //show signup view
@@ -166,7 +177,8 @@ app.get("/login", function (req, res) {
 });
 //log in user
 app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.send('logged in!!!');
+  // res.send('logged in!!!');
+  res.redirect("/profile");
 });
 
 //logout user

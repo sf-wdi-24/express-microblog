@@ -1,24 +1,32 @@
-#header {
-	background: #35cd95; /* Old browsers */
-background: -moz-linear-gradient(left, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, #35cd95 0%,#46bebd 41%,#50b5d6 61%,#59adeb 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, #35cd95 0%,#46bebd 41%,#50b5d6 61%,#59adeb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	height: 100px;
+nav {
+	/*background-color: transparent !important;*/
+	background: #35cd95;
+	background: -webkit-linear-gradient(left, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%);
+	background: -o-linear-gradient(left, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%);
+	background: linear-gradient(to right, #35cd95 0%, #46bebd 41%, #50b5d6 61%, #59adeb 100%);
+	border: none !important;
+}
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+.image {
+	height : 200px;
+	background: url("images/StorypicTeller.png");
+	background-size: contain;
 }
 .col-sm-12 {
 	padding: 0;
 }
 #sub-title {
-	font-size: 30px;
+	font-size: 16px;
 }
 .edit-button, .delete-button {
 	float: right;
 }
 h1 {
-	padding-top: 15px;
-	margin: 0px;
+	margin: 0px 0px 0px 15px;
 	color: #f2f3f4;
-	font-size: 60px;
+	font-size: 25px;
 	font-family: 'Berkshire Swash', cursive;
 }
 h3 {
@@ -32,9 +40,12 @@ h4 {
 li {
 	font-size: 18px;
 }
-li:hover {
+.categories li:hover {
  cursor:pointer;
 }
 .comments {
 	margin-left: 30px;
+}
+.delete-comment, .edit-comment {
+	padding-right: 10px;
 }

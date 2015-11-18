@@ -16,15 +16,26 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="text-center" id="header">
-					<h1>MicroBlog
-						<span id="sub-title">Share Your Stories</span>
-					</h1>
-				</div>
+				<nav class="navbar navbar-inverse text-center">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#">
+								<h1>MicroBlog<span id="sub-title"> Share Your Stories</span></h1>
+							</a>
+						</div>
+						<div>
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+								<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<div class="image"></div>
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1 text-center">
-						<ul class="nav nav-tabs nav-justified">
-						  <li class="active"><a href="#" disabled>All Categories</a></li>
+						<ul class="nav nav-tabs nav-justified categories">
+						  <li class="active"><a href="#" disabled>All</a></li>
 						  <li><a href="#" disabled>Economy</a></li>
 						  <li><a href="#" disabled>Finances</a></li>
 						  <li><a href="#" disabled>News</a></li>
@@ -97,8 +108,17 @@
 															</div>
 													</form>
 													\{{#each comments}}
-														<div class="comments">
-															<h5>\{{text}}<span class="glyphicon glyphicon-remove pull-right delete-comment" aria-hidden="true" id="\{{_id}}"></h5>
+														<div class="comments">s
+															<h5>\{{text}}
+																<span class="glyphicon glyphicon-remove pull-right delete-comment" aria-hidden="true" id="\{{_id}}"></span>
+																<span class="glyphicon glyphicon-edit pull-right edit-comment" aria-hidden="true" id="edit\{{_id}}"></span>
+																<form hidden id="edit-comment\{{_id}}">
+																	<div class="form-group">
+																		<input type="text" class="form-control" name="text">
+																		<input type="submit" class="btn btn-default" value="Edit">
+																	</div>
+																</form>
+															</h5>
 															<hr>
 														</div>
 													\{{/each}}
