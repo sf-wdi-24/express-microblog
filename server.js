@@ -7,7 +7,7 @@ var express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    GithubStrategy = require('passport-github').Strategy,
+    GitHubStrategy = require('passport-github').Strategy,
     oauth = require('./oauth.js');
 
 // configure bodyParser (for receiving form data)
@@ -42,7 +42,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 // passport.deserializeUser(User.deserializeUser());
 
 // passport-github config
-passport.use(new GithubStrategy({
+passport.use(new GitHubStrategy({
   clientID: oauth.github.clientID,
   clientSecret: oauth.github.clientSecret,
   callbackURL: oauth.github.callbackURL
