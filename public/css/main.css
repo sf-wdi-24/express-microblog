@@ -13,6 +13,7 @@
 
 body {
 	background-color: cyan;
+    padding-top: 50px;
 }
 
 .editDrop {
@@ -62,6 +63,8 @@ body {
     font-family: 'ziamimiregular';
 }
 
+
+
 hr {
     border: 2px solid magenta;
     border-width: 50%;
@@ -99,4 +102,54 @@ p {
     color: white;
 }
 
+.navbar {
+    background-color: yellow;
+}
 
+.navlinks {
+    font-family: 'ziamimiregular';
+    font-size: 14px;
+    color: magenta;
+    padding-top: 15px;
+}
+
+.logo {
+    font-family: 'ziamimiregular';
+    font-size: 36px;
+    color: magenta;
+
+}
+
+a {
+    color: magenta;
+}
+
+a:hover {
+ color: darkmagenta;
+ text-decoration: none;
+}
+
+
+.commentRemove {
+    color: magenta;
+}
+
+.commentRemove:hover {
+    color: darkmagenta;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.formHead {
+    font-family: 'ziamimiregular';
+    color: yellow;
+    background-color: magenta;
+}
+
+.formBod {
+    background-color: yellow;
+    padding:20px;
+}

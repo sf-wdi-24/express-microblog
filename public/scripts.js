@@ -103,8 +103,8 @@ $(document).ready(function (){
 			}
 		});
 	});
-
-	$(document).on('click', '.glyphicon-remove', function (event) {
+// DELETE blogpost
+	$(document).on('click', '.blogpostRemove', function (event) {
 		event.preventDefault();
 		var postId = $(this).closest('.pull-left').attr('id');
 		console.log('DELETE ID', postId);
@@ -122,5 +122,36 @@ $(document).ready(function (){
 		});
 	});
 
+
+// DELETE comment 
+$(document).on('click', '.commentRemove', function (event) {
+	event.preventDefault();
+	var commentId = $(this).attr('id');
+
+	console.log('COMMENT ID', commentId);
+	var commentDeleteIndex;
+	var postContCom;
+
+	blogArr.forEach(function (post) {
+		post.comments.forEach(function (comment) {
+			if (comment._id == commentId) {
+				commentDeleteIndex = post.comments.indexOf(comment);
+				postContCom = post;
+			}
+		});
+	});
+	console.log(commentDeleteIndex);
+	
+
+	$.ajax({
+		type: 'DELETE',
+		url: '/api/posts/' + postContCom._id + '/comments/' + commentId,
+		success: function (data) {
+			postContCom.comments.splice(commentDeleteIndex, 1);
+			addBlogpost();
+		}
+	});
+	//console.log("Comment Delete", commentToDelete);
+});
 
 });

@@ -13,20 +13,25 @@
 	<title>Sign Up</title>
 </head>
 <body>
-
-	<h2>Sign Up!</h2>
-	<br>
-	<form method ="POST" action="/signup">
-		<div class="form-group">
-			<input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-		</div>
-		<div class="form-group">
-			<input type="password" name="password" class="form-control" placeholder="Password">
-		</div>
-		<div class="form-group">
-			<input type="submit" class="btn btn-block btn-primary" value="Sign Up">
-		</div>
-	</form>
+	<div class="row text-center">
+		<h2 class="col-md-3 col-centered formHead">Sign Up!</h2>
+		<br>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-centered formBod">
+			<form method ="POST" action="/signup">
+				<div class="form-group">
+					<input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" class="form-control" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-block btn-primary" value="Sign Up">
+				</div>
+			</form>
+		</div>	
+	</div>	
 
 		<!-- jquery -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
@@ -34,8 +39,6 @@
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<!-- handlebars -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
-	<!-- custom script -->
-	<script type="text/javascript" src="scripts.js"></script>
 
 </body>
 </html>

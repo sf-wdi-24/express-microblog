@@ -105,6 +105,13 @@ app.post('/api/posts/:postId/comments', function (req, res) {
 	});
 });
 
+app.delete('/api/posts/:postId/comments/:commentId', function (req, res){
+	var commentId = req.params.commentId;
+	Comment.findOneAndRemove({_id: commentId}, function (err, deletedComment){
+		res.json(deletedComment);
+	});
+});
+
 
 // AUTH ROUTES
 
@@ -117,7 +124,7 @@ app.post('/signup', function (req, res) {
 	User.register(new User({ username : req.body.username}), req.body.password,
 		function (err, newUser){
 			passport.authenticate('local')(req, res, function() {
-				res.send('Signed up!');
+				res.redirect('/profile');
 			});
 		});
 });
@@ -130,13 +137,18 @@ app.get('/login', function (req, res){
 });
 
 app.post('/login', passport.authenticate('local'), function (req, res){
-	res.send('Logged in!');
+	res.redirect('/profile');
 });
 
 // Log out user
 app.get('/logout', function (req, res){
 	req.logout();
 	res.redirect('/');
+});
+
+// Rendering profile.hbs to /profile
+app.get('/profile', function (req, res){
+	res.render('profile', { user: req.user });
 });
 
 // Server listening?
