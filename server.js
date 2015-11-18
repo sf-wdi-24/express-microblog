@@ -131,7 +131,6 @@ app.delete("/api/posts/:postId/comments/:commentId", function (req, res) {
 //AUTH ROUTES
 
 //show signup view
-
 app.get("/signup", function (req, res) {
 	res.render("signup");
 });
@@ -159,6 +158,14 @@ app.post('/signup', function (req, res) {
   );
 });
 
+//show login view
+app.get("/login", function (req, res) {
+	res.render("login");
+});
+//log in user
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  res.send('logged in!!!');
+});
 
 //listen to port 3000
 var server = app.listen(process.env.PORT || 3000, function () {
