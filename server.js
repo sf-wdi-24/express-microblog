@@ -51,39 +51,24 @@ app.get('/', function (req, res) {
 
 // show signup view
 app.get('/signup', function (req, res) {
-  // if user is logged in, don't let them sign up again
-  if (req.user) {
-    res.redirect('/profile');
-  } else {
-    res.render('signup');
-  }
+  res.render('signup');
 });
 
 // sign up new user, then log them in
 // hashes and salts password, saves new user to db
 app.post('/signup', function (req, res) {
-  // if user is logged in, don't let them sign up again
-  if (req.user) {
-    res.redirect('/profile');
-  } else {
-    User.register(new User({ username: req.body.username }), req.body.password,
-      function (err, newUser) {
-        passport.authenticate('local')(req, res, function () {
-          res.redirect('/profile');
-        });
-      }
-    );
-  }
+  User.register(new User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function () {
+        res.redirect('/profile');
+      });
+    }
+  );
 });
 
 // show login view
 app.get('/login', function (req, res) {
-  // if user is logged in, don't let them sign up again
-  if (req.user) {
-    res.redirect('/profile');
-  } else {
-    res.render('login');
-  }
+  res.render('login');
 });
 
 // log in user
@@ -99,12 +84,7 @@ app.get('/logout', function (req, res) {
 
 // show user profile page
 app.get('/profile', function (req, res) {
-  // only show profile if user is logged in
-  if (req.user) {
-    res.render('profile', { user: req.user });
-  } else {
-    res.redirect('/login');
-  }
+  res.render('profile', { user: req.user });
 });
 
 
