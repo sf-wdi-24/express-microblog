@@ -7,7 +7,9 @@ var BlogSchema = new Schema({
 	category: {type: String},
 	blogContent: {type: String},
 	likes: {type: Number},
-	comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
+	date: {type: String},
+	comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
+	user: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 var Blog = mongoose.model('Blog', BlogSchema);

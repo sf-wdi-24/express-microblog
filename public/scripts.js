@@ -19,6 +19,7 @@ $(function(){
 	//populate website with blog postings
 	$.get('/api/blogs', function(data) {
 		allBlogs = data.blogs;
+		allBlogs.reverse();
 		var blogHtml = template({blogs: allBlogs});
 		$('.insertContainer').append(blogHtml);
 	});
@@ -29,6 +30,7 @@ $(function(){
 		var blogData = $(this).serialize();
 		console.log(blogData);
 		$.post('/api/blogs/', blogData, function(data) {
+			data.date = new Date();
 			allBlogs.push(data);
 			render();
 			$('.newBlog').each(function(){
@@ -46,7 +48,7 @@ $(function(){
 		var commentAdd = $(this).serialize();
 		$.post('api/blogs/'+blogId+'/comments/', commentAdd, function(data) {
 			render();
-		});
+			});
 		});
 	
 
@@ -69,16 +71,33 @@ $(function(){
 		});
 	});
 
- //update comment
-	// $('.insertContainer').on('submit', '.editCommentForm', function(event) {
-	// 	event.preventDefault();
-	// 	var blogId = $(this).closest('.blog-content').attr('data-id');
-	// 	var commentId = 
-	// 	$.ajax({
-	// 			type: 'PUT',
-	// 			url: '/api/blogs/:id/comments/:comment-id'
-	// 	});
-	// });
+ //delete comment
+	$('.insertContainer').on('click', '.deleteEditedComment', function(event) {
+		event.preventDefault();
+		var commentId = $(this).attr('data-id');
+		var blogId = $(this).closest('.blog-content').attr('data-id');
+		console.log('commentid',commentId);
+		console.log('blogid', blogId);
+		// var commentBlog;
+		// var commentIndex;
+		// allBlogs.forEach(function (blog) {
+		// 	blog.comments.forEach(function (comment) {
+		// 		if (commentId === comment._id) {
+		// 			commentIndex = blog.comments.indexOf(comment);
+		// 			commentBlog = blog;
+		// 			console.log('blogid',commentBlog._id);
+		// 		}
+		// 	});
+		// });
+		console.log('outside',commentId);
+		$.ajax({
+				type: 'DELETE',
+				url: '/api/blogs/'+blogId+'/comments/'+commentId,
+				success: function(data) {
+					render();
+				} 
+		});
+	});
 
 //delete blog posting
 $('.insertContainer').on('click', '.delete', function(event){

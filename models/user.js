@@ -4,7 +4,9 @@ var mongoose = require('mongoose'),
 
 var userSchema = new Schema({
 	username: String,
-	password: String
+	password: String,
+	posts: [{type: Schema.Types.ObjectId, ref: 'Blog'}],
+
 });
 
 userSchema.plugin(passportLocalMongoose);

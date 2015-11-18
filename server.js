@@ -43,7 +43,7 @@ app.set('view engine','hbs');
 
 //client home page
 app.get('/', function (req,res) {
-	res.render('index');
+	res.render('index',{ user: req.user });
 });
 
 //gather blogs data from server
@@ -84,7 +84,7 @@ app.put('/api/blogs/:id', function (req,res) {
 		updatedBlog.title = req.body.title;
 		updatedBlog.category = req.body.category;
 		updatedBlog.blogContent = req.body.blogContent;
-		updatedBlog.comments = req.body.comments;
+		// updatedBlog.comments = req.body.comments;
 		updatedBlog.save(function (err, newUpdatedBlog) {
 			res.json(newUpdatedBlog);
 		});
@@ -111,7 +111,7 @@ app.post('/api/blogs/:id/comments/', function (req,res){
 	});
 });
 
-//update individual comment
+//update individual comment not working :(
 // app.put('/api/blogs/:id/comments/:comment-id', function(req,res){
 // 	var blogId = req.params.id;
 // 	var commentId = req.params.comment-id;
@@ -123,6 +123,13 @@ app.post('/api/blogs/:id/comments/', function (req,res){
 // 	});
 // });
 
+//delete comment
+app.delete("/api/blogs/:blogId/comments/:commentId", function (req, res) {
+	var commentId = req.params.commentId;
+		Comment.findOneAndRemove({ _id: commentId}, function (err, deleteComment) {
+			res.json(deleteComment);
+		});
+});
 
 //signin GET route for new users
 app.get('/signup', function (req,res) {
@@ -134,7 +141,7 @@ app.post('/signup', function (req,res) {
 	User.register(new User({ username: req.body.username}), req.body.password, 
 		function (err, newUser) { 
 		passport.authenticate('local')(req,res, function(){
-			res.redirect('/profile');
+			res.redirect('/');
 		});
 	});
 });
@@ -145,8 +152,16 @@ app.get('/login', function (req,res) {
 });
 
 //post route for login user
-app.post('/login', passport.authenticate('local'), function (req,res) {
-	res.redirect('/profile');
+app.post('/login', passport.authenticate('local', 
+	{ successRedirect: '/',
+		failureRedirect: '/hackers'}),
+		 function (req,res) {
+	res.redirect('/');
+});
+
+//unseccessful login
+app.get('/hackers', function (req,res) {
+	res.render('hackers');
 });
 
 //log out user

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles.css">
+	<link href='https://fonts.googleapis.com/css?family=Tillana' rel='stylesheet' type='text/css'>
+</head>	
+<body>
+	<div class="container">
+		<nav class="menuBar navbar navbar-default navbar-fixed-top">
+			<div class=" container text-center">
+				{{#if user}}
+				<p class="navText">Welcome {{user.username}}</p>
+				<a href="/logout"><button class="navBtn logoutButton btn btn-primary pull-right">Logout</button></a>
+				{{else}}
+				<p class="navText">Please sign in for a personal experience</p>
+				<a href="/signup"><button class="navBtn signUpButton btn btn-primary pull-right">Sign Up</button></a>
+				<a href="/login"><button class="navBtn loginButton btn btn-primary pull-right">Log In</button></a>
+				<a href="/"><button class="navBtn homeButton btn btn-primary pull-right"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button></a>
+				{{/if}}
+			</div>
+		</nav>
+	</div>
+	<div class="row">
+		<div class="hackers text-center col-md-8 col-md-offset-2">
+			<h1>QUIT TRYING TO HACK THIS AWESOME BLOG<h1>
+			<img class="hacking" src="hacking.png">
+		</div>
+	</div>
+<body>
+	
+</body>
+</html>

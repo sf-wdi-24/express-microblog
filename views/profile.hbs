@@ -3,9 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Profile Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles.css">
+	<link href='https://fonts.googleapis.com/css?family=Tillana' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<h2>Welcome, {{ user.username }}, to the greatest blogging website!</h2>
-	<p>Here is your profile page</p>
+<div class="container">
+	<nav class="menuBar navbar navbar-default navbar-fixed-top">
+		<div class="navContainer">
+			<p class="navText text-center">Welcome {{ user.username }}</p>
+			<a href="/"><button class="navBtn homeButton btn btn-primary pull-right"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button></a>
+			<a href="/logout"><button class="navBtn logoutButton btn btn-primary pull-right">Log Out</button></a>
+		</div>
+	</nav>
+	<div class="row">
+	
+		
+	</div>
+	
+</div>
+
+
 </body>
 </html>
