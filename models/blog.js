@@ -9,7 +9,7 @@ var BlogSchema = new Schema({
 	likes: {type: Number},
 	date: {type: String},
 	comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-	user: [{type: Schema.Types.ObjectId, ref: 'User'}]
+	postedBy: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 });
 
 var Blog = mongoose.model('Blog', BlogSchema);

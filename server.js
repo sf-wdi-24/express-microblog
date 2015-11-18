@@ -48,7 +48,7 @@ app.get('/', function (req,res) {
 
 //gather blogs data from server
 app.get('/api/blogs', function (req,res) {
-	Blog.find().populate('comments').exec(function (err , allBlogs) {
+	Blog.find().populate('comments').populate('postedBy').exec(function (err , allBlogs) {
 		res.json({blogs: allBlogs});
 	});
 });
@@ -63,7 +63,8 @@ app.get('/api/blogs/:id', function (req,res) {
 
 //create new blog posting
 app.post('/api/blogs', function (req, res) {
-	var newBlog = new Blog(req.body);
+	var newBlog = new Blog(req.body, req.user);
+	newBlog.postedBy = (req.user._id);
 	newBlog.save(function(err, savedBlog){
 		res.json(savedBlog);
 	});
@@ -103,7 +104,8 @@ app.put('/api/blogs/:id', function (req,res) {
 app.post('/api/blogs/:id/comments/', function (req,res){
 	var blogId = req.params.id;
 	Blog.findOne({_id: blogId}, function(err, foundBlog){
-		var newComment = new Comment (req.body);
+		var newComment = new Comment (req.body, req.user);
+		newComment.commentedBy = req.user;
 		newComment.save();
 		foundBlog.comments.push(newComment);
 		foundBlog.save();

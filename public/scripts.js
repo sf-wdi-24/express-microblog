@@ -28,7 +28,6 @@ $(function(){
 	$('.newBlog').on('submit',function(event) {
 		event.preventDefault();
 		var blogData = $(this).serialize();
-		console.log(blogData);
 		$.post('/api/blogs/', blogData, function(data) {
 			data.date = new Date();
 			allBlogs.push(data);
