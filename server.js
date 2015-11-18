@@ -52,6 +52,13 @@ app.get('/', function (req, res) {
 
 // API ROUTES
 
+// Auth Routes
+// show signup view
+app.get('/signup', function (req, res) {
+  res.render('signup');
+});
+
+
 // 
 // Read all blogsPosts from server
 app.get('/api/blogPosts', function (req, res) {
