@@ -16,11 +16,38 @@
 		</head>
 		
 		<body>
-			<ol class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Photos</a></li>
-				<li><a href="#">Contact</li>
-			</ol>
+		        <nav id="whee" class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="/signup"><a href="#">Sign Up<span class="sr-only">(current)</span></a></li>
+                        <li><a href="/login">Log In</a></li>
+                    </ul>
+                
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                
+                    </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+			
+
+
 			<div class="container">
 				<h1>Micro-Blog</h1>
 				<p>A place to share thoughts, ideas, and whatever else may be on your mind...
@@ -43,9 +70,8 @@
 					<ul id="posts-list">
 						<script id="posts-template" type="text/x-handlebars-template">
 						\{{#each posts}}
-
 						<li class="list-group-item post" data-id="\{{_id}}"><strong>\{{title}}</strong><br>
-														
+													
 						\{{story}}</li>
 						
 						
@@ -72,9 +98,10 @@
 								<input type="submit" class="btn btn-block btn-default" value="update">
 							</div>
 						</form>
+
 						
-						
-                        \{{#each comments}}
+
+						   \{{#each comments}}
                         <li>\{{text}}</li>
                         \{{/each}}
 
@@ -90,7 +117,7 @@
 						
 						
 						
-						
+
 
 
 						\{{/each}}
@@ -112,8 +139,13 @@
 				</div>
 			</div>
 			
+
 			
+
 			
+
+
+
 			<!-- jquery -->
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 			<!-- bootsrap js -->

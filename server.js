@@ -10,7 +10,9 @@ var Post = require('./models/post'); //collection name posts is always plural
 
 
 app.use(express.static('public'));
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
+
 
 //configuring for bodyparser
 app.use(bodyParser.urlencoded({
