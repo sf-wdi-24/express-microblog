@@ -39,8 +39,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.set("view engine", "hbs");
 app.use(express.static("public"));
-
-
+hbs.registerPartials(__dirname + "/views/partials");
 
 app.get("/", function(req, res) {
 	res.render("index", {
@@ -66,6 +65,7 @@ app.post("/api/posts", function(req, res) {
 		//create new post from form data
 		var newPost = new Post(req.body);
 		newPost.like = false;
+		newPost.author = req.user._id;
 		newPost.time = (new Date()).toDateString();
 		//save newPost in db
 		newPost.save(function (err, newPost) {
@@ -215,9 +215,7 @@ app.get("/logout", function(req, res) {
 app.get("/profile", function(req, res) {
 	//only show profile if user login
 	if (req.user) {
-		res.render("profile", {
-			user: req.user
-		});
+		res.render("profile", { user: req.user});
 	} else {
 		res.redirect("/login");
 	}

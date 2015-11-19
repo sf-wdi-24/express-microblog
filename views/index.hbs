@@ -19,7 +19,7 @@
 				<nav class="navbar navbar-inverse text-center">
 					<div class="container-fluid">
 						<div class="navbar-header">
-							<a class="navbar-brand" href="#">
+							<a class="navbar-brand" href="/">
 								<h1>MicroBlog<span id="sub-title"> Share Your Stories</span></h1>
 							</a>
 						</div>
@@ -80,7 +80,7 @@
 											</div>
 											<div class="col-xs-10">
 													<h4>\{{description}}</h4>
-													<h5><i> Posted: \{{time}} (\{{category}})</i></h5>
+													<h5><i> Posted: {{user.username}} {{time}} (\{{category}})</i></h5>
 													<button type="button" class="btn \{{#if like}}btn-info\{{else}}btn-default\{{/if}} like-button" aria-label="Left Align" id="like\{{_id}}">
 													<span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true">Like
 													</span>
@@ -97,6 +97,7 @@
 													<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
 													</span>
 													</button>
+
 													<form hidden id="comment-form\{{_id}}">
 														<div class="form-group">
 															<input type="text" class="form-control" name="text">

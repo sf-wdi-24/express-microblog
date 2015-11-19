@@ -12,7 +12,9 @@ var UserSchema = new Schema({
 	}]
 });
 
-UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(passportLocalMongoose , {
+	populateFields: "posts"
+});
 
 var User = mongoose.model("User", UserSchema);
 module.exports = User;
