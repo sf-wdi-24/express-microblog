@@ -13,7 +13,6 @@ $(function () {
 	}
 
 	$.get(baseUrl, function (data) {
-		console.log(data.posts);
 		allPosts = data.posts.reverse(); //to post newest first
 		render();
 	});
@@ -31,6 +30,7 @@ $(function () {
 		newPost.like = false;
 		newPost.time = (new Date()).toDateString();
 		$.post(baseUrl, newPost, function (data) {
+			console.log(data);
 			allPosts.unshift(data);
 			render();
 		});
@@ -106,7 +106,6 @@ $(function () {
 		$("li").removeClass("active");
 		$(this).addClass("active");
 		var filterCategory = $(this).text().toLowerCase();
-		console.log(filterCategory);
 		foundCategoryPosts = [];
 		if (filterCategory == "all categories") {
 			foundCategoryPosts = allPosts;
@@ -158,7 +157,6 @@ $(function () {
 	//delete comment
 	$postList.on("click", ".delete-comment", function (event) {
 		var id = $(this).attr("id");
-		console.log(id);
 		var commentIndex;
 		var thisPost;
 		//loop to each post, and its comments to find tobe deleted comment id

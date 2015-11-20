@@ -50,7 +50,7 @@ app.get("/", function(req, res) {
 //set up posts api
 app.get("/api/posts", function(req, res) {
 	Post.find()
-		.populate("comments")
+		.populate("comments").populate("author") //need to convert the id into object
 		.exec(function(err, allPosts) {
 			res.json({
 				posts: allPosts
@@ -63,7 +63,7 @@ app.post("/api/posts", function(req, res) {
 	//only allow user to post
 	if (req.user) {
 		//create new post from form data
-		var newPost = new Post(req.body);
+		var newPost = new Post(req.body, req.user);
 		newPost.like = false;
 		newPost.author = req.user._id;
 		newPost.time = (new Date()).toDateString();
@@ -112,14 +112,26 @@ app.put("/api/posts/:id", function(req, res) {
 });
 
 app.delete("/api/posts/:id", function(req, res) {
-	//get id
-	var id = req.params.id;
-	//remove the post with that id
-	Post.findOneAndRemove({
-		_id: id
-	}, function(err, deletedPost) {
-		res.json(deletedPost);
-	});
+	if (req.user) {
+		//get id
+		var id = req.params.id;
+		//remove post id in user posts referencing
+		User.findOne({ _id: req.user._id}, function (err, foundUser) {
+			var userPosts = foundUser.posts;
+			//if post id about to delete match user created post id, allow to delete
+			//if not, can't delete. user can't delete other user's post
+			if (userPosts.indexOf(id) > -1) {
+				//remove the post with that id
+				Post.findOneAndRemove({
+					_id: id
+				}, function(err, deletedPost) {
+					res.json(deletedPost);
+				});
+				userPosts.splice(userPosts.indexOf(id), 1);
+				foundUser.save();
+			}
+		});
+	}
 });
 
 //route to create new comment 
