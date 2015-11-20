@@ -164,15 +164,18 @@ app.post("/api/posts/:postId/comments", function(req, res) {
 	}
 });
 
-//route to delete comment
+//route to delete comment (user can delete any comments tied to his posts)
 app.delete("/api/posts/:postId/comments/:commentId", function(req, res) {
 	if (req.user) {
 		var commentId = req.params.commentId;
+		var postId = req.params.postId;
 		//find current user is about to delete comment
 		User.findOne({ _id: req.user._id}, function (err, foundUser) {
 			var userComments = foundUser.comments;
-			//check if user made that comment, delete if so
-			if (userComments.indexOf(commentId) > -1) {
+			var userPosts = foundUser.posts;
+			//if comment is tied with user's post, allow to delete
+			if (userPosts.indexOf(postId) > -1) {
+				console.log(userComments);
 				Comment.findOneAndRemove({ _id: commentId}, function (err, deleteComment) {
 					res.json(deleteComment);
 				});
@@ -186,15 +189,22 @@ app.delete("/api/posts/:postId/comments/:commentId", function(req, res) {
 
 //route to edit comment
 app.put("/api/posts/:postId/comments/:commentId", function(req, res) {
-	var commentId = req.params.commentId;
-	Comment.findOne({
-		_id: commentId
-	}, function(err, foundComment) {
-		foundComment.text = req.body.text;
-		foundComment.save(function(err, editComment) {
-			res.json(editComment);
+	if (req.user) {
+		var commentId = req.params.commentId;
+		//find current user is about to edit comment
+		User.findOne({ _id: req.user._id}, function (err, foundUser) {
+			var userComments = foundUser.comments;
+			//check if user made that comment, edit if so
+			if (userComments.indexOf(commentId) > -1) {
+				Comment.findOne({ _id: commentId}, function (err, foundComment) {
+					foundComment.text = req.body.text;
+					foundComment.save(function(err, editComment) {
+						res.json(editComment);
+					});
+				});
+			}
 		});
-	});
+	}
 });
 
 //AUTH ROUTES
