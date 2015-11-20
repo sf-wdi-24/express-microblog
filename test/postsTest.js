@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 var request = require('request'),
     expect = require('chai').expect,
     baseUrl = 'http://localhost:3000';
@@ -17,8 +15,8 @@ describe('Posts', function() {
       {
         url: baseUrl + '/api/posts',
         form: {
-          task: 'Walk Dog',
-          description: 'Take Fluffy for a walk'
+          title: 'Hello World',
+          description: 'A post about saying hello.'
         }
       },
       function(error, response, body) {
@@ -47,8 +45,8 @@ describe('Posts', function() {
         {
           url: baseUrl + '/api/posts/' + singlePost._id,
           form: {
-            task: 'Walk Dog',
-            description: 'Take Spot for a walk'
+            title: 'Goodbye',
+            description: 'A post about saying goodbye.'
           }
         },
         function (error, response, body) {
