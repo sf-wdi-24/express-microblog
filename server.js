@@ -92,30 +92,40 @@ app.get("/api/posts/:id", function(req, res) {
 });
 
 app.put("/api/posts/:id", function(req, res) {
-	// get id
-	var id = req.params.id;
-	// find post by id
-	Post.findOne({
-		_id: id
-	}, function(err, foundPost) {
-		//assign new value to foundPost
-		foundPost.title = req.body.title;
-		foundPost.description = req.body.description;
-		foundPost.like = req.body.like;
-		foundPost.time = req.body.time;
-		foundPost.category = req.body.category;
-		//save edited foundPost to db
-		foundPost.save(function(err, editedPost) {
-			res.json(editedPost);
+	if (req.user) {
+		// get id of post to be edit
+		var id = req.params.id;
+		//find current user who is about to edit post
+		User.findOne({ _id: req.user._id}, function (err, foundUser) {
+			var userPosts = foundUser.posts;
+			//if post id about to edit match user created post id, allow to edit
+			//if not, can't edit. user can't edit other user's post
+			if (userPosts.indexOf(id) > -1) {
+				// find post by id
+				Post.findOne({
+					_id: id
+				}, function(err, foundPost) {
+					//assign new value to foundPost
+					foundPost.title = req.body.title;
+					foundPost.description = req.body.description;
+					foundPost.like = req.body.like;
+					foundPost.time = req.body.time;
+					foundPost.category = req.body.category;
+					//save edited foundPost to db
+					foundPost.save(function(err, editedPost) {
+						res.json(editedPost);
+					});
+				});
+			}
 		});
-	});
+	}
 });
 
 app.delete("/api/posts/:id", function(req, res) {
 	if (req.user) {
-		//get id
+		//get id of post to be deleted
 		var id = req.params.id;
-		//remove post id in user posts referencing
+		//find current user who is about to delete post
 		User.findOne({ _id: req.user._id}, function (err, foundUser) {
 			var userPosts = foundUser.posts;
 			//if post id about to delete match user created post id, allow to delete
@@ -127,6 +137,7 @@ app.delete("/api/posts/:id", function(req, res) {
 				}, function(err, deletedPost) {
 					res.json(deletedPost);
 				});
+				//delete post Id in users post referencing
 				userPosts.splice(userPosts.indexOf(id), 1);
 				foundUser.save();
 			}
@@ -137,7 +148,6 @@ app.delete("/api/posts/:id", function(req, res) {
 //route to create new comment 
 app.post("/api/posts/:postId/comments", function(req, res) {
 	var postId = req.params.postId;
-
 	Post.findOne({
 		_id: postId
 	}, function(err, foundPost) {
