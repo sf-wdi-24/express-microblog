@@ -8,8 +8,11 @@ $(function () {
 	function render() {
 		$postList.empty();
 		$("form").find("input[name='title'], input[name='category'], textarea[name='description']").val("");
-		var postsHtml = template({ posts: allPosts});
-		$postList.append(postsHtml);
+		$.get(baseUrl, function (data) {
+			allPosts = data.posts.reverse();
+			var postsHtml = template({ posts: allPosts});
+			$postList.append(postsHtml);
+		});
 	}
 
 	$.get(baseUrl, function (data) {

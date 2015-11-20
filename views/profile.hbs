@@ -1,9 +1,10 @@
 {{> header}}
-	<div class="container text-center">
-		<h2>Hello, {{user.username}}</h2>
-		<p>This is your profile.</p>
-		{{#each user.posts}}
-			{{#if title}}
+	<div class="container">
+		<div class="text-center">
+			<h2>Hello, {{user.username}}</h2>
+		</div>
+		{{#if user.posts}}
+			{{#each user.posts}}
 				<div class="row">
 					<div class="col-xs-12">
 						<h3>{{title}}</h3>
@@ -14,11 +15,14 @@
 					</div>
 					<div class="col-xs-10">
 						<h4>{{description}}</h4>
+						<h5><i> Posted: {{author.username}} {{time}} ({{category}})</i></h5>
 					</div>
 				</div>
 				<hr>
-			{{/if}}
-		{{/each}}
+			{{/each}}
+		{{else}}
+			<h3 class="text-center">You haven't posted any stories.</h3>
+		{{/if}}
 	</div>
 </body>
 </html>

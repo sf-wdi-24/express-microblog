@@ -147,27 +147,41 @@ app.delete("/api/posts/:id", function(req, res) {
 
 //route to create new comment 
 app.post("/api/posts/:postId/comments", function(req, res) {
-	var postId = req.params.postId;
-	Post.findOne({
-		_id: postId
-	}, function(err, foundPost) {
-		var newComment = new Comment(req.body);
-
-		newComment.save();
-		foundPost.comments.push(newComment);
-		foundPost.save();
-		res.json(newComment);
-	});
+	if (req.user) {
+		var postId = req.params.postId;
+		Post.findOne({
+			_id: postId
+		}, function(err, foundPost) {
+			var newComment = new Comment(req.body);
+			newComment.save();
+			foundPost.comments.push(newComment);
+			foundPost.save();
+			//insert comment id to user comments referencing, then save user
+			req.user.comments.push(newComment);
+			req.user.save();
+			res.json(newComment);
+		});
+	}
 });
 
 //route to delete comment
 app.delete("/api/posts/:postId/comments/:commentId", function(req, res) {
-	var commentId = req.params.commentId;
-	Comment.findOneAndRemove({
-		_id: commentId
-	}, function(err, deleteComment) {
-		res.json(deleteComment);
-	});
+	if (req.user) {
+		var commentId = req.params.commentId;
+		//find current user is about to delete comment
+		User.findOne({ _id: req.user._id}, function (err, foundUser) {
+			var userComments = foundUser.comments;
+			//check if user made that comment, delete if so
+			if (userComments.indexOf(commentId) > -1) {
+				Comment.findOneAndRemove({ _id: commentId}, function (err, deleteComment) {
+					res.json(deleteComment);
+				});
+				//remove comment id referencing in user comments, then save user
+				userComments.splice(userComments.indexOf(commentId), 1);
+				foundUser.save();
+			}
+		});
+	}
 });
 
 //route to edit comment
