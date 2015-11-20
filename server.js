@@ -6,6 +6,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
+    flash = require('express-flash'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     GitHubStrategy = require('passport-github').Strategy,
@@ -37,6 +38,9 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// send flash messages
+app.use(flash());
 
 // passport config
 passport.use(new LocalStrategy(User.authenticate()));
@@ -81,7 +85,7 @@ app.get('/signup', function (req, res) {
   if (req.user) {
     res.redirect('/profile');
   } else {
-    res.render('signup', { user: req.user });
+    res.render('signup', { user: req.user, errorMessage: req.flash('signupError') });
   }
 });
 
@@ -94,9 +98,15 @@ app.post('/signup', function (req, res) {
   } else {
     User.register(new User({ username: req.body.username }), req.body.password,
       function (err, newUser) {
-        passport.authenticate('local')(req, res, function () {
-          res.redirect('/profile');
-        });
+        if (err) {
+          // res.send(err);
+          req.flash('signupError', err.message);
+          res.redirect('/signup');
+        } else {
+          passport.authenticate('local')(req, res, function () {
+            res.redirect('/profile');
+          });
+        }
       }
     );
   }

@@ -46,3 +46,9 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
+  {{#if errorMessage}}
+    <div class="alert alert-danger">
+      <div class="container">{{errorMessage}}</div>
+    </div>
+  {{/if}}

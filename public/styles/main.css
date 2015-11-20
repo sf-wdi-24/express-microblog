@@ -15,3 +15,6 @@ h1, h2 {
   color: #000;
   opacity: 0.5;
 }
+label.error {
+  color: red;
+}
