@@ -30,8 +30,6 @@ $(function () {
 		newPost = newPost.replace(/&category=.+&/g, function(x) {
 			return x.slice(0,10) + x.slice(10, x.length-1).toLowerCase() + x.slice(-1);
 		});
-		newPost.like = false;
-		newPost.time = (new Date()).toDateString();
 		$.post(baseUrl, newPost, function (data) {
 			console.log(data);
 			allPosts.unshift(data);
@@ -54,7 +52,7 @@ $(function () {
 			editedPost = editedPost.replace(/&category=.+&/g, function(x) {
 			return x.slice(0,10) + x.slice(10, x.length-1).toLowerCase() + x.slice(-1);
 		});
-			editedPost= editedPost + "&like=" + allPosts[editPostIndex].like.toString() + "&time=" + allPosts[editPostIndex].time;
+			editedPost= editedPost + "&time=" + allPosts[editPostIndex].time;
 			event.preventDefault();
 			$.ajax({
 				type: "PUT",
@@ -88,29 +86,12 @@ $(function () {
 		});
 	});
 
-	$postList.on("click", ".like-button", function (event) {
-		var id = $(this).attr("id").slice(4);
-		$("#like" + id).toggleClass("btn-default").toggleClass("btn-info");
-		var likePost = allPosts.filter(function (post) {
-			return post._id == id;
-		})[0];
-		likePost = "title=" + likePost.title + "&description=" + likePost.description + "&like=" + (!likePost.like) + "&time=" + likePost.time + "&category=" + likePost.category;
-		$.ajax({
-			type: "PUT",
-			url: baseUrl + "/" + id,
-			data: likePost,
-			success: function(data) {
-				allPosts.splice(allPosts.indexOf(likePost), 1, data);
-			}
-		});
-	});
-
 	$(".categories li").click(function () {
 		$("li").removeClass("active");
 		$(this).addClass("active");
 		var filterCategory = $(this).text().toLowerCase();
 		foundCategoryPosts = [];
-		if (filterCategory == "all categories") {
+		if (filterCategory == "all") {
 			foundCategoryPosts = allPosts;
 		}
 		allPosts.forEach(function (post) {

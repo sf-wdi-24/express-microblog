@@ -64,7 +64,6 @@ app.post("/api/posts", function(req, res) {
 	if (req.user) {
 		//create new post from form data
 		var newPost = new Post(req.body, req.user);
-		newPost.like = false;
 		newPost.author = req.user._id;
 		newPost.time = (new Date()).toDateString();
 		//save newPost in db
@@ -108,7 +107,6 @@ app.put("/api/posts/:id", function(req, res) {
 					//assign new value to foundPost
 					foundPost.title = req.body.title;
 					foundPost.description = req.body.description;
-					foundPost.like = req.body.like;
 					foundPost.time = req.body.time;
 					foundPost.category = req.body.category;
 					//save edited foundPost to db

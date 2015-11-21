@@ -4,7 +4,6 @@ var mongoose = require("mongoose"),
 var PostSchema = new Schema({
 	title: String,
 	description: String,
-	like: Boolean,
 	time: String,
 	category: String,
 	comments: [{

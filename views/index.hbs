@@ -45,7 +45,7 @@
 						  <li><a href="#" disabled>Finances</a></li>
 						  <li><a href="#" disabled>News</a></li>
 						  <li><a href="#" disabled>Sports</a></li>
-						  <li><a href="#" disabled>Finances</a></li>
+						  <li><a href="#" disabled>Sciences</a></li>
 						  <li><a href="#" disabled>More</a></li>
 						</ul>
 					</div>
@@ -53,7 +53,9 @@
 				<br>
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2">
-						<button type="button" class="btn btn-info btn-block" id="new-story">New Story</button>
+						{{#if user}}
+							<button type="button" class="btn btn-info btn-block" id="new-story">New Story</button>
+						{{/if}}
 						<form class="form" id="new-post" hidden>
 							<div class="form-group">
 								<input type="text" class="form-control" name="title" placeholder="Title">
@@ -64,7 +66,6 @@
 						</form>
 					</div>
 				</div>
-				<hr>
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
 						<div id="posts-list">
@@ -81,23 +82,20 @@
 											<div class="col-xs-10">
 													<h4>\{{description}}</h4>
 													<h5><i> Posted: \{{author.username}} \{{time}} (\{{category}})</i></h5>
-													<button type="button" class="btn \{{#if like}}btn-info\{{else}}btn-default\{{/if}} like-button" aria-label="Left Align" id="like\{{_id}}">
-													<span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true">Like
-													</span>
-													</button>
-													<button type="button" class="btn btn-default comment-button" aria-label="Left Align" id="comment\{{_id}}">
-													<span class="glyphicon glyphicon-comment" aria-hidden="true">Comment
-													</span>
-													</button>
-													<button type="button" class="btn btn-default delete-button" aria-label="Left Align" id="del\{{_id}}">
-													<span class="glyphicon glyphicon-remove-circle glyphicon-align-left" aria-hidden="true">
-													</span>
-													</button>
-													<button type="button" class="btn btn-default edit-button" aria-label="Left Align" id="\{{_id}}">
-													<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
-													</span>
-													</button>
-
+													{{#if user}}
+														<button type="button" class="btn btn-default comment-button" aria-label="Left Align" id="comment\{{_id}}">
+														<span class="glyphicon glyphicon-comment" aria-hidden="true">Comment
+														</span>
+														</button>
+														<button type="button" class="btn btn-default delete-button" aria-label="Left Align" id="del\{{_id}}">
+														<span class="glyphicon glyphicon-remove-circle glyphicon-align-left" aria-hidden="true">
+														</span>
+														</button>
+														<button type="button" class="btn btn-default edit-button" aria-label="Left Align" id="\{{_id}}">
+														<span class="glyphicon glyphicon-edit glyphicon-align-left" aria-hidden="true">
+														</span>
+														</button>
+													{{/if}}
 													<form hidden id="comment-form\{{_id}}">
 														<div class="form-group">
 															<input type="text" class="form-control" name="text">
@@ -116,8 +114,10 @@
 													\{{#each comments}}
 														<div class="comments">
 															<h5>\{{text}}
-																<span class="glyphicon glyphicon-remove pull-right delete-comment" aria-hidden="true" id="\{{_id}}"></span>
-																<span class="glyphicon glyphicon-edit pull-right edit-comment" aria-hidden="true" id="edit\{{_id}}"></span>
+																{{#if user}}
+																	<span class="glyphicon glyphicon-remove pull-right delete-comment" aria-hidden="true" id="\{{_id}}"></span>
+																	<span class="glyphicon glyphicon-edit pull-right edit-comment" aria-hidden="true" id="edit\{{_id}}"></span>
+																{{/if}}
 																<form hidden id="edit-comment\{{_id}}">
 																	<div class="form-group">
 																		<input type="text" class="form-control" name="text">

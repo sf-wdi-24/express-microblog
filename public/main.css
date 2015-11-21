@@ -10,9 +10,9 @@ nav {
 	color: white;
 }
 .image {
+	margin-top: -20px;
 	height : 200px;
 	background: url("images/StorypicTeller.png");
-	background-size: contain;
 }
 .col-sm-12 {
 	padding: 0;
