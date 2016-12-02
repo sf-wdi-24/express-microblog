@@ -1,0 +1,28 @@
+{{> header}}
+	<div class="container">
+		<div class="text-center">
+			<h2>Hello, {{user.username}}</h2>
+		</div>
+		{{#if user.posts}}
+			{{#each user.posts}}
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>{{title}}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-2">
+					</div>
+					<div class="col-xs-10">
+						<h4>{{description}}</h4>
+						<h5><i> Posted: {{author.username}} {{time}} ({{category}})</i></h5>
+					</div>
+				</div>
+				<hr>
+			{{/each}}
+		{{else}}
+			<h3 class="text-center">You haven't posted any stories.</h3>
+		{{/if}}
+	</div>
+</body>
+</html>
