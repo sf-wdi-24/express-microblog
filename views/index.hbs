@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <!-- set viewport to device width to make site responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- bootstrap css -->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="main.css">
+	<title>Discussion Questions</title>
+</head>
+<body>
+	<div class="container full-height">
+		<div class="row full-height">
+
+			<div class="col-md-4 full height">
+				<div class="row text-center info">
+					<h1>Geometry 101</h1>
+				</div>	
+				<div class="row text-center info">
+					<h2>Mr. Noble</h2>
+					<h3>Room 1</h3>
+				</div>
+				<div class="row text-center info">
+					<h2>SF High</h2>
+					<h3>Bernal Heights</h3>
+				</div>
+				<div class="row info">
+					<h2 class="text-center">Search</h2>
+					<form id="search-form">
+						<div class="form-group">
+							<input type="text" class="formdata form-control form-group" name="question" placeholder="Discussion Question">
+							<input type="text" class="formdata form-control form-group" name="student" placeholder="Student">
+							<input type="submit" class="btn btn-block btn-info disabled" value="Submit">
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="col-md-8 full-height">
+				<div class="row info" id="discussion-question">
+					<h2>This is my sample discussion question.  Isn't it clever?</h2>
+		      <div class="btn-group pull-right">
+	          <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="edit-question" aria-hidden="true"></span>
+	          <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="delete-question" aria-hidden="true"></span>
+	          <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="like-question" aria-hidden="true"></span>
+	        </div>
+				</div>
+				<div class="row info">
+					<button class="btn btn-block btn-info" id="add-post-btn">Add Post</button>
+          <form class="add-post-form">
+            <div class="form-group">
+							<br>
+              <input type="text" class="formdata form-control form-group" name="post" placeholder="Post">
+              <input type="text" class="formdata form-control form-group" name="name" placeholder="Name">
+              <input type="text" class="formdata form-control form-group" name="category" placeholder="Category">
+              <input type="submit" class="btn btn-info btn-block" value="Submit">
+            </div>
+          </form>
+				</div>
+				<div class="row info" id="posts-results">
+					<script type="text/x-handlebars-template" id="posts-template">
+						\{{#each posts}}
+							<div class="row">
+								<div class="col-md-10"> // Column of 10 with post
+									<p>\{{post}}<span class="name"> - by \{{name}} at \{{time}}</span></p>
+								</div>
+								<div class="col-md-2">
+									<div class="btn-group pull-right">
+		                <span class="glyphicon glyphicon-comment btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+		              </div> // Column of 2 with glyphs
+		            </div>
+		          </div>
+		          <div class="row">  // Row for add comment and update post
+		            <div class="col-md-10">
+		            	// Add comment form
+		              <form class="addComment" id="form\{{_id}}">
+		                <div class="form-group">
+		                  <input type="text" class="formdata form-control form-group" name="post" value="\{{commenttext}}">
+		                  <input type="text" class="formdata form-control form-group" name="name" value="\{{commentname}}">
+		                  <input type="submit" class="btn btn-info btn-block" value="Submit">
+		                </div>
+		              </form>
+		              // Edit post form
+		              <form class="editPost" id="form\{{_id}}">
+		                <div class="form-group">
+		                  <input type="text" class="formdata form-control form-group" name="post" value="\{{post}}">
+		                  <input type="text" class="formdata form-control form-group" name="name" value="\{{name}}">
+		                  <input type="text" class="formdata form-control form-group" name="category" value="\{{category}}">
+		                  <input type="submit" class="btn btn-info btn-block" value="Submit">
+		                </div>
+		              </form>
+		            </div>
+		        	</div>
+		        	\{{#if comments}}
+			        	\{{#each comments}}
+									<div class="row commentrow">
+										<div class="col-md-1"></div>
+										<div class="col-md-9">
+											<p>\{{commenttext}}<span class="name"> - by \{{commentname}} at \{{commenttime}}</span></p>
+										</div>
+										<div class="col-md-2">
+											<div class="btn-group pull-right">
+				                <span class="glyphicon glyphicon-pencil btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+				                <span class="glyphicon glyphicon-trash btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+				                <span class="glyphicon glyphicon-star-empty btn btn-info btn-xs" id="\{{_id}}" aria-hidden="true"></span>
+				              </div>
+				              <form class="editComment" id="form\{{_id}}">
+				                <div class="form-group">
+				                  <input type="text" class="formdata form-control form-group" name="post" value="\{{commenttext}}">
+				                  <input type="text" class="formdata form-control form-group" name="name" value="\{{commentname}}">
+				                  <input type="submit" class="btn btn-info btn-block" value="Submit">
+				                </div>
+				              </form>
+				            </div>
+				        	</div>
+			        	\{{/each}}
+			        \{{/if}}
+						\{{/each}}
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jquery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- handlebars -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+  <!-- custom script -->
+  <script type="text/javascript" src="main.js"></script>	
+</body>
+</html>
